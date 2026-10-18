@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Malvinas 2041</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060a13; --bg2:#0d1626; --bg3:#16233b; --line:#2a4466;
+  --cel:#75AADB; --cel2:#a9cdee; --sol:#F6B40E; --tx:#f1f6fc; --dim:#9db2cc;
+  --red:#ff4d5e; --ok:#58d68d;
+  --f:'Rubik','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:clamp(15px,2vh,26px)}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);font-weight:500;line-height:1.2;
+  background-image:linear-gradient(rgba(117,170,219,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(117,170,219,.05) 1px,transparent 1px);background-size:2rem 2rem}
+button{font-family:var(--f);cursor:pointer}
+.app{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:.6rem;padding:.6rem .8rem}
+
+/* ---------- HUD ---------- */
+.hud{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.2rem;align-items:center;background:var(--bg2);border:.2rem solid var(--cel);padding:.5rem .9rem;box-shadow:.25rem .25rem 0 #000}
+.brand{display:flex;align-items:center;gap:.8rem}
+.brand .t{font-weight:800;font-size:1.5rem;color:var(--cel);letter-spacing:.03em;line-height:1}
+.brand .t em{font-style:normal;color:var(--sol)}
+.yr{background:var(--sol);color:#000;font-weight:800;font-size:1.6rem;padding:.2rem .6rem;border:.15rem solid #000;line-height:1}
+.yr small{display:block;font-size:.7rem;font-weight:700;margin-top:.15rem;letter-spacing:.04em}
+.prop .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:1rem;color:var(--dim);margin-bottom:.25rem;font-weight:700}
+.prop .lab b{font-size:1.35rem;font-weight:800}
+.bar{height:1.25rem;background:#03060c;border:.17rem solid #000;outline:.13rem solid var(--line);position:relative}
+.bar>i{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(90deg,var(--cel) 0 .5rem,#5e93c4 .5rem .6rem);transition:width .9s}
+.bar .mk{position:absolute;top:-.3rem;bottom:-.3rem;width:.2rem;background:var(--sol)}
+.zones{position:relative;height:1.1rem;font-size:.8rem;color:var(--dim);margin-top:.2rem;font-weight:700}
+.zones span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.tens{width:10rem}
+.tens .lab{display:flex;justify-content:space-between;font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.25rem}
+.bar.t>i{background:repeating-linear-gradient(90deg,var(--red) 0 .5rem,#b72437 .5rem .6rem)}
+.hb{display:flex;gap:.5rem}
+.btn{background:var(--bg3);color:var(--cel2);border:.17rem solid var(--cel);padding:.45rem .75rem;font-size:.95rem;font-weight:700;box-shadow:.15rem .15rem 0 #000;white-space:nowrap}
+.btn:hover{background:var(--cel);color:#000}
+
+/* ---------- ESCENARIO ---------- */
+.stage{display:grid;grid-template-columns:minmax(0,21rem) minmax(0,1fr) minmax(0,21rem);gap:.7rem;min-height:0}
+.side{display:flex;flex-direction:column;gap:.5rem;min-height:0}
+.mob{flex:1 1 0;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:center;
+  background:var(--bg2);border:.17rem solid var(--line);padding:.4rem .6rem;position:relative;box-shadow:.2rem .2rem 0 #000}
+.flagw{position:relative;width:4.3rem;height:4.3rem}
+.flagw canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
+.flagw .ic{position:absolute;right:-.5rem;bottom:-.5rem;font-size:1.7rem;filter:drop-shadow(.1rem .1rem 0 #000)}
+.mob.hit .flagw canvas{animation:shake .5s}
+.mob .nm{font-weight:800;font-size:1.1rem;color:var(--cel2);letter-spacing:.02em}
+.mob .ds{font-size:.82rem;color:var(--dim);line-height:1.15;margin:.1rem 0 .3rem;font-weight:500}
+.mob .br{display:flex;align-items:center;gap:.5rem}
+.mob .bar{flex:1;height:.8rem;border-width:.13rem;outline-width:.1rem}
+.mob .val{font-weight:800;font-size:1.1rem;color:var(--sol);min-width:1.8rem;text-align:right}
+.mob .d{position:absolute;right:.5rem;top:.1rem;font-weight:800;font-size:1.3rem;opacity:0;pointer-events:none;text-shadow:.1rem .1rem 0 #000}
+.mob .d.show{animation:float 1.6s ease-out}
+.mob .d.up{color:var(--ok)} .mob .d.dn{color:var(--red)}
+.news{flex:1 1 0;min-height:0;background:var(--bg2);border:.17rem solid var(--sol);padding:.55rem .75rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.3rem;overflow:hidden}
+.news h4{font-size:.9rem;color:var(--sol);font-weight:800;letter-spacing:.05em}
+.news .ico{font-size:1.9rem;line-height:1}
+.news p{font-size:1.05rem;line-height:1.25}
+@keyframes float{0%{opacity:1;transform:translateY(.5rem)}100%{opacity:0;transform:translateY(-1.3rem)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-.3rem) rotate(-4deg)}40%{transform:translateX(.3rem) rotate(4deg)}60%{transform:translateX(-.2rem)}80%{transform:translateX(.2rem)}}
+
+/* ---------- MAPA 3D ---------- */
+.mapbox{position:relative;border:.2rem solid var(--cel);background:radial-gradient(ellipse at 50% 55%,#0b2442 0%,#050a14 75%);box-shadow:.25rem .25rem 0 #000;overflow:hidden;min-height:0;perspective:1400px}
+.tilt{position:absolute;inset:0;transform:rotateX(34deg) scale(1.2) translateY(-1%);transform-origin:50% 62%;transform-style:preserve-3d}
+#map{width:100%;height:100%;display:block}
+.maptitle{position:absolute;left:0;right:0;bottom:2.6rem;text-align:center;font-weight:800;font-size:clamp(1.4rem,3.6vh,3.4rem);color:var(--cel2);letter-spacing:.14em;
+  text-shadow:.15rem .15rem 0 #000,0 0 1.2rem rgba(117,170,219,.6);pointer-events:none}
+.maptitle em{font-style:normal;color:var(--sol)}
+.legend{position:absolute;left:50%;transform:translateX(-50%);bottom:.5rem;white-space:nowrap;display:flex;flex-direction:row;gap:.9rem;font-size:clamp(.62rem,1.5vh,.85rem);font-weight:700;background:rgba(5,10,20,.72);border:.13rem solid var(--line);padding:.4rem .6rem}
+.legend span::before{content:"";display:inline-block;width:.9rem;height:.9rem;margin-right:.45rem;vertical-align:-.1rem;border:.1rem solid #000}
+.legend .a::before{background:#7a8a52}.legend .b::before{background:var(--cel)}
+.tag{position:absolute;right:.7rem;top:.6rem;font-weight:800;font-size:1.7rem;color:var(--sol);text-shadow:.12rem .12rem 0 #000;opacity:0;transition:opacity .4s;background:rgba(5,10,20,.72);border:.15rem solid var(--sol);padding:.3rem .8rem}
+.tag.on{opacity:1}
+
+/* ---------- DECISIÓN ---------- */
+.card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);gap:.8rem;background:var(--bg2);border:.2rem solid var(--sol);padding:.7rem .9rem;box-shadow:.25rem .25rem 0 #000;position:relative;min-height:0}
+.card .info .tg{font-weight:800;font-size:.95rem;color:var(--sol);letter-spacing:.05em;margin-bottom:.25rem}
+.card .info h2{font-weight:800;font-size:1.6rem;color:var(--cel2);line-height:1.1;margin-bottom:.35rem}
+.card .info p{font-size:1.15rem;line-height:1.25;color:var(--tx)}
+.opt{text-align:left;background:var(--bg3);color:var(--tx);border:.2rem solid var(--cel);padding:.6rem .8rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.45rem;justify-content:space-between;transition:transform .08s}
+.opt:hover{background:#1d3558;transform:translate(-.1rem,-.1rem)}
+.opt:active{transform:translate(.15rem,.15rem);box-shadow:none}
+.opt .l{font-weight:800;font-size:1.2rem;line-height:1.15}
+.opt .l b{display:inline-block;background:var(--sol);color:#000;padding:0 .45rem;margin-right:.5rem;font-size:1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.25rem .5rem;font-size:.95rem;font-weight:700}
+.chips span{background:#0a1424;border:.1rem solid var(--line);padding:.05rem .4rem}
+.chips .u{color:var(--ok)} .chips .dn{color:var(--red)}
+.timer{position:absolute;left:0;right:0;top:0;height:.35rem;background:#03060c}
+.timer i{display:block;height:100%;background:var(--sol);width:100%}
+.card.res{grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)}
+.res .t1{font-weight:800;font-size:1.05rem;color:var(--sol);margin-bottom:.3rem}
+.res p{font-size:1.25rem;line-height:1.25}
+.res .ev{margin-top:.4rem;border-left:.25rem solid var(--cel);padding-left:.6rem;color:var(--cel2);font-size:1.05rem}
+.go{background:var(--sol);color:#000;border:.2rem solid #000;font-weight:800;font-size:1.3rem;box-shadow:.2rem .2rem 0 var(--cel);align-self:stretch}
+.go:hover{background:#fff}
+
+/* ---------- OVERLAYS ---------- */
+.ov{position:fixed;inset:0;background:rgba(3,6,12,.9);display:none;align-items:center;justify-content:center;padding:1rem;z-index:10;overflow:auto}
+.ov.on{display:flex}
+.panel{background:var(--bg2);border:.25rem solid var(--cel);box-shadow:.4rem .4rem 0 #000;max-width:54rem;width:100%;padding:1.4rem 1.6rem;max-height:96vh;overflow:auto}
+.panel h1{font-weight:800;font-size:2.6rem;color:var(--cel);line-height:1.05;margin-bottom:.3rem}
+.panel h1 em{font-style:normal;color:var(--sol)}
+.panel h3{font-weight:800;font-size:1.1rem;color:var(--sol);margin:1rem 0 .3rem;letter-spacing:.05em}
+.panel p,.panel li{font-size:1.2rem;line-height:1.3}
+.panel ul{padding-left:1.3rem}
+.panel .sub{color:var(--dim);margin-bottom:.8rem}
+.chk{display:flex;gap:.6rem;align-items:center;margin:1rem 0 .2rem;font-size:1.15rem;color:var(--cel2);cursor:pointer}
+.chk input{width:1.2rem;height:1.2rem;accent-color:var(--sol)}
+.row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1rem}
+.row .go{align-self:auto;padding:.7rem 1.4rem}
+.th{width:100%;border-collapse:collapse;margin-top:.4rem}
+.th td{border:.12rem solid var(--bg3);padding:.4rem .6rem;font-size:1.05rem;vertical-align:top}
+.th td:first-child{font-weight:800;color:var(--cel2);width:32%}
+.endbars{display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1.2rem;margin:.8rem 0}
+.endbars div{font-size:1.1rem}
+.big{font-weight:800;font-size:1.9rem;line-height:1.15;margin:.5rem 0}
+.ok{color:var(--ok)} .bad{color:var(--red)} .mid{color:var(--sol)}
+
+@media (max-width:1000px){
+  html,body{overflow:auto}
+  .app{height:auto}
+  .stage{grid-template-columns:1fr}
+  .mapbox{height:60vw}
+  .card,.card.res{grid-template-columns:1fr}
+  .hud{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hud">
+    <div class="brand">
+      <div class="yr" id="year">2026<small>TURNO 1/10</small></div>
+      <div class="t">MALVINAS <em>2041</em></div>
+    </div>
+    <div class="prop">
+      <div class="lab"><span>Propensión del RU a ceder</span><b id="scoreLab">BAJA</b></div>
+      <div class="bar"><i id="scoreFill" style="width:30%"></i><span class="mk" style="left:40%"></span><span class="mk" style="left:55%"></span></div>
+      <div class="zones"><span style="left:20%">BAJA</span><span style="left:47.5%">MEDIA</span><span style="left:77.5%">ALTA</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center">
+      <div class="tens">
+        <div class="lab"><span>TENSIÓN</span><span id="tensV">10</span></div>
+        <div class="bar t"><i id="tensFill" style="width:10%"></i></div>
+      </div>
+      <div class="hb"><button class="btn" id="btnTheory">TEORÍA</button><button class="btn" id="btnFS">⛶ PANT. COMPLETA</button></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="side" id="sideL"></div>
+    <div class="mapbox" id="mapbox">
+      <div class="tilt"><canvas id="map"></canvas></div>
+      <div class="legend"><span class="a">Bajo control británico</span><span class="b">Avanza hacia la transición</span></div>
+      <div class="tag" id="mapTag"></div>
+      <div class="maptitle">ISLAS <em>MALVINAS</em></div>
+    </div>
+    <div class="side" id="sideR"></div>
+  </div>
+
+  <div class="card" id="card"></div>
+</div>
+
+<!-- INTRO -->
+<div class="ov on" id="ovIntro">
+  <div class="panel">
+    <h1>MALVINAS <em>2041</em></h1>
+    <p class="sub">Simulador prospectivo de relaciones internacionales</p>
+    <p>Sos el equipo de política exterior argentino. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para aumentar la <b style="color:var(--cel2)">propensión del Reino Unido a ceder la soberanía</b> por la vía pacífica.</p>
+    <h3>CÓMO SE JUEGA</h3>
+    <ul>
+      <li>Elegí <b>A</b> o <b>B</b>. Cada opción muestra qué variables sube ▲ o baja ▼.</li>
+      <li>Cada bandera británica es un factor real del modelo. Cuanto más sube, más se rompe.</li>
+      <li>Las islas se van <b style="color:var(--cel2)">pintando de celeste</b> a medida que avanza la propensión.</li>
+      <li>Si la <b style="color:var(--red)">tensión</b> llega a 60, se rompe la vía pacífica y perdés.</li>
+      <li>Una partida dura menos de 3 minutos.</li>
+    </ul>
+    <label class="chk"><input type="checkbox" id="chkExpo"> Modo exposición (sin cronómetro)</label>
+    <div class="row">
+      <button class="go" id="btnStart">JUGAR ▶</button>
+      <button class="btn" id="btnFS2">⛶ PANTALLA COMPLETA</button>
+      <button class="btn" id="btnTheory2">VER TEORÍA DEL TP</button>
+    </div>
+  </div>
+</div>
+
+<!-- TEORIA -->
+<div class="ov" id="ovTheory">
+  <div class="panel">
+    <h1>MODELO <em>DEL TP</em></h1>
+    <p class="sub">Trabajo prospectivo con enfoque mixto cuanti-cualitativo. Realismo, interdependencia, liberalismo y contractualismo.</p>
+    <p><b style="color:var(--sol)">Pregunta:</b> ¿es alta, intermedia o baja la propensión del RUGBIN a una transición pacífica del poder soberano de las Malvinas? Horizonte 2026–2041. Incluye cesión plena y fórmulas mixtas como Chagos.</p>
+    <h3>LAS 7 VARIABLES</h3>
+    <table class="th">
+      <tr><td>💷 ECONOMÍA</td><td>Crecimiento y PBI, balanza de pagos, vulnerabilidad económica (EVI-ONU).</td></tr>
+      <tr><td>🛢️ TERRITORIO</td><td>Recursos no explotados (VPN), sensibilidad económica, ZEE y plataforma continental.</td></tr>
+      <tr><td>🧭 DISTANCIA</td><td>Distancia geodésica y marítima, tiempo y costo del despliegue logístico.</td></tr>
+      <tr><td>⚔️ CAPACIDAD MILITAR</td><td>Costo de desplegar un teatro de operaciones, gasto defensivo en el territorio, proyección y gasto absoluto.</td></tr>
+      <tr><td>🌍 SITUACIÓN INTERNACIONAL</td><td>Aliados de la potencia y del reclamante, conflictos latentes que desvían fuerzas (Ucrania, Medio Oriente, presión de EE.UU.).</td></tr>
+      <tr><td>🏛️ SITUACIÓN DOMÉSTICA</td><td>Estabilidad política y económica del RUGBIN y de Argentina. Incluye la hipótesis de fragmentación del RU como escenario.</td></tr>
+      <tr><td>👥 AUTONOMÍA E IDENTIDAD</td><td>Población y moral: legitimidad de la potencia ocupante, similitud cultural, IDH.</td></tr>
+    </table>
+    <h3>CÓMO PUNTÚA EL JUEGO</h3>
+    <p>Cada variable va de 0 a 100 y las siete pesan lo mismo, como en el TP. La propensión es el promedio: <b style="color:var(--cel2)">baja</b> menos de 40, <b style="color:var(--sol)">intermedia</b> de 40 a 55, <b style="color:var(--ok)">alta</b> desde 55.</p>
+    <h3>LÍMITES DEL MODELO (los del TP)</h3>
+    <ul>
+      <li>Los umbrales salen de solo dos casos de cesión, así que son tentativos.</li>
+      <li>Las siete variables pesan lo mismo (a definir) y los puntajes son subjetivos.</li>
+      <li>Gibraltar tiene propensión intermedia y no cedió: <b style="color:var(--sol)">propensión no es resultado</b>. Por eso el juego tiene un final Gibraltar.</li>
+    </ul>
+    <div class="row"><button class="go" id="btnCloseTheory">VOLVER</button></div>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div class="ov" id="ovEnd"><div class="panel" id="endPanel"></div></div>
+
+<script>
+/* ============ DATOS (editables) ============ */
+const VARS = [
+  {k:'eco', n:'ECONOMÍA',       ic:'💷', side:'L', v:30, ds:'PBI, déficit y deuda del RU: cuánto le pesa sostener las islas'},
+  {k:'ter', n:'TERRITORIO',     ic:'🛢️', side:'L', v:30, ds:'Pesca, petróleo y ZEE: qué vale el mar y el suelo en disputa'},
+  {k:'dis', n:'DISTANCIA',      ic:'🧭', side:'L', v:35, ds:'13.000 km de logística: costo y tiempo de llegar a las islas'},
+  {k:'mil', n:'PODER MILITAR',  ic:'⚔️', side:'L', v:20, ds:'Brecha de fuerzas y costo de defender un teatro de operaciones'},
+  {k:'int', n:'MUNDO',          ic:'🌍', side:'R', v:25, ds:'Aliados, otros conflictos y presión de EE.UU. sobre el RU'},
+  {k:'dom', n:'POLÍTICA INTERNA', ic:'🏛️', side:'R', v:30, ds:'Estabilidad política y económica del RU y de Argentina'},
+  {k:'aut', n:'ISLEÑOS',        ic:'👥', side:'R', v:10, ds:'Identidad y apoyo de la población de las islas'}
+];
+const TH_LOW = 40, TH_HIGH = 55, TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.6;
+
+const CARDS = [
+ {y:2026, t:'Licencias de pesca', x:'El calamar de la ZEE vale millones y Londres vende licencias por su cuenta.',
+  A:{l:'Acuerdo de pesca conjunta', an:'fish', tag:'🎣 PESCA CONJUNTA', fx:{ter:9,eco:5,aut:3,int:2}, r:'Se abre una mesa técnica y los barcos pescan bajo un mismo esquema. Los isleños miran con desconfianza, pero cobran.'},
+  B:{l:'Denunciar las licencias ante la ONU', an:'un', tag:'📜 ONU', fx:{int:8,dom:-3}, t:8, r:'Ganás votos en el Comité de Descolonización. Londres se cierra.'}},
+ {y:2027, t:'El precedente Chagos', x:'El RU acuerda ceder Chagos con arrendamiento de la base. La prensa ya pregunta por Malvinas.',
+  A:{l:'Citar Chagos en el Comité de Descolonización', an:'un', tag:'📜 PRECEDENTE', fx:{int:10,dom:3}, r:'Chagos queda en actas como precedente. Londres responde que es otro caso.'},
+  B:{l:'Pedir una negociación bilateral reservada', an:'peace', tag:'🤝 DIÁLOGO', fx:{int:3,dom:4,eco:2}, r:'Cancillería abre un canal discreto. Sin foco, no hay presión.'}},
+ {y:2029, t:'Guerra en Ucrania', x:'La OTAN consume recursos británicos. La Royal Navy está estirada.',
+  A:{l:'Ofrecer neutralidad y cooperación atlántica', an:'peace', tag:'🕊️ COOPERACIÓN', fx:{int:6,mil:4,dis:4}, t:-6, r:'Argentina aparece como socio confiable. La tensión baja.'},
+  B:{l:'Aprovechar para apretar diplomáticamente', an:'press', tag:'📢 PRESIÓN', fx:{int:8,dom:-2,mil:3}, t:14, r:'Se nota la oportunidad. En Londres lo leen como oportunismo.'}},
+ {y:2030, t:'Crisis económica británica', x:'Libra débil, déficit récord y recortes. Westminster busca nuevos mercados.',
+  A:{l:'Ofrecer inversión y un acuerdo comercial', an:'invest', tag:'💰 INVERSIÓN', fx:{eco:10,int:3,dom:-2}, r:'El Tesoro británico empieza a hacer cuentas sobre el costo de las islas.'},
+  B:{l:'Mantener el reclamo sin concesiones', an:'hold', tag:'🛡️ FIRMEZA', fx:{dom:5,eco:-1,aut:-2}, r:'Frente interno unido, pero no se mueve ninguna variable económica.'}},
+ {y:2032, t:'Rearme', x:'Tu Ministerio de Defensa pide renovar aviones y buques.',
+  A:{l:'Comprar cazas y buques', an:'arm', tag:'✈️ REARME', fx:{mil:10,dis:4,dom:-5,int:-4}, t:28, r:'La brecha militar se achica. Londres refuerza la guarnición y el mundo se inquieta.'},
+  B:{l:'Priorizar diplomacia y reservas', an:'hold', tag:'🛡️ REGLAS CLARAS', fx:{dom:6,eco:3,mil:-3}, r:'Más estabilidad macro, menos poder duro. El RU se relaja.'}},
+ {y:2033, t:'Los isleños', x:'Son unos 3.500. Su voto pesa en cada debate británico.',
+  A:{l:'Seducir: vuelos, becas, conectividad', an:'people', tag:'🏠 PUENTES', fx:{aut:11,eco:-2,dom:-1}, r:'Se rompe un poco el aislamiento. Algunos dejan de ver a Argentina como amenaza.'},
+  B:{l:'Ignorarlos: el reclamo es con Londres', an:'ignore', tag:'🚫 SIN DIÁLOGO', fx:{aut:-5,int:3,dom:3}, t:6, r:'Discurso coherente con la ONU. Los isleños se atrincheran.'}},
+ {y:2035, t:'Escocia vota', x:'Referéndum de independencia: el RU podría fragmentarse. Es un escenario, no la línea base.',
+  A:{l:'Respetar la autodeterminación escocesa', an:'scot', tag:'🏴 ESCOCIA', fx:{dom:10,int:4}, r:'Argentina queda como actor serio. El RU llega al límite de su cohesión.'},
+  B:{l:'Atar el caso Malvinas a la crisis del RU', an:'scot', tag:'🏴 ESCOCIA', fx:{dom:5,int:-4}, t:12, r:'Se te acusa de meterte en asuntos ajenos. La jugada sale cara.'}},
+ {y:2037, t:'Petróleo en la cuenca', x:'Las exploraciones apuntan a reservas en la plataforma continental.',
+  A:{l:'Exploración conjunta bajo paraguas de soberanía', an:'oil', tag:'🛢️ PETRÓLEO', fx:{ter:10,eco:6}, t:-4, r:'La fórmula del paraguas se transforma en cooperación. Cada lado ve su cuota.'},
+  B:{l:'Sancionar a las petroleras', an:'sanction', tag:'🚫 SANCIONES', fx:{ter:3,eco:4,int:-5}, t:22, r:'Las empresas se retiran, pero tus aliados protestan. Sube el riesgo.'}},
+ {y:2038, t:'La base militar', x:'Para Londres, la base de Mount Pleasant es lo único que importa. El modelo Chagos aparece sobre la mesa.',
+  A:{l:'Ofrecer cesión con arrendamiento de la base', an:'base', tag:'🚩 FÓRMULA CHAGOS', fx:{mil:9,int:6,dis:8,aut:-4}, r:'Es la fórmula mixta del TP: soberanía a cambio de continuidad estratégica.'},
+  B:{l:'Exigir cesión plena y sin condiciones', an:'press', tag:'📢 EXIGENCIA', fx:{dom:5,mil:-4,int:1}, t:10, r:'Es inflexible y coherente, pero Londres no tiene incentivos.'}},
+ {y:2040, t:'Cumbre final', x:'Una ventana de negociación se abre antes de 2041. Es ahora o nunca.',
+  A:{l:'Convocar a EE.UU. como mediador', an:'summit', tag:'🤝 MEDIACIÓN', fx:{int:8,eco:3,dom:-2}, r:'Washington presiona a ambos lados para cerrar un trato.'},
+  B:{l:'Plebiscito de apoyo interno', an:'vote', tag:'🗳️ PLEBISCITO', fx:{dom:8,aut:2,int:-2}, r:'El apoyo en casa es fuerte. Londres lo ve como un gesto, no como una oferta.'}}
+];
+
+const EVENTS = [
+ {ic:'🗳️', x:'Elecciones en EE.UU.: Washington pide moderación a ambos.', fx:{int:3}, t:-3},
+ {ic:'🏛️', x:'Escándalo político en Westminster.', fx:{dom:4}},
+ {ic:'📉', x:'Cae el precio de la lana y el calamar.', fx:{eco:4,ter:-1}},
+ {ic:'🌍', x:'Tensión en Medio Oriente: la Royal Navy se desvía.', fx:{mil:4,int:2}},
+ {ic:'⚠️', x:'Nueva crisis económica en Argentina.', fx:{dom:-5,eco:-3}},
+ {ic:'✂️', x:'Recorte al presupuesto de defensa británico.', fx:{mil:5,eco:2}},
+ {ic:'📊', x:'Sondeo: los isleños rechazan cualquier cambio.', fx:{aut:-5}}
+];
+const TIMEOUT = {l:'No decidiste a tiempo', an:'timeout', tag:'⏳ SIN DECISIÓN', fx:{dom:-3,int:-3}, t:4, r:'La falta de decisión se paga caro. El tiempo pasa y Londres lo nota.'};
+
+/* ============ ESTADO ============ */
+let S = null, phase = 'intro', tickId = null, autoId = null, expo = false;
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=100) => Math.max(a, Math.min(b, v));
+const lerp = (a,b,t) => a+(b-a)*t;
+const score = () => VARS.reduce((s,v)=>s+S.val[v.k],0) / VARS.length;
+const level = s => s >= TH_HIGH ? 'ALTA' : s >= TH_LOW ? 'INTERMEDIA' : 'BAJA';
+const VI = {}; VARS.forEach(v => VI[v.k] = v);
+const covOf = s => clamp((s-15)/40, 0, 1);
+
+function newGame(){
+  S = {val:{}, tension:10, turn:0, log:[]};
+  VARS.forEach(v => S.val[v.k] = v.v);
+}
+
+/* ============ BANDERAS-MOB (RU estilo creeper) ============ */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const mobOrders = {};
+function blockOrder(i){
+  if(mobOrders[i]) return mobOrders[i];
+  const r = mulberry(7919*(i+3)), a = [];
+  for(let n=0;n<64;n++) a.push(n);
+  for(let n=63;n>0;n--){const j=Math.floor(r()*(n+1));[a[n],a[j]]=[a[j],a[n]];}
+  return mobOrders[i]=a;
+}
+function drawMob(cv, value, idx){
+  const c = cv.getContext('2d');
+  c.clearRect(0,0,32,32);
+  for(let y=0;y<32;y++)for(let x=0;x<32;x++){
+    const d1=Math.abs(x-y), d2=Math.abs(x+y-31);
+    let col='#012169';
+    if(d1<=2.5||d2<=2.5) col='#ffffff';
+    if(d1<=1||d2<=1) col='#C8102E';
+    if(Math.abs(x-15.5)<=5||Math.abs(y-15.5)<=5) col='#ffffff';
+    if(Math.abs(x-15.5)<=3||Math.abs(y-15.5)<=3) col='#C8102E';
+    c.fillStyle=col; c.fillRect(x,y,1,1);
+  }
+  c.fillStyle='rgba(0,0,0,.82)';
+  c.fillRect(7,9,5,5); c.fillRect(20,9,5,5);
+  c.fillRect(13,15,6,6); c.fillRect(10,19,3,7); c.fillRect(19,19,3,7);
+  const n = Math.round(value/100*0.9*64), ord = blockOrder(idx);
+  for(let i=0;i<n;i++){
+    const b=ord[i];
+    c.clearRect((b%8)*4,Math.floor(b/8)*4,4,4);
+  }
+}
+
+function buildSide(){
+  $('sideL').innerHTML=''; $('sideR').innerHTML='';
+  VARS.forEach(v=>{
+    const el = document.createElement('div');
+    el.className='mob'; el.id='mob_'+v.k;
+    el.innerHTML = `<span class="d" id="d_${v.k}"></span>
+      <div class="flagw"><canvas width="32" height="32"></canvas><span class="ic">${v.ic}</span></div>
+      <div><div class="nm">${v.n}</div><div class="ds">${v.ds}</div>
+      <div class="br"><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div></div>`;
+    $(v.side==='L'?'sideL':'sideR').appendChild(el);
+  });
+  const n=document.createElement('div'); n.className='news'; n.id='news';
+  n.innerHTML='<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">🌐</div><p>2026: se abre la ventana de negociación. Todo está por decidirse.</p>';
+  $('sideR').appendChild(n);
+}
+function setNews(ic, txt){ $('news').innerHTML=`<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">${ic}</div><p>${txt}</p>`; }
+function renderMobs(deltas){
+  VARS.forEach((v,i)=>{
+    const el=$('mob_'+v.k), val=Math.round(S.val[v.k]);
+    drawMob(el.querySelector('canvas'), val, i);
+    el.querySelector('.bar>i').style.width = val+'%';
+    el.querySelector('.val').textContent = val;
+    if(deltas && deltas[v.k]){
+      const d=$('d_'+v.k), x=deltas[v.k];
+      d.textContent=(x>0?'+':'')+x; d.className='d show '+(x>0?'up':'dn');
+      el.classList.remove('hit'); void el.offsetWidth;
+      if(x>0) el.classList.add('hit');
+      setTimeout(()=>{d.className='d'},1700);
+    }
+  });
+}
+
+/* ============ MAPA 3D: ISLAS REALES (lon/lat) ============ */
+const WW=1008, WH=480, CELL=6, GW=WW/CELL, GH=WH/CELL;
+const LON0=-61.5, LON1=-57.6, LAT0=-51.12, LAT1=-52.4;
+const PPDY=WH*0.86/(LAT0-LAT1), PPDX=PPDY*0.618;
+const OX=(WW-(LON1-LON0)*PPDX)/2, OY=(WH-(LAT0-LAT1)*PPDY)/2;
+const P=(lon,lat)=>[OX+(lon-LON0)*PPDX, OY+(LAT0-lat)*PPDY];
+
+const EAST=[[-59.00,-51.28],[-58.75,-51.27],[-58.50,-51.32],[-58.25,-51.38],[-58.05,-51.45],[-57.95,-51.50],[-58.05,-51.58],[-57.90,-51.60],[-57.72,-51.66],[-57.70,-51.72],[-57.85,-51.76],[-58.05,-51.80],[-58.20,-51.88],[-58.50,-51.90],[-58.85,-51.90],[-58.55,-51.99],[-58.20,-52.04],[-58.05,-52.10],[-58.40,-52.20],[-58.80,-52.25],[-59.15,-52.20],[-59.35,-52.08],[-59.38,-51.95],[-59.22,-51.90],[-59.10,-51.82],[-59.20,-51.72],[-59.12,-51.60],[-59.20,-51.48],[-59.08,-51.38]];
+const WEST=[[-59.45,-51.30],[-59.80,-51.28],[-60.15,-51.30],[-60.55,-51.34],[-60.85,-51.40],[-61.05,-51.52],[-61.20,-51.65],[-61.38,-51.75],[-61.25,-51.88],[-61.05,-51.85],[-61.05,-52.00],[-60.85,-52.10],[-60.70,-52.22],[-60.45,-52.22],[-60.35,-52.10],[-60.20,-52.05],[-60.00,-51.98],[-59.85,-51.85],[-59.75,-51.70],[-59.65,-51.55],[-59.55,-51.42]];
+function blob(cx,cy,rx,ry,n,seed){const r=mulberry(seed),o=[];for(let i=0;i<n;i++){const a=i/n*Math.PI*2,k=.75+r()*.5;o.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k]);}return o;}
+function jag(pts,seed,depth,k){
+  const r=mulberry(seed); let p=pts;
+  for(let d=0;d<depth;d++){
+    const o=[];
+    for(let i=0;i<p.length;i++){
+      const a=p[i],b=p[(i+1)%p.length],dx=b[0]-a[0],dy=b[1]-a[1];
+      o.push(a);
+      o.push([(a[0]+b[0])/2 - dy*k*(r()-.5)*.62, (a[1]+b[1])/2 + dx*k*(r()-.5)*1.6]);
+    }
+    p=o;
+  }
+  return p;
+}
+const POLYS=[jag(EAST,11,3,.3),jag(WEST,5,3,.3),
+  blob(-60.70,-51.22,.07,.03,7,1),blob(-60.22,-51.20,.14,.035,8,2),blob(-59.62,-51.19,.2,.03,9,3),blob(-60.52,-51.25,.04,.025,6,4),
+  blob(-58.85,-52.32,.07,.03,7,5),blob(-61.10,-51.82,.05,.03,6,6),blob(-59.45,-52.35,.04,.02,6,7),blob(-58.22,-52.30,.05,.025,6,8)
+].map(p=>p.map(q=>P(q[0],q[1])));
+
+function inPoly(px,py,poly){
+  let ins=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0],yi=poly[i][1],xj=poly[j][0],yj=poly[j][1];
+    if(((yi>py)!==(yj>py)) && (px < (xj-xi)*(py-yi)/(yj-yi)+xi)) ins=!ins;
+  }
+  return ins;
+}
+const hash=(x,y)=>{let h=Math.imul(x|0,374761393)+Math.imul(y|0,668265263);h=Math.imul(h^(h>>>13),1274126177);return ((h^(h>>>16))>>>0)/4294967295;};
+function vnoise(x,y){const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,s=t=>t*t*(3-2*t);
+  return lerp(lerp(hash(xi,yi),hash(xi+1,yi),s(xf)),lerp(hash(xi,yi+1),hash(xi+1,yi+1),s(xf)),s(yf));}
+function chamfer(src){
+  const D=new Float32Array(GW*GH).fill(1e3);
+  for(let i=0;i<GW*GH;i++) if(src[i]) D[i]=0;
+  const at=(x,y)=>(x<0||y<0||x>=GW||y>=GH)?1e3:D[y*GW+x];
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){const i=y*GW+x;D[i]=Math.min(D[i],at(x-1,y)+1,at(x,y-1)+1,at(x-1,y-1)+1.4,at(x+1,y-1)+1.4);}
+  for(let y=GH-1;y>=0;y--)for(let x=GW-1;x>=0;x--){const i=y*GW+x;D[i]=Math.min(D[i],at(x+1,y)+1,at(x,y+1)+1,at(x+1,y+1)+1.4,at(x-1,y+1)+1.4);}
+  return D;
+}
+const LAND=new Uint8Array(GW*GH), WATER=new Uint8Array(GW*GH);
+for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){
+  const wx=x*CELL+CELL/2, wy=y*CELL+CELL/2;
+  const l=POLYS.some(p=>inPoly(wx,wy,p)); LAND[y*GW+x]=l?1:0; WATER[y*GW+x]=l?0:1;
+}
+const DL=chamfer(WATER), DW=chamfer(LAND);   // DL: tierra→costa, DW: agua→tierra
+const BUMPS=[[-58.55,-51.70,.55,.16],[-60.05,-51.55,.5,.2],[-60.75,-51.70,.45,.18],[-59.8,-51.78,.35,.14],[-61.0,-51.62,.35,.15],[-58.2,-51.52,.3,.12],[-59.1,-52.10,.15,.2]].map(b=>{const q=P(b[0],b[1]);return [q[0]/CELL,q[1]/CELL,b[2],b[3]*PPDX/CELL];});
+const H=new Float32Array(GW*GH);
+for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){
+  const i=y*GW+x; if(!LAND[i]) continue;
+  const base=Math.pow(Math.min(DL[i],13)/13,.8);
+  const n=.6*vnoise(x/9,y/9)+.4*vnoise(x/4,y/4);
+  let h=base*(.35+.5*n);
+  for(const b of BUMPS){const dx=x-b[0],dy=y-b[1];h+=b[2]*Math.exp(-(dx*dx+dy*dy)/(b[3]*b[3]));}
+  H[i]=clamp(h,0,1);
+}
+const STANLEY=P(-57.85,-51.72), STX=STANLEY[0]/CELL, STY=STANLEY[1]/CELL;
+const RANK=new Float32Array(GW*GH);
+for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){const d=Math.hypot(x-STX,(y-STY)*1.2)/ (GW*.5); RANK[y*GW+x]=.65*hash(x*3+1,y*7+2)+.35*clamp(d,0,1);}
+
+const landCv=document.createElement('canvas'); landCv.width=WW; landCv.height=WH;
+const silCv=document.createElement('canvas'); silCv.width=WW; silCv.height=WH;
+const shoalCv=document.createElement('canvas'); shoalCv.width=WW; shoalCv.height=WH;
+(function(){ // silueta y aguas poco profundas (estáticas)
+  const s=silCv.getContext('2d'), h=shoalCv.getContext('2d');
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){
+    const i=y*GW+x;
+    if(LAND[i]){s.fillStyle='#fff';s.fillRect(x*CELL,y*CELL,CELL,CELL);}
+    else if(DW[i]<=4.5){const a=(1-DW[i]/4.5)*.55;h.fillStyle=`rgba(80,190,200,${a})`;h.fillRect(x*CELL,y*CELL,CELL,CELL);}
+  }
+})();
+const mix=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
+const rgb=(c,k=1)=>`rgb(${clamp(c[0]*k,0,255)|0},${clamp(c[1]*k,0,255)|0},${clamp(c[2]*k,0,255)|0})`;
+function renderLand(cov){
+  const c=landCv.getContext('2d'); c.clearRect(0,0,WW,WH);
+  const g=(x,y)=>(x<0||y<0||x>=GW||y>=GH)?0:H[y*GW+x];
+  for(let y=0;y<GH;y++)for(let x=0;x<GW;x++){
+    const i=y*GW+x; if(!LAND[i]) continue;
+    const h=H[i], edge=DL[i]<=1.5;
+    const sh=1+clamp((g(x-1,y-1)-g(x+1,y+1))*3.2,-.45,.45);
+    const painted = RANK[i] < cov*0.98;
+    let col;
+    if(painted){
+      col = edge ? [246,180,14] : mix([95,152,208],[236,246,255],Math.pow(h,1.3)*.85);
+    } else {
+      col = edge ? [196,178,128] : h<.4 ? mix([88,106,58],[126,118,80],h/.4) : mix([126,118,80],[176,170,156],(h-.4)/.6);
+    }
+    const nz=.94+hash(x,y)*.12;
+    const k=sh*nz;
+    const px=x*CELL, py=y*CELL;
+    c.fillStyle=rgb(col,k); c.fillRect(px,py,CELL,CELL);
+    c.fillStyle='rgba(255,255,255,.14)'; c.fillRect(px,py,CELL,1); c.fillRect(px,py,1,CELL);
+    c.fillStyle='rgba(0,0,0,.22)'; c.fillRect(px,py+CELL-1,CELL,1); c.fillRect(px+CELL-1,py,1,CELL);
+  }
+}
+
+/* ---- sprites y animaciones sobre el mapa ---- */
+const FX=[]; const now=()=>performance.now()/1000;
+const EMO='"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
+let ctxM=null;
+function emo(ch,x,y,size,alpha=1,rot=0){
+  ctxM.save(); ctxM.globalAlpha=clamp(alpha,0,1); ctxM.translate(x,y); ctxM.rotate(rot);
+  ctxM.font=`${size}px ${EMO}`; ctxM.textAlign='center'; ctxM.textBaseline='middle'; ctxM.fillText(ch,0,0); ctxM.restore();
+}
+function label(txt,x,y,size,col='#fff'){
+  ctxM.save(); ctxM.font=`800 ${size}px Rubik,sans-serif`; ctxM.textAlign='center'; ctxM.textBaseline='middle';
+  ctxM.lineWidth=size/5; ctxM.strokeStyle='#000'; ctxM.strokeText(txt,x,y); ctxM.fillStyle=col; ctxM.fillText(txt,x,y); ctxM.restore();
+}
+const ease=t=>1-Math.pow(1-t,3), env=(p)=>Math.min(1,p*6,(1-p)*5);
+const ST=P(-57.85,-51.72), CEN=[WW/2,WH/2];
+const ANIMS={
+ fish(p,t){ for(let i=0;i<5;i++){ const tx=ST[0]+60+i*34, ty=ST[1]-30+i*26+Math.sin(t*2+i)*6; const x=lerp(WW+40,tx,ease(Math.min(1,p*1.6))); emo('⛵',x,ty,38,env(p)); }
+   for(let i=0;i<9;i++){ const a=t*1.6+i*.7; emo('🐟',ST[0]+80+Math.cos(a)*70+i*8, ST[1]+10+Math.sin(a)*36, 26,env(p)); } label('+ PESCA',ST[0]+90,ST[1]-70,30,'#8fe3ff'); },
+ un(p,t){ const y=lerp(-30,CEN[1]-20,ease(Math.min(1,p*1.8))); emo('📜',CEN[0],y,84,env(p)); label('ONU',CEN[0],y+70,34,'#a9cdee');
+   for(let i=0;i<4;i++){ const a=t*1.8+i*1.6; emo('🕊️',CEN[0]+Math.cos(a)*220,CEN[1]-70+Math.sin(a*1.3)*50,44,env(p)); } },
+ peace(p,t){ for(let i=0;i<4;i++){ const x=lerp(-40,WW+40,((p*1.2+i*.18)%1)); emo('🕊️',x,150+i*55+Math.sin(t*4+i)*14,46,env(p)); } emo('🤝',CEN[0],CEN[1]-10,100*ease(Math.min(1,p*2)),env(p)); },
+ press(p,t){ const k=1+.15*Math.sin(t*10); emo('📢',CEN[0]-80,CEN[1],96*k,env(p),-.2); for(let i=0;i<4;i++) emo('⚡',CEN[0]+20+i*55,CEN[1]-20+Math.sin(t*9+i)*20,42,env(p)*(Math.sin(t*12+i)>0?1:.35));
+   ctxM.save();ctxM.globalAlpha=.16*env(p)*(.5+.5*Math.sin(t*9));ctxM.fillStyle='#f33';ctxM.fillRect(0,0,WW,WH);ctxM.restore(); },
+ invest(p,t){ for(let i=0;i<16;i++){ const s=(i*.045), q=clamp((p-s)*1.8,0,1); if(q<=0||q>=1) continue; const x=190+(i*53)%640, ty=130+((i*71)%240); emo(i%3?'💰':'💶',x,lerp(-30,ty,q*q),40,Math.min(1,(1-q)*3)); } },
+ hold(p,t){ const k=1+.1*Math.sin(t*6); emo('🛡️',CEN[0],CEN[1],130*k*ease(Math.min(1,p*2)),env(p)); },
+ arm(p,t){ for(let i=0;i<3;i++){ const x=lerp(-80,WW+80,clamp(p*1.3-i*.12,0,1)); emo('✈️',x,110+i*70,60,env(p),0); }
+   for(let i=0;i<2;i++){ const x=lerp(WW+60,ST[0]+60+i*60,ease(clamp(p*1.4-i*.1,0,1))); emo('🚢',x,ST[1]+30+i*34,54,env(p)); }
+   ctxM.save();ctxM.globalAlpha=.14*env(p)*(.5+.5*Math.sin(t*8));ctxM.fillStyle='#f33';ctxM.fillRect(0,0,WW,WH);ctxM.restore(); },
+ people(p,t){ [[0,0],[40,-20],[75,10],[-40,10],[20,28]].forEach((o,i)=>{ const q=clamp(p*2.2-i*.18,0,1); emo('🏠',ST[0]+o[0]-30,ST[1]+o[1]-30,50*ease(q),env(p)); });
+   emo('✈️',lerp(-60,ST[0]-20,ease(Math.min(1,p*1.6))),ST[1]-90+(1-ease(Math.min(1,p*1.6)))*-50,60,env(p)); emo('🎓',ST[0]+110,ST[1]-60+Math.sin(t*4)*6,46,env(p)); },
+ ignore(p,t){ const k=1+.12*Math.sin(t*7); emo('🚫',CEN[0],CEN[1],150*k*ease(Math.min(1,p*2)),env(p)); },
+ scot(p,t){ const x=780,y=100,w=170*ease(Math.min(1,p*2)),h=w*.62; ctxM.save(); ctxM.globalAlpha=env(p);
+   ctxM.fillStyle='#fff';ctxM.fillRect(x-6,y,8,200); ctxM.fillStyle='#0065BD';ctxM.fillRect(x,y,w,h);
+   ctxM.strokeStyle='#fff';ctxM.lineWidth=w*.13;ctxM.beginPath();ctxM.moveTo(x,y);ctxM.lineTo(x+w,y+h);ctxM.moveTo(x+w,y);ctxM.lineTo(x,y+h);ctxM.stroke();ctxM.restore();
+   label('ESCOCIA',x+w/2,y-24,30,'#9bd0ff'); emo('💥',CEN[0]-80,CEN[1]+20+Math.sin(t*8)*4,80*ease(Math.min(1,p*2)),env(p)); },
+ oil(p,t){ [[.0,.0],[.55,-.3],[1.1,.2],[.7,.55]].forEach((o,i)=>{ const q=ease(clamp(p*2-i*.2,0,1)); const x=ST[0]+110+o[0]*130, y=ST[1]+70+o[1]*70+(1-q)*40; emo('🛢️',x,y,58*q,env(p)); emo('⛽',x+34,y-30,34*q,env(p)); });
+   for(let i=0;i<8;i++) emo('💧',ST[0]+130+i*26,ST[1]+60+Math.sin(t*5+i)*10,20,env(p)*.9); },
+ sanction(p,t){ for(let i=0;i<3;i++){ const x=lerp(ST[0]+80+i*45,WW+60,clamp(p*1.3-i*.1,0,1)); emo('🚢',x,ST[1]+40+i*28,54,env(p)); } emo('🚫',ST[0]+160,ST[1]+60,120*ease(Math.min(1,p*2)),env(p)); emo('🛢️',ST[0]+160,ST[1]+60,60,env(p)*.9); },
+ base(p,t){ const bx=ST[0]-40,by=ST[1]-20,q=ease(Math.min(1,p*1.8)),fw=120,fh=76; ctxM.save(); ctxM.globalAlpha=env(p);
+   ctxM.fillStyle='#e9e9e9';ctxM.fillRect(bx-4,by-110,8,130); const fy=by-110+(1-q)*60+Math.sin(t*6)*2;
+   ctxM.fillStyle='#75AADB';ctxM.fillRect(bx+4,fy,fw,fh*.34);ctxM.fillStyle='#fff';ctxM.fillRect(bx+4,fy+fh*.34,fw,fh*.32);ctxM.fillStyle='#75AADB';ctxM.fillRect(bx+4,fy+fh*.66,fw,fh*.34);
+   ctxM.fillStyle='#F6B40E';ctxM.beginPath();ctxM.arc(bx+4+fw/2,fy+fh/2,fh*.14,0,6.3);ctxM.fill();ctxM.restore();
+   emo('🛬',lerp(-60,bx+170,ease(Math.min(1,p*1.4))),by+40,60,env(p)); label('BASE',bx+60,by+60,28,'#F6B40E'); },
+ summit(p,t){ emo('🤝',CEN[0],CEN[1],110*ease(Math.min(1,p*2)),env(p)); for(let i=0;i<3;i++){ const a=t*2+i*2.1; emo('🌍',CEN[0]+Math.cos(a)*200,CEN[1]+Math.sin(a)*90,52,env(p)); } label('EE.UU. MEDIADOR',CEN[0],CEN[1]+90,28,'#a9cdee'); },
+ vote(p,t){ emo('🗳️',CEN[0],CEN[1]-10,110*ease(Math.min(1,p*2)),env(p)); for(let i=0;i<6;i++){ const q=clamp(p*2.2-i*.12,0,1); emo('👤',CEN[0]-150+i*60,CEN[1]+90,38*ease(q),env(p)); } },
+ timeout(p,t){ emo('⏳',CEN[0],CEN[1],120,env(p),Math.sin(t*3)*.3); },
+ event(p,t,e){ const q=ease(Math.min(1,p*2)); emo(e.ic,120,120,70*q,env(p)); }
+};
+function spawn(type,dur=3.6,extra){ FX.push({type,t0:now(),dur,extra}); }
+function showTag(txt){ const el=$('mapTag'); el.textContent=txt; el.classList.add('on'); clearTimeout(showTag.id); showTag.id=setTimeout(()=>el.classList.remove('on'),3300); }
+
+const SEA=[]; for(let i=0;i<140;i++) SEA.push([hash(i,1)*WW,hash(i,2)*WH,hash(i,3)*6.28,.4+hash(i,4)]);
+let cov=0, covTarget=0, dirty=true;
+function setCov(t){ covTarget=t; }
+function frame(){
+  requestAnimationFrame(frame);
+  const cv=$('map'); if(!cv.width) return;
+  const t=now(); ctxM=cv.getContext('2d');
+  if(Math.abs(cov-covTarget)>0.002){ cov+= (covTarget-cov)*0.06; dirty=true; } else if(cov!==covTarget){ cov=covTarget; dirty=true; }
+  if(dirty){ renderLand(cov); dirty=false; }
+  const sc=Math.min(cv.width/WW,cv.height/WH);
+  ctxM.setTransform(1,0,0,1,0,0); ctxM.clearRect(0,0,cv.width,cv.height);
+  ctxM.setTransform(sc,0,0,sc,(cv.width-WW*sc)/2,(cv.height-WH*sc)/2);
+  // mar
+  const gr=ctxM.createLinearGradient(0,0,0,WH); gr.addColorStop(0,'#0e3b66'); gr.addColorStop(1,'#08213f');
+  ctxM.fillStyle=gr; ctxM.fillRect(-200,-200,WW+400,WH+400);
+  for(const w of SEA){ const x=(w[0]+t*14*w[3])%(WW+40)-20, y=w[1]+Math.sin(t*1.5+w[2])*2; ctxM.fillStyle=`rgba(170,215,255,${.10+.1*Math.sin(t+w[2])})`; ctxM.fillRect(x,y,14*w[3]+6,2); }
+  ctxM.drawImage(shoalCv,0,0);
+  // sombra en el agua
+  ctxM.save(); ctxM.globalAlpha=.4; ctxM.filter='blur(5px) brightness(0)'; ctxM.drawImage(silCv,10,20); ctxM.restore();
+  // espesor del bloque (tierra/dirt)
+  for(let d=14;d>=1;d--){ ctxM.save(); ctxM.filter=`brightness(${.22+.02*(14-d)}) sepia(1) saturate(2.2) hue-rotate(-18deg)`; ctxM.drawImage(silCv,0,d); ctxM.restore(); }
+  ctxM.drawImage(landCv,0,0);
+  // animaciones
+  for(let i=FX.length-1;i>=0;i--){ const f=FX[i], p=(t-f.t0)/f.dur; if(p>=1){FX.splice(i,1);continue;} const fn=ANIMS[f.type]; if(fn) fn(p,t,f.extra); }
+  // viñeta de bordes
+  ctxM.setTransform(1,0,0,1,0,0);
+  ctxM.globalCompositeOperation='destination-in';
+  const rg=ctxM.createRadialGradient(cv.width/2,cv.height/2,Math.min(cv.width,cv.height)*.28,cv.width/2,cv.height/2,Math.max(cv.width,cv.height)*.6);
+  rg.addColorStop(0,'rgba(0,0,0,1)'); rg.addColorStop(1,'rgba(0,0,0,0)'); ctxM.fillStyle=rg; ctxM.fillRect(0,0,cv.width,cv.height);
+  ctxM.globalCompositeOperation='source-over';
+}
+function fitMap(){
+  const cv=$('map'), r=cv.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=Math.max(10,Math.round(r.width*dpr)); cv.height=Math.max(10,Math.round(r.height*dpr));
+}
+window.addEventListener('resize',fitMap);
+
+/* ============ UI ============ */
+function setHud(){
+  const s=score(), lv=level(s);
+  $('year').innerHTML = `${S.turn<TURNS?CARDS[S.turn].y:2041}<small>TURNO ${Math.min(S.turn+1,TURNS)}/${TURNS}</small>`;
+  $('scoreFill').style.width = s+'%';
+  const lab=$('scoreLab'); lab.textContent=lv+' ('+Math.round(s)+')';
+  lab.style.color = lv==='ALTA'?'var(--ok)':lv==='INTERMEDIA'?'var(--sol)':'var(--cel2)';
+  $('tensFill').style.width = Math.min(100,S.tension/TENSION_MAX*100)+'%';
+  $('tensV').textContent = Math.round(S.tension)+'/'+TENSION_MAX;
+  setCov(covOf(s));
+}
+function chips(o){
+  const a=[];
+  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<span class="${up?'u':'dn'}">${VI[k].ic} ${VI[k].n.split(' ')[0]} ${up?'▲':'▼'}</span>`); }
+  if(o.t>0) a.push('<span class="dn">🔥 TENSIÓN ▲</span>'); else if(o.t<0) a.push('<span class="u">🔥 TENSIÓN ▼</span>');
+  return a.join('');
+}
+function showCard(){
+  phase='card';
+  const c = CARDS[S.turn], card=$('card');
+  card.className='card';
+  card.innerHTML = `
+    ${expo?'':'<div class="timer"><i id="timerFill"></i></div>'}
+    <div class="info"><div class="tg">${c.y} · DECISIÓN ${S.turn+1} DE ${TURNS}</div><h2>${c.t}</h2><p>${c.x}</p></div>
+    <button class="opt" data-o="A"><div class="l"><b>A</b>${c.A.l}</div><div class="chips">${chips(c.A)}</div></button>
+    <button class="opt" data-o="B"><div class="l"><b>B</b>${c.B.l}</div><div class="chips">${chips(c.B)}</div></button>`;
+  card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>choose(b.dataset.o));
+  setHud();
+  if(!expo){
+    let left=TIME*1000; clearInterval(tickId);
+    tickId=setInterval(()=>{
+      left-=100;
+      const f=$('timerFill'); if(f){ f.style.width=Math.max(0,left/(TIME*1000)*100)+'%'; if(left<4000) f.style.background='var(--red)'; }
+      if(left<=0){clearInterval(tickId);choose(null);}
+    },100);
+  }
+}
+function applyFx(fx,deltas,gain=1){
+  for(const k in fx){
+    const before=S.val[k], d=fx[k]>0?fx[k]*gain:fx[k];
+    S.val[k]=clamp(S.val[k]+d);
+    deltas[k]=(deltas[k]||0)+Math.round(S.val[k]-before);
+  }
+}
+function choose(o){
+  if(phase!=='card') return;
+  phase='result'; clearInterval(tickId);
+  const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={};
+  applyFx(opt.fx,deltas,o?GAIN:1);
+  S.tension += (opt.t||0);
+  applyFx({ter:1,dis:1},deltas);
+  let ev=null;
+  if(S.turn>=1 && Math.random()<0.5){
+    ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
+    applyFx(ev.fx,deltas); S.tension += (ev.t||0);
+  }
+  S.tension = Math.max(0, S.tension-3);
+  S.log.push({y:c.y, t:c.t, pick:o?c[o].l:TIMEOUT.l});
+  renderMobs(deltas); setHud();
+  spawn(opt.an); showTag(opt.tag);
+  if(ev){ setTimeout(()=>spawn('event',2.6,ev),900); setNews(ev.ic,ev.x); } else setNews('🌐','Sin novedades del mundo este año. El tablero depende de vos.');
+
+  const last = S.turn===TURNS-1, dead = S.tension>=TENSION_MAX;
+  const card=$('card'); card.className='card res';
+  card.innerHTML = `
+    <div class="res">
+      <div class="t1">${o?`ELEGISTE ${o}: ${opt.l.toUpperCase()}`:'SE ACABÓ EL TIEMPO'}</div>
+      <p>${opt.r}</p>
+      ${ev?`<div class="ev">${ev.ic} Evento mundial: ${ev.x}</div>`:''}
+    </div>
+    <button class="go" id="btnNext">${dead||last?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
+  const next=()=>{clearTimeout(autoId); if(dead||last) finish(dead); else {S.turn++; showCard();}};
+  $('btnNext').onclick=next;
+  if(!expo) autoId=setTimeout(next, dead||last ? 4200 : 3800);
+}
+
+function finish(dead){
+  phase='end'; clearInterval(tickId); clearTimeout(autoId);
+  const s=score(), lv=level(s), v=S.val;
+  let cls, title, text;
+  if(dead){
+    cls='bad'; title='CONFLICTO: SE ROMPE LA VÍA PACÍFICA';
+    text='La tensión superó el límite. Sin vía negociada, el modelo ya no mide transición pacífica: terminó en crisis. Ganar propensión a costa de tensión no sirve.';
+  } else if(lv==='ALTA' && v.aut>=25){
+    cls='ok'; title='CESIÓN PLENA NEGOCIADA';
+    text='Alta propensión y una población insular que no se opone. El RUGBIN acepta transferir la soberanía por vía negociada.';
+  } else if(lv==='ALTA'){
+    cls='ok'; title='FÓRMULA CHAGOS: CESIÓN CON BASE';
+    text='Alta propensión, pero la identidad insular sigue pesando. El acuerdo posible: soberanía argentina con arrendamiento de la base militar, como en Chagos.';
+  } else if(lv==='INTERMEDIA'){
+    cls='mid'; title='FINAL GIBRALTAR';
+    text='Propensión intermedia: hay conversaciones, gestos y presión, pero nadie firma. Es el límite del TP: la propensión no es lo mismo que el resultado.';
+  } else {
+    cls='bad'; title='STATU QUO';
+    text='Baja propensión. Las islas siguen igual en 2041. El costo de ceder sigue siendo mayor al de quedarse.';
+  }
+  const bars = VARS.map(x=>`<div>${x.ic} ${x.n}: <b style="color:var(--sol)">${Math.round(v[x.k])}</b> / 100</div>`).join('');
+  $('endPanel').innerHTML = `
+    <h1>MALVINAS <em>2041</em></h1>
+    <div class="big ${cls}">${title}</div>
+    <p>${text}</p>
+    <p style="margin-top:.6rem;color:var(--cel2)">Propensión final: <b style="color:var(--sol)">${lv} (${Math.round(s)})</b> · Tensión: <b style="color:var(--red)">${Math.round(S.tension)}/${TENSION_MAX}</b></p>
+    <div class="endbars">${bars}</div>
+    <div class="row">
+      <button class="go" id="btnAgain">JUGAR DE NUEVO ▶</button>
+      <button class="btn" id="btnTheory3">VER TEORÍA DEL TP</button>
+    </div>`;
+  $('btnAgain').onclick=start;
+  $('btnTheory3').onclick=()=>openTheory('ovEnd');
+  $('ovEnd').classList.add('on');
+}
+function start(){
+  expo = $('chkExpo').checked;
+  newGame(); cov=0; covTarget=0; dirty=true; FX.length=0;
+  $('ovIntro').classList.remove('on'); $('ovEnd').classList.remove('on');
+  buildSide(); renderMobs(); showCard(); fitMap();
+}
+
+let theoryFrom=null;
+function openTheory(from){theoryFrom=from; if(from) $(from).classList.remove('on'); $('ovTheory').classList.add('on'); if(phase==='card') clearInterval(tickId);}
+function closeTheory(){
+  $('ovTheory').classList.remove('on');
+  if(theoryFrom) $(theoryFrom).classList.add('on');
+  else if(phase==='card') showCard();
+}
+function toggleFS(){
+  if(document.fullscreenElement) document.exitFullscreen();
+  else (document.documentElement.requestFullscreen||function(){}).call(document.documentElement);
+}
+
+$('btnStart').onclick=start;
+$('btnTheory').onclick=()=>openTheory(null);
+$('btnTheory2').onclick=()=>openTheory('ovIntro');
+$('btnCloseTheory').onclick=closeTheory;
+$('btnFS').onclick=toggleFS; $('btnFS2').onclick=toggleFS;
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase();
+  if(k==='f' && phase!=='card'){ toggleFS(); return; }
+  if(phase==='card' && !$('ovTheory').classList.contains('on')){
+    if(k==='a'||k==='1') choose('A'); else if(k==='b'||k==='2') choose('B'); else if(k==='f') toggleFS();
+  } else if(phase==='result' && (k==='enter'||k===' ')){const b=$('btnNext'); if(b) b.click();}
+});
+
+newGame(); buildSide(); renderMobs(); setHud(); fitMap(); requestAnimationFrame(frame);
+</script>
+</body>
+</html>
