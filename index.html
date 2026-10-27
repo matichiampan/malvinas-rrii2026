@@ -142,7 +142,7 @@ button{font-family:var(--f);cursor:pointer}
       <div class="t">MALVINAS <em>2041</em></div>
     </div>
     <div class="prop">
-      <div class="lab"><span>Propensión del RU a una transición pacífica</span><b id="scoreLab">34%</b></div>
+      <div class="lab"><span>Propensión del Reino Unido a una transición pacífica</span><b id="scoreLab">34%</b></div>
       <div class="bar"><i id="scoreFill" style="width:34%"></i><span class="mk" style="left:55%"></span></div>
       <div class="zones"><span style="left:27.5%">STATUS QUO</span><span style="left:77.5%">TRANSICIÓN PACÍFICA</span></div>
     </div>
@@ -201,12 +201,12 @@ button{font-family:var(--f);cursor:pointer}
     <p><b style="color:var(--sol)">Pregunta:</b> ¿qué escenario será favorable para una transición pacífica del poder soberano de las Malvinas hacia la República Argentina? Horizonte 2026–2041.</p>
     <h3>LAS 6 DIMENSIONES</h3>
     <table class="th">
-      <tr><td>🌍 SITUACIÓN INTERNACIONAL (SI)</td><td>Alianzas estratégicas, respaldo diplomático en foros multilaterales y exposición a frentes de conflicto globales.</td></tr>
-      <tr><td>⚔️ CAPACIDAD MILITAR (ICM)</td><td>Gasto en defensa, correlación de fuerzas navales, terrestres y aeroespaciales, y disuasión nuclear.</td></tr>
-      <tr><td>💰 FACTOR ECONÓMICO (FE)</td><td>Asimetrías de producto bruto, solvencia financiera, vulnerabilidad macroeconómica y valorización de los recursos naturales.</td></tr>
-      <tr><td>🧭 TERRITORIO Y LOGÍSTICA (TyL)</td><td>Proximidad geográfica continental argentina frente a la cadena de suministro transoceánica británica.</td></tr>
-      <tr><td>🏛️ SITUACIÓN DOMÉSTICA (SD)</td><td>Capital político, aprobación gubernamental, riesgo país e interés cohesivo de las sociedades civiles.</td></tr>
-      <tr><td>🏝️ AUTONOMÍA ESTRUCTURAL (AE)</td><td>Independencia fiscal del enclave, matriz demográfica, retención de capital humano y dependencia de la metrópoli.</td></tr>
+      <tr><td>🌍 SITUACIÓN INTERNACIONAL</td><td>Alianzas estratégicas, respaldo diplomático en foros multilaterales y exposición a frentes de conflicto globales.</td></tr>
+      <tr><td>⚔️ CAPACIDAD MILITAR</td><td>Gasto en defensa, correlación de fuerzas navales, terrestres y aeroespaciales, y disuasión nuclear.</td></tr>
+      <tr><td>💰 FACTOR ECONÓMICO</td><td>Asimetrías de producto bruto, solvencia financiera, vulnerabilidad macroeconómica y valorización de los recursos naturales.</td></tr>
+      <tr><td>🧭 TERRITORIO Y LOGÍSTICA</td><td>Proximidad geográfica continental argentina frente a la cadena de suministro transoceánica británica.</td></tr>
+      <tr><td>🏛️ SITUACIÓN DOMÉSTICA</td><td>Capital político, aprobación gubernamental, riesgo país e interés cohesivo de las sociedades civiles.</td></tr>
+      <tr><td>🏝️ AUTONOMÍA ESTRUCTURAL</td><td>Independencia fiscal del enclave, matriz demográfica, retención de capital humano y dependencia de la metrópoli.</td></tr>
     </table>
     <h3>LOS 3 ESCENARIOS</h3>
     <ul>
@@ -215,7 +215,7 @@ button{font-family:var(--f);cursor:pointer}
       <li><b style="color:var(--ok)">Transición pacífica:</b> negociación bilateral que termina en transferencia plena o en soberanía compartida o arriendo. Requiere la confluencia de crisis de autonomía estructural, presión del Norte Global y desgaste doméstico británico.</li>
     </ul>
     <h3>CÓMO PUNTÚA EL JUEGO</h3>
-    <p>Cada barra va de 0 a 100 y mide cuánto empuja esa dimensión hacia la transición pacífica. La propensión es el promedio de las seis. Hay transición pacífica si la propensión llega a <b style="color:var(--ok)">55%</b> y AE, SI y SD superan 50 al mismo tiempo. Hay guerra si la propensión al enfrentamiento llega a 60.</p>
+    <p>Cada barra va de 0 a 100 y mide cuánto empuja esa dimensión hacia la transición pacífica. La propensión es el promedio de las seis. Hay transición pacífica si la propensión llega a <b style="color:var(--ok)">55%</b> y autonomía estructural, situación internacional y situación doméstica superan 50 al mismo tiempo. Hay guerra si la propensión al enfrentamiento llega a 60.</p>
     <div class="row"><button class="go" id="btnCloseTheory">VOLVER</button></div>
   </div>
 </div>
@@ -228,12 +228,12 @@ button{font-family:var(--f);cursor:pointer}
 /* Las seis dimensiones del TP. Cada barra mide cuánto empuja esa dimensión hacia la transición pacífica (0-100).
    Valores iniciales: promedio 34, la propensión "marcadamente baja" del escenario del status quo. */
 const VARS = [
-  {k:'si',  c:'SI',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas estratégicas, respaldo en foros multilaterales y frentes de conflicto globales'},
-  {k:'icm', c:'ICM', n:'CAPACIDAD MILITAR (ICM)',  ic:'⚔️', side:'L', v:10, ds:'Gasto en defensa, fuerzas navales, terrestres y aeroespaciales, disuasión nuclear'},
-  {k:'fe',  c:'FE',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Producto bruto, solvencia financiera, vulnerabilidad macroeconómica, recursos naturales'},
-  {k:'tyl', c:'TyL', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad continental argentina frente a la cadena de suministro transoceánica británica'},
-  {k:'sd',  c:'SD',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político, aprobación gubernamental, riesgo país y cohesión de las sociedades civiles'},
-  {k:'ae',  c:'AE',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Sube cuando las islas pierden independencia fiscal, población y capital humano'}
+  {k:'si',  c:'Situación internacional',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas estratégicas, respaldo en foros multilaterales y frentes de conflicto globales'},
+  {k:'icm', c:'Capacidad militar', n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Gasto en defensa, fuerzas navales, terrestres y aeroespaciales, disuasión nuclear'},
+  {k:'fe',  c:'Factor económico',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Producto bruto, solvencia financiera, vulnerabilidad macroeconómica, recursos naturales'},
+  {k:'tyl', c:'Territorio y logística', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad continental argentina frente a la cadena de suministro transoceánica británica'},
+  {k:'sd',  c:'Situación doméstica',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político, aprobación gubernamental, riesgo país y cohesión de las sociedades civiles'},
+  {k:'ae',  c:'Autonomía estructural',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Sube cuando las islas pierden independencia fiscal, población y capital humano'}
 ];
 /* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
    (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
@@ -241,9 +241,9 @@ const TH_TRANS = 55, TH_FULL = 58, TH_CONF = 50, CONF = ['ae','si','sd'];
 const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.4;
 
 const CARDS = [
- {y:2026, t:'Diplomacia multilateral', x:'AR tiene respaldo en la Asamblea General de la ONU, el Comité de Descolonización y la OEA, pero carece de fuerza coercitiva real.',
-  A:{l:'Trascender el Sur Global: sumar a EE.UU. y la UE', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8}, r:'La campaña sale de su zona de confort discursiva y empieza a sumar a las potencias del Norte Global.'},
-  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 ONU', fx:{si:3,sd:3}, r:'Más respaldo declarativo. Sin condicionamiento material, las resoluciones quedan en el plano simbólico.'}},
+ {y:2026, t:'Diplomacia multilateral', x:'Argentina tiene respaldo en la Asamblea General de las Naciones Unidas, el Comité de Descolonización y la Organización de los Estados Americanos, pero carece de fuerza coercitiva real.',
+  A:{l:'Trascender el Sur Global: sumar a Estados Unidos y la Unión Europea', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8}, r:'La campaña sale de su zona de confort discursiva y empieza a sumar a las potencias del Norte Global.'},
+  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{si:3,sd:3}, r:'Más respaldo declarativo. Sin condicionamiento material, las resoluciones quedan en el plano simbólico.'}},
  {y:2027, t:'Vulnerabilidad financiera', x:'El riesgo país, el alto endeudamiento externo y las fluctuaciones inflacionarias restringen el margen del Estado argentino.',
   A:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:2}, r:'Con más solvencia financiera, el Estado puede ejecutar políticas consistentes a largo plazo.'},
   B:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-4}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'}},
@@ -252,7 +252,7 @@ const CARDS = [
   B:{l:'Persuadir a los aliados occidentales sobre los recursos', an:'fish', tag:'🎣 RECURSOS', fx:{si:5,ae:3}, r:'La valorización de los recursos naturales entra en la agenda de los aliados de Londres.'}},
  {y:2030, t:'Frentes simultáneos', x:'El Reino Unido enfrenta frentes en Europa Oriental, Medio Oriente o el Indopacífico: una crisis de sobre extensión imperial.',
   A:{l:'Aprovechar la ventana de vulnerabilidad británica', an:'press', tag:'⚡ VENTANA', fx:{icm:6,si:-2}, t:16, r:'El flanco sur británico queda desprotegido, pero Londres lee la jugada como una amenaza.'},
-  B:{l:'Presentarse como garante de la estabilidad regional', an:'peace', tag:'🕊️ ESTABILIDAD', fx:{si:7}, t:-6, r:'Los aliados occidentales ven en AR un socio para la estabilidad regional del Atlántico.'}},
+  B:{l:'Presentarse como garante de la estabilidad regional', an:'peace', tag:'🕊️ ESTABILIDAD', fx:{si:7}, t:-6, r:'Los aliados occidentales ven en Argentina un socio para la estabilidad regional del Atlántico.'}},
  {y:2032, t:'Programa de rearme', x:'Defensa propone un programa sostenido de rearme y modernización naval, submarina y aeroespacial.',
   A:{l:'Ejecutar el rearme', an:'arm', tag:'✈️ REARME', fx:{icm:12,fe:-4}, t:26, r:'Se reduce la brecha del índice de capacidad militar. Aumenta la propensión al enfrentamiento.'},
   B:{l:'Mantener la vía estrictamente diplomática', an:'hold', tag:'🛡️ VÍA DIPLOMÁTICA', fx:{si:4,fe:3}, t:-4, r:'Sin coacción militar ni uso de la fuerza. La vía pacífica sigue abierta.'}},
@@ -268,7 +268,7 @@ const CARDS = [
  {y:2038, t:'Desgaste doméstico británico', x:'La sociedad civil británica, agobiada por las reformas del estado de bienestar, cuestiona los costos de sostener las islas.',
   A:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:9,si:2}, r:'Los costos impositivos, logísticos y políticos de las islas entran en el debate británico.'},
   B:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:4}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo.'}},
- {y:2040, t:'Ultimátum de los aliados', x:'EE.UU. y actores clave de la UE pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
+ {y:2040, t:'Ultimátum de los aliados', x:'Estados Unidos y actores clave de la Unión Europea pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
   A:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:10}, t:4, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica.'},
   B:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:3}, r:'Una arquitectura jurídica innovadora: soberanía compartida o arriendo territorial a muy largo plazo.'}}
 ];
@@ -276,7 +276,7 @@ const CARDS = [
 const EVENTS = [
  {ic:'🐟', x:'Los recursos pesqueros migran por el cambio climático.', fx:{ae:6}},
  {ic:'🛢️', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', fx:{ae:6}},
- {ic:'🌍', x:'Nuevo frente en el Indopacífico: el RU dispersa sus recursos.', fx:{icm:4,si:2}},
+ {ic:'🌍', x:'Nuevo frente en el Indopacífico: el Reino Unido dispersa sus recursos.', fx:{icm:4,si:2}},
  {ic:'📉', x:'Sube el riesgo país argentino.', fx:{fe:-5,sd:-3}},
  {ic:'🏛️', x:'Crisis interna británica por las reformas del estado de bienestar.', fx:{sd:5}},
  {ic:'✈️', x:'Rotación permanente de efectivos en Mount Pleasant.', fx:{icm:-3}},
@@ -300,7 +300,7 @@ function newGame(){
   VARS.forEach(v => S.val[v.k] = v.v);
 }
 
-/* ============ BANDERAS-MOB (RU estilo creeper) ============ */
+/* ============ BANDERAS-MOB (Reino Unido estilo creeper) ============ */
 function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const mobOrders = {};
 function blockOrder(i){
@@ -467,7 +467,7 @@ const ST=P(-57.85,-51.72), CEN=[WW/2,WH/2];
 const ANIMS={
  fish(p,t){ for(let i=0;i<5;i++){ const tx=ST[0]+60+i*34, ty=ST[1]-30+i*26+Math.sin(t*2+i)*6; const x=lerp(WW+40,tx,ease(Math.min(1,p*1.6))); emo('⛵',x,ty,38,env(p)); }
    for(let i=0;i<9;i++){ const a=t*1.6+i*.7; emo('🐟',ST[0]+80+Math.cos(a)*70+i*8, ST[1]+10+Math.sin(a)*36, 26,env(p)); } label('+ PESCA',ST[0]+90,ST[1]-70,30,'#8fe3ff'); },
- un(p,t){ const y=lerp(-30,CEN[1]-20,ease(Math.min(1,p*1.8))); emo('📜',CEN[0],y,84,env(p)); label('ONU',CEN[0],y+70,34,'#a9cdee');
+ un(p,t){ const y=lerp(-30,CEN[1]-20,ease(Math.min(1,p*1.8))); emo('📜',CEN[0],y,84,env(p)); label('NACIONES UNIDAS',CEN[0],y+70,34,'#a9cdee');
    for(let i=0;i<4;i++){ const a=t*1.8+i*1.6; emo('🕊️',CEN[0]+Math.cos(a)*220,CEN[1]-70+Math.sin(a*1.3)*50,44,env(p)); } },
  peace(p,t){ for(let i=0;i<4;i++){ const x=lerp(-40,WW+40,((p*1.2+i*.18)%1)); emo('🕊️',x,150+i*55+Math.sin(t*4+i)*14,46,env(p)); } emo('🤝',CEN[0],CEN[1]-10,100*ease(Math.min(1,p*2)),env(p)); },
  press(p,t){ const k=1+.15*Math.sin(t*10); emo('📢',CEN[0]-80,CEN[1],96*k,env(p),-.2); for(let i=0;i<4;i++) emo('⚡',CEN[0]+20+i*55,CEN[1]-20+Math.sin(t*9+i)*20,42,env(p)*(Math.sin(t*12+i)>0?1:.35));
