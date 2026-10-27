@@ -35,8 +35,8 @@ button{font-family:var(--f);cursor:pointer}
 .bar .mk{position:absolute;top:-.3rem;bottom:-.3rem;width:.2rem;background:var(--sol)}
 .zones{position:relative;height:1.1rem;font-size:.8rem;color:var(--dim);margin-top:.2rem;font-weight:700}
 .zones span{position:absolute;transform:translateX(-50%);white-space:nowrap}
-.tens{width:10rem}
-.tens .lab{display:flex;justify-content:space-between;font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.25rem}
+.tens{width:13rem}
+.tens .lab{display:flex;justify-content:space-between;gap:.5rem;font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.25rem}
 .bar.t>i{background:repeating-linear-gradient(90deg,var(--red) 0 .5rem,#b72437 .5rem .6rem)}
 .hb{display:flex;gap:.5rem}
 .btn{background:var(--bg3);color:var(--cel2);border:.17rem solid var(--cel);padding:.45rem .75rem;font-size:.95rem;font-weight:700;box-shadow:.15rem .15rem 0 #000;white-space:nowrap}
@@ -76,6 +76,7 @@ button{font-family:var(--f);cursor:pointer}
 .legend{position:absolute;left:50%;transform:translateX(-50%);bottom:.5rem;white-space:nowrap;display:flex;flex-direction:row;gap:.9rem;font-size:clamp(.62rem,1.5vh,.85rem);font-weight:700;background:rgba(5,10,20,.72);border:.13rem solid var(--line);padding:.4rem .6rem}
 .legend span::before{content:"";display:inline-block;width:.9rem;height:.9rem;margin-right:.45rem;vertical-align:-.1rem;border:.1rem solid #000}
 .legend .a::before{background:#7a8a52}.legend .b::before{background:var(--cel)}
+.osm{position:absolute;right:.4rem;bottom:.2rem;font-size:.55rem;color:var(--dim);opacity:.7;pointer-events:none}
 .tag{position:absolute;right:.7rem;top:.6rem;font-weight:800;font-size:1.7rem;color:var(--sol);text-shadow:.12rem .12rem 0 #000;opacity:0;transition:opacity .4s;background:rgba(5,10,20,.72);border:.15rem solid var(--sol);padding:.3rem .8rem}
 .tag.on{opacity:1}
 
@@ -141,13 +142,13 @@ button{font-family:var(--f);cursor:pointer}
       <div class="t">MALVINAS <em>2041</em></div>
     </div>
     <div class="prop">
-      <div class="lab"><span>Propensión del RU a ceder</span><b id="scoreLab">BAJA</b></div>
-      <div class="bar"><i id="scoreFill" style="width:30%"></i><span class="mk" style="left:40%"></span><span class="mk" style="left:55%"></span></div>
-      <div class="zones"><span style="left:20%">BAJA</span><span style="left:47.5%">MEDIA</span><span style="left:77.5%">ALTA</span></div>
+      <div class="lab"><span>Propensión del RU a una transición pacífica</span><b id="scoreLab">34%</b></div>
+      <div class="bar"><i id="scoreFill" style="width:34%"></i><span class="mk" style="left:55%"></span></div>
+      <div class="zones"><span style="left:27.5%">STATUS QUO</span><span style="left:77.5%">TRANSICIÓN PACÍFICA</span></div>
     </div>
     <div style="display:flex;gap:1rem;align-items:center">
       <div class="tens">
-        <div class="lab"><span>TENSIÓN</span><span id="tensV">10</span></div>
+        <div class="lab"><span>ENFRENTAMIENTO</span><span id="tensV">10</span></div>
         <div class="bar t"><i id="tensFill" style="width:10%"></i></div>
       </div>
       <div class="hb"><button class="btn" id="btnTheory">TEORÍA</button><button class="btn" id="btnFS">⛶ PANT. COMPLETA</button></div>
@@ -158,7 +159,8 @@ button{font-family:var(--f);cursor:pointer}
     <div class="side" id="sideL"></div>
     <div class="mapbox" id="mapbox">
       <div class="tilt"><canvas id="map"></canvas></div>
-      <div class="legend"><span class="a">Bajo control británico</span><span class="b">Avanza hacia la transición</span></div>
+      <div class="legend"><span class="a">Administración británica</span><span class="b">Avanza la transición pacífica</span></div>
+      <div class="osm">Costa: © OpenStreetMap contributors</div>
       <div class="tag" id="mapTag"></div>
       <div class="maptitle">ISLAS <em>MALVINAS</em></div>
     </div>
@@ -173,14 +175,14 @@ button{font-family:var(--f);cursor:pointer}
   <div class="panel">
     <h1>MALVINAS <em>2041</em></h1>
     <p class="sub">Simulador prospectivo de relaciones internacionales</p>
-    <p>Sos el equipo de política exterior argentino. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para aumentar la <b style="color:var(--cel2)">propensión del Reino Unido a ceder la soberanía</b> por la vía pacífica.</p>
+    <p>Asesorás al gobierno nacional de la República Argentina. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para subir la <b style="color:var(--cel2)">propensión del Reino Unido a una transición pacífica</b> del poder soberano de las Malvinas. Hoy está en <b style="color:var(--sol)">34%</b>: marcadamente baja.</p>
     <h3>CÓMO SE JUEGA</h3>
     <ul>
-      <li>Elegí <b>A</b> o <b>B</b>. Cada opción muestra qué variables sube ▲ o baja ▼.</li>
-      <li>Cada bandera británica es un factor real del modelo. Cuanto más sube, más se rompe.</li>
-      <li>Las islas se van <b style="color:var(--cel2)">pintando de celeste</b> a medida que avanza la propensión.</li>
-      <li>Si la <b style="color:var(--red)">tensión</b> llega a 60, se rompe la vía pacífica y perdés.</li>
-      <li>Una partida dura menos de 3 minutos.</li>
+      <li>Elegí <b>A</b> o <b>B</b>. Cada opción muestra qué dimensión sube ▲ o baja ▼.</li>
+      <li>Cada bandera británica es una de las <b>6 dimensiones</b> del TP. Cuanto más sube, más se rompe.</li>
+      <li>Las islas se van <b style="color:var(--cel2)">pintando de celeste</b> a medida que sube la propensión.</li>
+      <li>Si la <b style="color:var(--red)">propensión al enfrentamiento</b> llega a 60, estalla la guerra.</li>
+      <li>Hay 3 escenarios posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
     <label class="chk"><input type="checkbox" id="chkExpo"> Modo exposición (sin cronómetro)</label>
     <div class="row">
@@ -195,26 +197,25 @@ button{font-family:var(--f);cursor:pointer}
 <div class="ov" id="ovTheory">
   <div class="panel">
     <h1>MODELO <em>DEL TP</em></h1>
-    <p class="sub">Trabajo prospectivo con enfoque mixto cuanti-cualitativo. Realismo, interdependencia, liberalismo y contractualismo.</p>
-    <p><b style="color:var(--sol)">Pregunta:</b> ¿es alta, intermedia o baja la propensión del RUGBIN a una transición pacífica del poder soberano de las Malvinas? Horizonte 2026–2041. Incluye cesión plena y fórmulas mixtas como Chagos.</p>
-    <h3>LAS 7 VARIABLES</h3>
+    <p class="sub">Investigación prospectiva con enfoque metodológico mixto. Anclaje realista y neorrealista, con escenarios de la interdependencia, el contractualismo y el liberalismo.</p>
+    <p><b style="color:var(--sol)">Pregunta:</b> ¿qué escenario será favorable para una transición pacífica del poder soberano de las Malvinas hacia la República Argentina? Horizonte 2026–2041.</p>
+    <h3>LAS 6 DIMENSIONES</h3>
     <table class="th">
-      <tr><td>💷 ECONOMÍA</td><td>Crecimiento y PBI, balanza de pagos, vulnerabilidad económica (EVI-ONU).</td></tr>
-      <tr><td>🛢️ TERRITORIO</td><td>Recursos no explotados (VPN), sensibilidad económica, ZEE y plataforma continental.</td></tr>
-      <tr><td>🧭 DISTANCIA</td><td>Distancia geodésica y marítima, tiempo y costo del despliegue logístico.</td></tr>
-      <tr><td>⚔️ CAPACIDAD MILITAR</td><td>Costo de desplegar un teatro de operaciones, gasto defensivo en el territorio, proyección y gasto absoluto.</td></tr>
-      <tr><td>🌍 SITUACIÓN INTERNACIONAL</td><td>Aliados de la potencia y del reclamante, conflictos latentes que desvían fuerzas (Ucrania, Medio Oriente, presión de EE.UU.).</td></tr>
-      <tr><td>🏛️ SITUACIÓN DOMÉSTICA</td><td>Estabilidad política y económica del RUGBIN y de Argentina. Incluye la hipótesis de fragmentación del RU como escenario.</td></tr>
-      <tr><td>👥 AUTONOMÍA E IDENTIDAD</td><td>Población y moral: legitimidad de la potencia ocupante, similitud cultural, IDH.</td></tr>
+      <tr><td>🌍 SITUACIÓN INTERNACIONAL (SI)</td><td>Alianzas estratégicas, respaldo diplomático en foros multilaterales y exposición a frentes de conflicto globales.</td></tr>
+      <tr><td>⚔️ CAPACIDAD MILITAR (ICM)</td><td>Gasto en defensa, correlación de fuerzas navales, terrestres y aeroespaciales, y disuasión nuclear.</td></tr>
+      <tr><td>💰 FACTOR ECONÓMICO (FE)</td><td>Asimetrías de producto bruto, solvencia financiera, vulnerabilidad macroeconómica y valorización de los recursos naturales.</td></tr>
+      <tr><td>🧭 TERRITORIO Y LOGÍSTICA (TyL)</td><td>Proximidad geográfica continental argentina frente a la cadena de suministro transoceánica británica.</td></tr>
+      <tr><td>🏛️ SITUACIÓN DOMÉSTICA (SD)</td><td>Capital político, aprobación gubernamental, riesgo país e interés cohesivo de las sociedades civiles.</td></tr>
+      <tr><td>🏝️ AUTONOMÍA ESTRUCTURAL (AE)</td><td>Independencia fiscal del enclave, matriz demográfica, retención de capital humano y dependencia de la metrópoli.</td></tr>
     </table>
-    <h3>CÓMO PUNTÚA EL JUEGO</h3>
-    <p>Cada variable va de 0 a 100 y las siete pesan lo mismo, como en el TP. La propensión es el promedio: <b style="color:var(--cel2)">baja</b> menos de 40, <b style="color:var(--sol)">intermedia</b> de 40 a 55, <b style="color:var(--ok)">alta</b> desde 55.</p>
-    <h3>LÍMITES DEL MODELO (los del TP)</h3>
+    <h3>LOS 3 ESCENARIOS</h3>
     <ul>
-      <li>Los umbrales salen de solo dos casos de cesión, así que son tentativos.</li>
-      <li>Las siete variables pesan lo mismo (a definir) y los puntajes son subjetivos.</li>
-      <li>Gibraltar tiene propensión intermedia y no cedió: <b style="color:var(--sol)">propensión no es resultado</b>. Por eso el juego tiene un final Gibraltar.</li>
+      <li><b>Status quo:</b> el más probable. Administración británica sostenida por disuasión militar, sin conflicto armado ni negociación sustantiva. Propensión cercana al 34%.</li>
+      <li><b style="color:var(--red)">Guerra:</b> ruptura violenta del status quo. Requiere rearme argentino, sobre extensión británica y presiones internas.</li>
+      <li><b style="color:var(--ok)">Transición pacífica:</b> negociación bilateral que termina en transferencia plena o en soberanía compartida o arriendo. Requiere la confluencia de crisis de autonomía estructural, presión del Norte Global y desgaste doméstico británico.</li>
     </ul>
+    <h3>CÓMO PUNTÚA EL JUEGO</h3>
+    <p>Cada barra va de 0 a 100 y mide cuánto empuja esa dimensión hacia la transición pacífica. La propensión es el promedio de las seis. Hay transición pacífica si la propensión llega a <b style="color:var(--ok)">55%</b> y AE, SI y SD superan 50 al mismo tiempo. Hay guerra si la propensión al enfrentamiento llega a 60.</p>
     <div class="row"><button class="go" id="btnCloseTheory">VOLVER</button></div>
   </div>
 </div>
@@ -224,60 +225,65 @@ button{font-family:var(--f);cursor:pointer}
 
 <script>
 /* ============ DATOS (editables) ============ */
+/* Las seis dimensiones del TP. Cada barra mide cuánto empuja esa dimensión hacia la transición pacífica (0-100).
+   Valores iniciales: promedio 34, la propensión "marcadamente baja" del escenario del status quo. */
 const VARS = [
-  {k:'eco', n:'ECONOMÍA',       ic:'💷', side:'L', v:30, ds:'PBI, déficit y deuda del RU: cuánto le pesa sostener las islas'},
-  {k:'ter', n:'TERRITORIO',     ic:'🛢️', side:'L', v:30, ds:'Pesca, petróleo y ZEE: qué vale el mar y el suelo en disputa'},
-  {k:'dis', n:'DISTANCIA',      ic:'🧭', side:'L', v:35, ds:'13.000 km de logística: costo y tiempo de llegar a las islas'},
-  {k:'mil', n:'PODER MILITAR',  ic:'⚔️', side:'L', v:20, ds:'Brecha de fuerzas y costo de defender un teatro de operaciones'},
-  {k:'int', n:'MUNDO',          ic:'🌍', side:'R', v:25, ds:'Aliados, otros conflictos y presión de EE.UU. sobre el RU'},
-  {k:'dom', n:'POLÍTICA INTERNA', ic:'🏛️', side:'R', v:30, ds:'Estabilidad política y económica del RU y de Argentina'},
-  {k:'aut', n:'ISLEÑOS',        ic:'👥', side:'R', v:10, ds:'Identidad y apoyo de la población de las islas'}
+  {k:'si',  c:'SI',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas estratégicas, respaldo en foros multilaterales y frentes de conflicto globales'},
+  {k:'icm', c:'ICM', n:'CAPACIDAD MILITAR (ICM)',  ic:'⚔️', side:'L', v:10, ds:'Gasto en defensa, fuerzas navales, terrestres y aeroespaciales, disuasión nuclear'},
+  {k:'fe',  c:'FE',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Producto bruto, solvencia financiera, vulnerabilidad macroeconómica, recursos naturales'},
+  {k:'tyl', c:'TyL', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad continental argentina frente a la cadena de suministro transoceánica británica'},
+  {k:'sd',  c:'SD',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político, aprobación gubernamental, riesgo país y cohesión de las sociedades civiles'},
+  {k:'ae',  c:'AE',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Sube cuando las islas pierden independencia fiscal, población y capital humano'}
 ];
-const TH_LOW = 40, TH_HIGH = 55, TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.6;
+/* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
+   (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
+const TH_TRANS = 55, TH_FULL = 58, TH_CONF = 50, CONF = ['ae','si','sd'];
+const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.4;
 
 const CARDS = [
- {y:2026, t:'Licencias de pesca', x:'El calamar de la ZEE vale millones y Londres vende licencias por su cuenta.',
-  A:{l:'Acuerdo de pesca conjunta', an:'fish', tag:'🎣 PESCA CONJUNTA', fx:{ter:9,eco:5,aut:3,int:2}, r:'Se abre una mesa técnica y los barcos pescan bajo un mismo esquema. Los isleños miran con desconfianza, pero cobran.'},
-  B:{l:'Denunciar las licencias ante la ONU', an:'un', tag:'📜 ONU', fx:{int:8,dom:-3}, t:8, r:'Ganás votos en el Comité de Descolonización. Londres se cierra.'}},
- {y:2027, t:'El precedente Chagos', x:'El RU acuerda ceder Chagos con arrendamiento de la base. La prensa ya pregunta por Malvinas.',
-  A:{l:'Citar Chagos en el Comité de Descolonización', an:'un', tag:'📜 PRECEDENTE', fx:{int:10,dom:3}, r:'Chagos queda en actas como precedente. Londres responde que es otro caso.'},
-  B:{l:'Pedir una negociación bilateral reservada', an:'peace', tag:'🤝 DIÁLOGO', fx:{int:3,dom:4,eco:2}, r:'Cancillería abre un canal discreto. Sin foco, no hay presión.'}},
- {y:2029, t:'Guerra en Ucrania', x:'La OTAN consume recursos británicos. La Royal Navy está estirada.',
-  A:{l:'Ofrecer neutralidad y cooperación atlántica', an:'peace', tag:'🕊️ COOPERACIÓN', fx:{int:6,mil:4,dis:4}, t:-6, r:'Argentina aparece como socio confiable. La tensión baja.'},
-  B:{l:'Aprovechar para apretar diplomáticamente', an:'press', tag:'📢 PRESIÓN', fx:{int:8,dom:-2,mil:3}, t:14, r:'Se nota la oportunidad. En Londres lo leen como oportunismo.'}},
- {y:2030, t:'Crisis económica británica', x:'Libra débil, déficit récord y recortes. Westminster busca nuevos mercados.',
-  A:{l:'Ofrecer inversión y un acuerdo comercial', an:'invest', tag:'💰 INVERSIÓN', fx:{eco:10,int:3,dom:-2}, r:'El Tesoro británico empieza a hacer cuentas sobre el costo de las islas.'},
-  B:{l:'Mantener el reclamo sin concesiones', an:'hold', tag:'🛡️ FIRMEZA', fx:{dom:5,eco:-1,aut:-2}, r:'Frente interno unido, pero no se mueve ninguna variable económica.'}},
- {y:2032, t:'Rearme', x:'Tu Ministerio de Defensa pide renovar aviones y buques.',
-  A:{l:'Comprar cazas y buques', an:'arm', tag:'✈️ REARME', fx:{mil:10,dis:4,dom:-5,int:-4}, t:28, r:'La brecha militar se achica. Londres refuerza la guarnición y el mundo se inquieta.'},
-  B:{l:'Priorizar diplomacia y reservas', an:'hold', tag:'🛡️ REGLAS CLARAS', fx:{dom:6,eco:3,mil:-3}, r:'Más estabilidad macro, menos poder duro. El RU se relaja.'}},
- {y:2033, t:'Los isleños', x:'Son unos 3.500. Su voto pesa en cada debate británico.',
-  A:{l:'Seducir: vuelos, becas, conectividad', an:'people', tag:'🏠 PUENTES', fx:{aut:11,eco:-2,dom:-1}, r:'Se rompe un poco el aislamiento. Algunos dejan de ver a Argentina como amenaza.'},
-  B:{l:'Ignorarlos: el reclamo es con Londres', an:'ignore', tag:'🚫 SIN DIÁLOGO', fx:{aut:-5,int:3,dom:3}, t:6, r:'Discurso coherente con la ONU. Los isleños se atrincheran.'}},
- {y:2035, t:'Escocia vota', x:'Referéndum de independencia: el RU podría fragmentarse. Es un escenario, no la línea base.',
-  A:{l:'Respetar la autodeterminación escocesa', an:'scot', tag:'🏴 ESCOCIA', fx:{dom:10,int:4}, r:'Argentina queda como actor serio. El RU llega al límite de su cohesión.'},
-  B:{l:'Atar el caso Malvinas a la crisis del RU', an:'scot', tag:'🏴 ESCOCIA', fx:{dom:5,int:-4}, t:12, r:'Se te acusa de meterte en asuntos ajenos. La jugada sale cara.'}},
- {y:2037, t:'Petróleo en la cuenca', x:'Las exploraciones apuntan a reservas en la plataforma continental.',
-  A:{l:'Exploración conjunta bajo paraguas de soberanía', an:'oil', tag:'🛢️ PETRÓLEO', fx:{ter:10,eco:6}, t:-4, r:'La fórmula del paraguas se transforma en cooperación. Cada lado ve su cuota.'},
-  B:{l:'Sancionar a las petroleras', an:'sanction', tag:'🚫 SANCIONES', fx:{ter:3,eco:4,int:-5}, t:22, r:'Las empresas se retiran, pero tus aliados protestan. Sube el riesgo.'}},
- {y:2038, t:'La base militar', x:'Para Londres, la base de Mount Pleasant es lo único que importa. El modelo Chagos aparece sobre la mesa.',
-  A:{l:'Ofrecer cesión con arrendamiento de la base', an:'base', tag:'🚩 FÓRMULA CHAGOS', fx:{mil:9,int:6,dis:8,aut:-4}, r:'Es la fórmula mixta del TP: soberanía a cambio de continuidad estratégica.'},
-  B:{l:'Exigir cesión plena y sin condiciones', an:'press', tag:'📢 EXIGENCIA', fx:{dom:5,mil:-4,int:1}, t:10, r:'Es inflexible y coherente, pero Londres no tiene incentivos.'}},
- {y:2040, t:'Cumbre final', x:'Una ventana de negociación se abre antes de 2041. Es ahora o nunca.',
-  A:{l:'Convocar a EE.UU. como mediador', an:'summit', tag:'🤝 MEDIACIÓN', fx:{int:8,eco:3,dom:-2}, r:'Washington presiona a ambos lados para cerrar un trato.'},
-  B:{l:'Plebiscito de apoyo interno', an:'vote', tag:'🗳️ PLEBISCITO', fx:{dom:8,aut:2,int:-2}, r:'El apoyo en casa es fuerte. Londres lo ve como un gesto, no como una oferta.'}}
+ {y:2026, t:'Diplomacia multilateral', x:'AR tiene respaldo en la Asamblea General de la ONU, el Comité de Descolonización y la OEA, pero carece de fuerza coercitiva real.',
+  A:{l:'Trascender el Sur Global: sumar a EE.UU. y la UE', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8}, r:'La campaña sale de su zona de confort discursiva y empieza a sumar a las potencias del Norte Global.'},
+  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 ONU', fx:{si:3,sd:3}, r:'Más respaldo declarativo. Sin condicionamiento material, las resoluciones quedan en el plano simbólico.'}},
+ {y:2027, t:'Vulnerabilidad financiera', x:'El riesgo país, el alto endeudamiento externo y las fluctuaciones inflacionarias restringen el margen del Estado argentino.',
+  A:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:2}, r:'Con más solvencia financiera, el Estado puede ejecutar políticas consistentes a largo plazo.'},
+  B:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-4}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'}},
+ {y:2029, t:'Licencias pesqueras', x:'La explotación de licencias pesqueras dota a la administración isleña de autonomía fiscal y un elevado producto bruto per cápita.',
+  A:{l:'Aplicar medidas de presión económica sobre las licencias', an:'sanction', tag:'🚫 PRESIÓN ECONÓMICA', fx:{ae:8,fe:-2}, t:8, r:'Algunas empresas pesqueras se retiran. La ocupación empieza a tener un costo.'},
+  B:{l:'Persuadir a los aliados occidentales sobre los recursos', an:'fish', tag:'🎣 RECURSOS', fx:{si:5,ae:3}, r:'La valorización de los recursos naturales entra en la agenda de los aliados de Londres.'}},
+ {y:2030, t:'Frentes simultáneos', x:'El Reino Unido enfrenta frentes en Europa Oriental, Medio Oriente o el Indopacífico: una crisis de sobre extensión imperial.',
+  A:{l:'Aprovechar la ventana de vulnerabilidad británica', an:'press', tag:'⚡ VENTANA', fx:{icm:6,si:-2}, t:16, r:'El flanco sur británico queda desprotegido, pero Londres lee la jugada como una amenaza.'},
+  B:{l:'Presentarse como garante de la estabilidad regional', an:'peace', tag:'🕊️ ESTABILIDAD', fx:{si:7}, t:-6, r:'Los aliados occidentales ven en AR un socio para la estabilidad regional del Atlántico.'}},
+ {y:2032, t:'Programa de rearme', x:'Defensa propone un programa sostenido de rearme y modernización naval, submarina y aeroespacial.',
+  A:{l:'Ejecutar el rearme', an:'arm', tag:'✈️ REARME', fx:{icm:12,fe:-4}, t:26, r:'Se reduce la brecha del índice de capacidad militar. Aumenta la propensión al enfrentamiento.'},
+  B:{l:'Mantener la vía estrictamente diplomática', an:'hold', tag:'🛡️ VÍA DIPLOMÁTICA', fx:{si:4,fe:3}, t:-4, r:'Sin coacción militar ni uso de la fuerza. La vía pacífica sigue abierta.'}},
+ {y:2033, t:'Hidrocarburos en la cuenca norte', x:'Las proyecciones de extracción de hidrocarburos refuerzan la autonomía fiscal isleña, en un mundo en acelerada transición energética.',
+  A:{l:'Desalentar la inversión offshore', an:'sanction', tag:'🛢️ OFFSHORE', fx:{ae:9}, t:6, r:'Gana peso la inviabilidad comercial de la extracción a gran escala.'},
+  B:{l:'Apostar a la transición energética con los aliados', an:'peace', tag:'🌱 TRANSICIÓN ENERGÉTICA', fx:{ae:4,si:4,fe:2}, r:'El petróleo isleño pierde valor estratégico ante la transición energética.'}},
+ {y:2035, t:'Envejecimiento y fuga de cerebros', x:'La población de las islas envejece y su capital humano emigra hacia el continente europeo.',
+  A:{l:'Aprovechar la proximidad continental argentina', an:'people', tag:'🏠 PROXIMIDAD', fx:{tyl:5,ae:6}, r:'Crece la dependencia del enclave respecto del continente más cercano.'},
+  B:{l:'Profundizar el aislamiento logístico del enclave', an:'ignore', tag:'🚫 AISLAMIENTO', fx:{tyl:8,ae:4}, t:10, r:'La cadena de suministro transoceánica se encarece. Londres refuerza su postura.'}},
+ {y:2037, t:'Los vecinos del cono sur', x:'Los países vecinos del cono sur podrían bloquear las rutas de abastecimiento británicas.',
+  A:{l:'Pedir el bloqueo de las rutas de abastecimiento', an:'sanction', tag:'⛔ BLOQUEO', fx:{tyl:10,si:2}, t:14, r:'El aislamiento logístico de la potencia ocupante es real. También sube la propensión al enfrentamiento.'},
+  B:{l:'Coordinar una postura regional sin bloqueo', an:'summit', tag:'🤝 APOYO REGIONAL', fx:{tyl:4,si:5}, r:'El apoyo regional se consolida sin tensionar la relación bilateral.'}},
+ {y:2038, t:'Desgaste doméstico británico', x:'La sociedad civil británica, agobiada por las reformas del estado de bienestar, cuestiona los costos de sostener las islas.',
+  A:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:9,si:2}, r:'Los costos impositivos, logísticos y políticos de las islas entran en el debate británico.'},
+  B:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:4}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo.'}},
+ {y:2040, t:'Ultimátum de los aliados', x:'EE.UU. y actores clave de la UE pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
+  A:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:10}, t:4, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica.'},
+  B:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:3}, r:'Una arquitectura jurídica innovadora: soberanía compartida o arriendo territorial a muy largo plazo.'}}
 ];
 
 const EVENTS = [
- {ic:'🗳️', x:'Elecciones en EE.UU.: Washington pide moderación a ambos.', fx:{int:3}, t:-3},
- {ic:'🏛️', x:'Escándalo político en Westminster.', fx:{dom:4}},
- {ic:'📉', x:'Cae el precio de la lana y el calamar.', fx:{eco:4,ter:-1}},
- {ic:'🌍', x:'Tensión en Medio Oriente: la Royal Navy se desvía.', fx:{mil:4,int:2}},
- {ic:'⚠️', x:'Nueva crisis económica en Argentina.', fx:{dom:-5,eco:-3}},
- {ic:'✂️', x:'Recorte al presupuesto de defensa británico.', fx:{mil:5,eco:2}},
- {ic:'📊', x:'Sondeo: los isleños rechazan cualquier cambio.', fx:{aut:-5}}
+ {ic:'🐟', x:'Los recursos pesqueros migran por el cambio climático.', fx:{ae:6}},
+ {ic:'🛢️', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', fx:{ae:6}},
+ {ic:'🌍', x:'Nuevo frente en el Indopacífico: el RU dispersa sus recursos.', fx:{icm:4,si:2}},
+ {ic:'📉', x:'Sube el riesgo país argentino.', fx:{fe:-5,sd:-3}},
+ {ic:'🏛️', x:'Crisis interna británica por las reformas del estado de bienestar.', fx:{sd:5}},
+ {ic:'✈️', x:'Rotación permanente de efectivos en Mount Pleasant.', fx:{icm:-3}},
+ {ic:'💷', x:'Las islas mantienen un elevado producto bruto per cápita.', fx:{ae:-4}},
+ {ic:'🤝', x:'Las potencias del Norte Global respaldan a su aliado británico.', fx:{si:-4}}
 ];
-const TIMEOUT = {l:'No decidiste a tiempo', an:'timeout', tag:'⏳ SIN DECISIÓN', fx:{dom:-3,int:-3}, t:4, r:'La falta de decisión se paga caro. El tiempo pasa y Londres lo nota.'};
+const TIMEOUT = {l:'No decidiste a tiempo', an:'timeout', tag:'⏳ SIN DECISIÓN', fx:{sd:-3,si:-3}, t:4, r:'Sin políticas consistentes, el status quo se refuerza.'};
 
 /* ============ ESTADO ============ */
 let S = null, phase = 'intro', tickId = null, autoId = null, expo = false;
@@ -285,9 +291,9 @@ const $ = id => document.getElementById(id);
 const clamp = (v,a=0,b=100) => Math.max(a, Math.min(b, v));
 const lerp = (a,b,t) => a+(b-a)*t;
 const score = () => VARS.reduce((s,v)=>s+S.val[v.k],0) / VARS.length;
-const level = s => s >= TH_HIGH ? 'ALTA' : s >= TH_LOW ? 'INTERMEDIA' : 'BAJA';
+const confluence = () => CONF.every(k => S.val[k] >= TH_CONF);
 const VI = {}; VARS.forEach(v => VI[v.k] = v);
-const covOf = s => clamp((s-15)/40, 0, 1);
+const covOf = s => clamp((s-34)/30, 0, 1);
 
 function newGame(){
   S = {val:{}, tension:10, turn:0, log:[]};
@@ -338,7 +344,7 @@ function buildSide(){
     $(v.side==='L'?'sideL':'sideR').appendChild(el);
   });
   const n=document.createElement('div'); n.className='news'; n.id='news';
-  n.innerHTML='<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">🌐</div><p>2026: se abre la ventana de negociación. Todo está por decidirse.</p>';
+  n.innerHTML='<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">🌐</div><p>2026: status quo. Propensión marcadamente baja.</p>';
   $('sideR').appendChild(n);
 }
 function setNews(ic, txt){ $('news').innerHTML=`<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">${ic}</div><p>${txt}</p>`; }
@@ -474,19 +480,15 @@ const ANIMS={
  people(p,t){ [[0,0],[40,-20],[75,10],[-40,10],[20,28]].forEach((o,i)=>{ const q=clamp(p*2.2-i*.18,0,1); emo('🏠',ST[0]+o[0]-30,ST[1]+o[1]-30,50*ease(q),env(p)); });
    emo('✈️',lerp(-60,ST[0]-20,ease(Math.min(1,p*1.6))),ST[1]-90+(1-ease(Math.min(1,p*1.6)))*-50,60,env(p)); emo('🎓',ST[0]+110,ST[1]-60+Math.sin(t*4)*6,46,env(p)); },
  ignore(p,t){ const k=1+.12*Math.sin(t*7); emo('🚫',CEN[0],CEN[1],150*k*ease(Math.min(1,p*2)),env(p)); },
- scot(p,t){ const x=WW-210,y=100,w=170*ease(Math.min(1,p*2)),h=w*.62; ctxM.save(); ctxM.globalAlpha=env(p);
-   ctxM.fillStyle='#fff';ctxM.fillRect(x-6,y,8,200); ctxM.fillStyle='#0065BD';ctxM.fillRect(x,y,w,h);
-   ctxM.strokeStyle='#fff';ctxM.lineWidth=w*.13;ctxM.beginPath();ctxM.moveTo(x,y);ctxM.lineTo(x+w,y+h);ctxM.moveTo(x+w,y);ctxM.lineTo(x,y+h);ctxM.stroke();ctxM.restore();
-   label('ESCOCIA',x+w/2,y-24,30,'#9bd0ff'); emo('💥',CEN[0]-80,CEN[1]+20+Math.sin(t*8)*4,80*ease(Math.min(1,p*2)),env(p)); },
  oil(p,t){ [[.0,.0],[.55,-.3],[1.1,.2],[.7,.55]].forEach((o,i)=>{ const q=ease(clamp(p*2-i*.2,0,1)); const x=ST[0]+110+o[0]*130, y=ST[1]+70+o[1]*70+(1-q)*40; emo('🛢️',x,y,58*q,env(p)); emo('⛽',x+34,y-30,34*q,env(p)); });
    for(let i=0;i<8;i++) emo('💧',ST[0]+130+i*26,ST[1]+60+Math.sin(t*5+i)*10,20,env(p)*.9); },
- sanction(p,t){ for(let i=0;i<3;i++){ const x=lerp(ST[0]+80+i*45,WW+60,clamp(p*1.3-i*.1,0,1)); emo('🚢',x,ST[1]+40+i*28,54,env(p)); } emo('🚫',ST[0]+160,ST[1]+60,120*ease(Math.min(1,p*2)),env(p)); emo('🛢️',ST[0]+160,ST[1]+60,60,env(p)*.9); },
+ sanction(p,t){ for(let i=0;i<3;i++){ const x=lerp(ST[0]+80+i*45,WW+60,clamp(p*1.3-i*.1,0,1)); emo('🚢',x,ST[1]+40+i*28,54,env(p)); } emo('🚫',ST[0]+160,ST[1]+60,120*ease(Math.min(1,p*2)),env(p)); },
  base(p,t){ const bx=ST[0]-40,by=ST[1]-20,q=ease(Math.min(1,p*1.8)),fw=120,fh=76; ctxM.save(); ctxM.globalAlpha=env(p);
    ctxM.fillStyle='#e9e9e9';ctxM.fillRect(bx-4,by-110,8,130); const fy=by-110+(1-q)*60+Math.sin(t*6)*2;
    ctxM.fillStyle='#75AADB';ctxM.fillRect(bx+4,fy,fw,fh*.34);ctxM.fillStyle='#fff';ctxM.fillRect(bx+4,fy+fh*.34,fw,fh*.32);ctxM.fillStyle='#75AADB';ctxM.fillRect(bx+4,fy+fh*.66,fw,fh*.34);
    ctxM.fillStyle='#F6B40E';ctxM.beginPath();ctxM.arc(bx+4+fw/2,fy+fh/2,fh*.14,0,6.3);ctxM.fill();ctxM.restore();
-   emo('🛬',lerp(-60,bx+170,ease(Math.min(1,p*1.4))),by+40,60,env(p)); label('BASE',bx+60,by+60,28,'#F6B40E'); },
- summit(p,t){ emo('🤝',CEN[0],CEN[1],110*ease(Math.min(1,p*2)),env(p)); for(let i=0;i<3;i++){ const a=t*2+i*2.1; emo('🌍',CEN[0]+Math.cos(a)*200,CEN[1]+Math.sin(a)*90,52,env(p)); } label('EE.UU. MEDIADOR',CEN[0],CEN[1]+90,28,'#a9cdee'); },
+   emo('🛬',lerp(-60,bx+170,ease(Math.min(1,p*1.4))),by+40,60,env(p)); label('ARRIENDO',bx+60,by+60,28,'#F6B40E'); },
+ summit(p,t){ emo('🤝',CEN[0],CEN[1],110*ease(Math.min(1,p*2)),env(p)); for(let i=0;i<3;i++){ const a=t*2+i*2.1; emo('🌍',CEN[0]+Math.cos(a)*200,CEN[1]+Math.sin(a)*90,52,env(p)); } label('NORTE GLOBAL',CEN[0],CEN[1]+90,28,'#a9cdee'); },
  vote(p,t){ emo('🗳️',CEN[0],CEN[1]-10,110*ease(Math.min(1,p*2)),env(p)); for(let i=0;i<6;i++){ const q=clamp(p*2.2-i*.12,0,1); emo('👤',CEN[0]-150+i*60,CEN[1]+90,38*ease(q),env(p)); } },
  timeout(p,t){ emo('⏳',CEN[0],CEN[1],120,env(p),Math.sin(t*3)*.3); },
  event(p,t,e){ const q=ease(Math.min(1,p*2)); emo(e.ic,120,120,70*q,env(p)); }
@@ -533,19 +535,19 @@ window.addEventListener('resize',fitMap);
 
 /* ============ UI ============ */
 function setHud(){
-  const s=score(), lv=level(s);
+  const s=score();
   $('year').innerHTML = `${S.turn<TURNS?CARDS[S.turn].y:2041}<small>TURNO ${Math.min(S.turn+1,TURNS)}/${TURNS}</small>`;
   $('scoreFill').style.width = s+'%';
-  const lab=$('scoreLab'); lab.textContent=lv+' ('+Math.round(s)+')';
-  lab.style.color = lv==='ALTA'?'var(--ok)':lv==='INTERMEDIA'?'var(--sol)':'var(--cel2)';
+  const lab=$('scoreLab'); lab.textContent=Math.round(s)+'%';
+  lab.style.color = s>=TH_TRANS?'var(--ok)':'var(--cel2)';
   $('tensFill').style.width = Math.min(100,S.tension/TENSION_MAX*100)+'%';
   $('tensV').textContent = Math.round(S.tension)+'/'+TENSION_MAX;
   setCov(covOf(s));
 }
 function chips(o){
   const a=[];
-  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<span class="${up?'u':'dn'}">${VI[k].ic} ${VI[k].n.split(' ')[0]} ${up?'▲':'▼'}</span>`); }
-  if(o.t>0) a.push('<span class="dn">🔥 TENSIÓN ▲</span>'); else if(o.t<0) a.push('<span class="u">🔥 TENSIÓN ▼</span>');
+  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<span class="${up?'u':'dn'}">${VI[k].ic} ${VI[k].c} ${up?'▲':'▼'}</span>`); }
+  if(o.t>0) a.push('<span class="dn">🔥 ENFRENTAMIENTO ▲</span>'); else if(o.t<0) a.push('<span class="u">🔥 ENFRENTAMIENTO ▼</span>');
   return a.join('');
 }
 function showCard(){
@@ -581,7 +583,6 @@ function choose(o){
   const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={};
   applyFx(opt.fx,deltas,o?GAIN:1);
   S.tension += (opt.t||0);
-  applyFx({ter:1,dis:1},deltas);
   let ev=null;
   if(S.turn>=1 && Math.random()<0.5){
     ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
@@ -609,30 +610,29 @@ function choose(o){
 
 function finish(dead){
   phase='end'; clearInterval(tickId); clearTimeout(autoId);
-  const s=score(), lv=level(s), v=S.val;
+  const s=score(), v=S.val;
   let cls, title, text;
   if(dead){
-    cls='bad'; title='CONFLICTO: SE ROMPE LA VÍA PACÍFICA';
-    text='La tensión superó el límite. Sin vía negociada, el modelo ya no mide transición pacífica: terminó en crisis. Ganar propensión a costa de tensión no sirve.';
-  } else if(lv==='ALTA' && v.aut>=25){
-    cls='ok'; title='CESIÓN PLENA NEGOCIADA';
-    text='Alta propensión y una población insular que no se opone. El RUGBIN acepta transferir la soberanía por vía negociada.';
-  } else if(lv==='ALTA'){
-    cls='ok'; title='FÓRMULA CHAGOS: CESIÓN CON BASE';
-    text='Alta propensión, pero la identidad insular sigue pesando. El acuerdo posible: soberanía argentina con arrendamiento de la base militar, como en Chagos.';
-  } else if(lv==='INTERMEDIA'){
-    cls='mid'; title='FINAL GIBRALTAR';
-    text='Propensión intermedia: hay conversaciones, gestos y presión, pero nadie firma. Es el límite del TP: la propensión no es lo mismo que el resultado.';
+    cls='bad'; title='ESCENARIO DE LA GUERRA';
+    text='Ruptura violenta del status quo a través de un conflicto bélico directo y de alta intensidad. El costo político de una concesión territorial se volvió inaceptable para la dirigencia británica, que optó por asumir los riesgos de una contienda a gran escala.';
+  } else if(s>=TH_TRANS && confluence()){
+    cls='ok'; title='ESCENARIO DE LA TRANSICIÓN PACÍFICA';
+    text = (s>=TH_FULL
+      ? 'Proceso progresivo y estrictamente diplomático de negociación bilateral que culmina en la <b>transferencia plena de la soberanía</b> a la República Argentina.'
+      : 'Proceso progresivo y estrictamente diplomático de negociación bilateral que culmina en <b>soberanía compartida o arriendo territorial a muy largo plazo</b>.')
+      + ' Los costos de retener las islas superaron a sus beneficios.';
   } else {
-    cls='bad'; title='STATU QUO';
-    text='Baja propensión. Las islas siguen igual en 2041. El costo de ceder sigue siendo mayor al de quedarse.';
+    cls='bad'; title='ESCENARIO DEL STATUS QUO';
+    text='Prolongación de la administración británica, garantizada por la disuasión militar, sin conflicto armado ni negociación sustantiva. Ante la ausencia de incentivos materiales para negociar, la decisión racional del Reino Unido es sostener la situación actual.';
+    const miss=CONF.filter(k=>v[k]<TH_CONF).map(k=>VI[k].n);
+    if(s>=TH_TRANS) text+=` <br><br>La propensión llegó a ${Math.round(s)}%, pero faltó la confluencia de desgastes: ${miss.join(', ')} quedó por debajo de ${TH_CONF}.`;
   }
   const bars = VARS.map(x=>`<div>${x.ic} ${x.n}: <b style="color:var(--sol)">${Math.round(v[x.k])}</b> / 100</div>`).join('');
   $('endPanel').innerHTML = `
     <h1>MALVINAS <em>2041</em></h1>
     <div class="big ${cls}">${title}</div>
     <p>${text}</p>
-    <p style="margin-top:.6rem;color:var(--cel2)">Propensión final: <b style="color:var(--sol)">${lv} (${Math.round(s)})</b> · Tensión: <b style="color:var(--red)">${Math.round(S.tension)}/${TENSION_MAX}</b></p>
+    <p style="margin-top:.6rem;color:var(--cel2)">Propensión a una transición pacífica: <b style="color:var(--sol)">${Math.round(s)}%</b> (empezó en 34%) · Propensión al enfrentamiento: <b style="color:var(--red)">${Math.round(S.tension)}/${TENSION_MAX}</b></p>
     <div class="endbars">${bars}</div>
     <div class="row">
       <button class="go" id="btnAgain">JUGAR DE NUEVO ▶</button>
