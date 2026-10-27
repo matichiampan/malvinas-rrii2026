@@ -16,53 +16,53 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{font-size:clamp(15px,2vh,26px)}
 html,body{height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--tx);font-family:var(--f);font-weight:500;line-height:1.2;
+body{background:var(--bg);color:var(--tx);font-family:var(--f);font-weight:500;line-height:1.35;
   background-image:linear-gradient(rgba(117,170,219,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(117,170,219,.05) 1px,transparent 1px);background-size:2rem 2rem}
 button{font-family:var(--f);cursor:pointer}
-.app{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:.6rem;padding:.6rem .8rem}
+.app{height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:.9rem;padding:.9rem 1.1rem}
 
 /* ---------- HUD ---------- */
-.hud{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.2rem;align-items:center;background:var(--bg2);border:.2rem solid var(--cel);padding:.5rem .9rem;box-shadow:.25rem .25rem 0 #000}
+.hud{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.6rem;align-items:center;background:var(--bg2);border:.2rem solid var(--cel);padding:.6rem 1.2rem;box-shadow:.25rem .25rem 0 #000}
 .brand{display:flex;align-items:center;gap:.8rem}
 .brand .t{font-weight:800;font-size:1.5rem;color:var(--cel);letter-spacing:.03em;line-height:1}
 .brand .t em{font-style:normal;color:var(--sol)}
 .yr{background:var(--sol);color:#000;font-weight:800;font-size:1.6rem;padding:.2rem .6rem;border:.15rem solid #000;line-height:1}
 .yr small{display:block;font-size:.7rem;font-weight:700;margin-top:.15rem;letter-spacing:.04em}
-.prop .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:1rem;color:var(--dim);margin-bottom:.25rem;font-weight:700}
-.prop .lab b{font-size:1.35rem;font-weight:800}
+.prop .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:1.05rem;color:var(--tx);margin-bottom:.35rem;font-weight:700}
+.prop .lab b{font-size:1.6rem;font-weight:800}
 .bar{height:1.25rem;background:#03060c;border:.17rem solid #000;outline:.13rem solid var(--line);position:relative}
 .bar>i{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(90deg,var(--cel) 0 .5rem,#5e93c4 .5rem .6rem);transition:width .9s}
 .bar .mk{position:absolute;top:-.3rem;bottom:-.3rem;width:.2rem;background:var(--sol)}
-.zones{position:relative;height:1.1rem;font-size:.8rem;color:var(--dim);margin-top:.2rem;font-weight:700}
+.zones{position:relative;height:1.2rem;font-size:.85rem;color:var(--dim);margin-top:.3rem;font-weight:700;letter-spacing:.04em}
 .zones span{position:absolute;transform:translateX(-50%);white-space:nowrap}
-.tens{width:13rem}
-.tens .lab{display:flex;justify-content:space-between;gap:.5rem;font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.25rem}
+.tens{width:17rem}
+.tens .lab{display:flex;justify-content:space-between;gap:.5rem;font-size:1.05rem;font-weight:800;color:var(--red);margin-bottom:.25rem}
 .bar.t>i{background:repeating-linear-gradient(90deg,var(--red) 0 .5rem,#b72437 .5rem .6rem)}
 .hb{display:flex;gap:.5rem}
 .btn{background:var(--bg3);color:var(--cel2);border:.17rem solid var(--cel);padding:.45rem .75rem;font-size:.95rem;font-weight:700;box-shadow:.15rem .15rem 0 #000;white-space:nowrap}
 .btn:hover{background:var(--cel);color:#000}
 
 /* ---------- ESCENARIO ---------- */
-.stage{display:grid;grid-template-columns:minmax(0,21rem) minmax(0,1fr) minmax(0,21rem);gap:.7rem;min-height:0}
-.side{display:flex;flex-direction:column;gap:.5rem;min-height:0}
-.mob{flex:1 1 0;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.65rem;align-items:center;
-  background:var(--bg2);border:.17rem solid var(--line);padding:.4rem .6rem;position:relative;box-shadow:.2rem .2rem 0 #000}
-.flagw{position:relative;width:4.3rem;height:4.3rem}
+.stage{display:grid;grid-template-columns:minmax(0,19rem) minmax(0,1fr) minmax(0,19rem);gap:.9rem;min-height:0}
+.side{display:flex;flex-direction:column;gap:.6rem;min-height:0}
+.mob{flex:1 1 0;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:center;
+  background:var(--bg2);border:.17rem solid var(--line);padding:.4rem .9rem;position:relative;box-shadow:.2rem .2rem 0 #000}
+.flagw{position:relative;width:3.8rem;height:3.8rem}
 .flagw canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
 .flagw .ic{position:absolute;right:-.5rem;bottom:-.5rem;font-size:1.7rem;filter:drop-shadow(.1rem .1rem 0 #000)}
 .mob.hit .flagw canvas{animation:shake .5s}
-.mob .nm{font-weight:800;font-size:1.1rem;color:var(--cel2);letter-spacing:.02em}
-.mob .ds{font-size:.82rem;color:var(--dim);line-height:1.15;margin:.1rem 0 .3rem;font-weight:500}
+.mob .nm{font-weight:800;font-size:1.05rem;color:var(--cel2);letter-spacing:.03em;line-height:1.2}
+.mob .ds{font-size:.9rem;color:var(--dim);line-height:1.3;margin:.15rem 0 .35rem;font-weight:500}
 .mob .br{display:flex;align-items:center;gap:.5rem}
-.mob .bar{flex:1;height:.8rem;border-width:.13rem;outline-width:.1rem}
-.mob .val{font-weight:800;font-size:1.1rem;color:var(--sol);min-width:1.8rem;text-align:right}
+.mob .bar{flex:1;height:.95rem;border-width:.13rem;outline-width:.1rem}
+.mob .val{font-weight:800;font-size:1.35rem;color:var(--sol);min-width:2.2rem;text-align:right}
 .mob .d{position:absolute;right:.5rem;top:.1rem;font-weight:800;font-size:1.3rem;opacity:0;pointer-events:none;text-shadow:.1rem .1rem 0 #000}
 .mob .d.show{animation:float 1.6s ease-out}
 .mob .d.up{color:var(--ok)} .mob .d.dn{color:var(--red)}
-.news{flex:1 1 0;min-height:0;background:var(--bg2);border:.17rem solid var(--sol);padding:.55rem .75rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.3rem;overflow:hidden}
+.news{flex:1 1 0;min-height:0;background:var(--bg2);border:.17rem solid var(--sol);padding:.6rem .9rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.4rem;overflow:hidden}
 .news h4{font-size:.9rem;color:var(--sol);font-weight:800;letter-spacing:.05em}
-.news .ico{font-size:1.9rem;line-height:1}
-.news p{font-size:1.05rem;line-height:1.25}
+.news .ico{font-size:1.6rem;line-height:1}
+.news p{font-size:1rem;line-height:1.35}
 @keyframes float{0%{opacity:1;transform:translateY(.5rem)}100%{opacity:0;transform:translateY(-1.3rem)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-.3rem) rotate(-4deg)}40%{transform:translateX(.3rem) rotate(4deg)}60%{transform:translateX(-.2rem)}80%{transform:translateX(.2rem)}}
 
@@ -81,24 +81,32 @@ button{font-family:var(--f);cursor:pointer}
 .tag.on{opacity:1}
 
 /* ---------- DECISIÓN ---------- */
-.card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);gap:.8rem;background:var(--bg2);border:.2rem solid var(--sol);padding:.7rem .9rem;box-shadow:.25rem .25rem 0 #000;position:relative;min-height:0}
-.card .info .tg{font-weight:800;font-size:.95rem;color:var(--sol);letter-spacing:.05em;margin-bottom:.25rem}
-.card .info h2{font-weight:800;font-size:1.6rem;color:var(--cel2);line-height:1.1;margin-bottom:.35rem}
-.card .info p{font-size:1.15rem;line-height:1.25;color:var(--tx)}
-.opt{text-align:left;background:var(--bg3);color:var(--tx);border:.2rem solid var(--cel);padding:.6rem .8rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.45rem;justify-content:space-between;transition:transform .08s}
+.card{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:1.2rem;background:var(--bg2);border:.2rem solid var(--sol);padding:1rem 1.2rem;box-shadow:.25rem .25rem 0 #000;position:relative;min-height:0}
+.card .info .tg{font-weight:800;font-size:.95rem;color:var(--sol);letter-spacing:.08em;margin-bottom:.4rem}
+.card .info h2{font-weight:800;font-size:1.7rem;color:var(--cel2);line-height:1.15;margin-bottom:.5rem}
+.card .info p{font-size:1.1rem;line-height:1.4;color:var(--dim)}
+.card .info .ask{margin-top:.6rem;font-weight:800;font-size:1.05rem;color:var(--sol);letter-spacing:.06em}
+.opt{text-align:left;background:var(--bg3);color:var(--tx);border:.2rem solid var(--cel);padding:.8rem 1rem;box-shadow:.2rem .2rem 0 #000;display:flex;flex-direction:column;gap:.7rem;justify-content:flex-start;transition:transform .08s}
 .opt:hover{background:#1d3558;transform:translate(-.1rem,-.1rem)}
 .opt:active{transform:translate(.15rem,.15rem);box-shadow:none}
-.opt .l{font-weight:800;font-size:1.2rem;line-height:1.15}
+.opt .l{font-weight:800;font-size:1.2rem;line-height:1.3}
 .opt .l b{display:inline-block;background:var(--sol);color:#000;padding:0 .45rem;margin-right:.5rem;font-size:1.1rem}
-.chips{display:flex;flex-wrap:wrap;gap:.25rem .5rem;font-size:.95rem;font-weight:700}
-.chips span{background:#0a1424;border:.1rem solid var(--line);padding:.05rem .4rem}
-.chips .u{color:var(--ok)} .chips .dn{color:var(--red)}
+.fx{list-style:none;display:flex;flex-direction:column;gap:.3rem;font-size:1rem;font-weight:700}
+.fx li{display:flex;gap:.5rem;align-items:center}
+.fx .u{color:var(--ok)} .fx .dn{color:var(--red)}
+.fx .ar{width:1rem;text-align:center}
+.risk{margin-top:auto;font-size:.95rem;font-weight:800;padding:.3rem .6rem;border:.13rem solid;letter-spacing:.02em}
+.risk.bad{color:var(--red);border-color:var(--red);background:rgba(255,77,94,.1)}
+.risk.good{color:var(--ok);border-color:var(--ok);background:rgba(88,214,141,.08)}
+.risk.neu{color:var(--dim);border-color:var(--line)}
 .timer{position:absolute;left:0;right:0;top:0;height:.35rem;background:#03060c}
 .timer i{display:block;height:100%;background:var(--sol);width:100%}
-.card.res{grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)}
-.res .t1{font-weight:800;font-size:1.05rem;color:var(--sol);margin-bottom:.3rem}
-.res p{font-size:1.25rem;line-height:1.25}
-.res .ev{margin-top:.4rem;border-left:.25rem solid var(--cel);padding-left:.6rem;color:var(--cel2);font-size:1.05rem}
+.card.res{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,13rem)}
+.res .t1{font-weight:800;font-size:1.05rem;color:var(--sol);margin-bottom:.5rem;letter-spacing:.04em}
+.res p{font-size:1.2rem;line-height:1.4}
+.sum{display:flex;flex-direction:column;gap:.4rem;border-left:.2rem solid var(--line);padding-left:1rem}
+.sum .t1{font-weight:800;font-size:1rem;color:var(--sol);letter-spacing:.06em}
+.res .ev{margin-top:.6rem;border-left:.25rem solid var(--cel);padding-left:.6rem;color:var(--cel2);font-size:1.05rem}
 .go{background:var(--sol);color:#000;border:.2rem solid #000;font-weight:800;font-size:1.3rem;box-shadow:.2rem .2rem 0 var(--cel);align-self:stretch}
 .go:hover{background:#fff}
 
@@ -139,16 +147,15 @@ button{font-family:var(--f);cursor:pointer}
   <div class="hud">
     <div class="brand">
       <div class="yr" id="year">2026<small>TURNO 1/10</small></div>
-      <div class="t">MALVINAS <em>2041</em></div>
     </div>
     <div class="prop">
-      <div class="lab"><span>Propensión del Reino Unido a una transición pacífica</span><b id="scoreLab">34%</b></div>
+      <div class="lab"><span>Propensión del Reino Unido a la transición pacífica</span><b id="scoreLab">34%</b></div>
       <div class="bar"><i id="scoreFill" style="width:34%"></i><span class="mk" style="left:55%"></span></div>
-      <div class="zones"><span style="left:27.5%">STATUS QUO</span><span style="left:77.5%">TRANSICIÓN PACÍFICA</span></div>
+      <div class="zones"><span style="left:27.5%">STATUS QUO</span><span style="left:55%;color:var(--sol)">▲ META 55%</span><span style="left:84%">TRANSICIÓN</span></div>
     </div>
     <div style="display:flex;gap:1rem;align-items:center">
       <div class="tens">
-        <div class="lab"><span>ENFRENTAMIENTO</span><span id="tensV">10</span></div>
+        <div class="lab"><span>⚠️ RIESGO DE GUERRA</span><span id="tensV">10</span></div>
         <div class="bar t"><i id="tensFill" style="width:10%"></i></div>
       </div>
       <div class="hb"><button class="btn" id="btnTheory">TEORÍA</button><button class="btn" id="btnFS">⛶ PANT. COMPLETA</button></div>
@@ -181,7 +188,7 @@ button{font-family:var(--f);cursor:pointer}
       <li>Elegí <b>A</b> o <b>B</b>. Cada opción muestra qué dimensión sube ▲ o baja ▼.</li>
       <li>Cada bandera británica es una de las <b>6 dimensiones</b> del TP. Cuanto más sube, más se rompe.</li>
       <li>Las islas se van <b style="color:var(--cel2)">pintando de celeste</b> a medida que sube la propensión.</li>
-      <li>Si la <b style="color:var(--red)">propensión al enfrentamiento</b> llega a 60, estalla la guerra.</li>
+      <li>Si el <b style="color:var(--red)">riesgo de guerra</b> (propensión al enfrentamiento) llega a 60, estalla la guerra.</li>
       <li>Hay 3 escenarios posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
     <label class="chk"><input type="checkbox" id="chkExpo"> Modo exposición (sin cronómetro)</label>
@@ -228,12 +235,12 @@ button{font-family:var(--f);cursor:pointer}
 /* Las seis dimensiones del TP. Cada barra mide cuánto empuja esa dimensión hacia la transición pacífica (0-100).
    Valores iniciales: promedio 34, la propensión "marcadamente baja" del escenario del status quo. */
 const VARS = [
-  {k:'si',  c:'Situación internacional',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas estratégicas, respaldo en foros multilaterales y frentes de conflicto globales'},
-  {k:'icm', c:'Capacidad militar', n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Gasto en defensa, fuerzas navales, terrestres y aeroespaciales, disuasión nuclear'},
-  {k:'fe',  c:'Factor económico',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Producto bruto, solvencia financiera, vulnerabilidad macroeconómica, recursos naturales'},
-  {k:'tyl', c:'Territorio y logística', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad continental argentina frente a la cadena de suministro transoceánica británica'},
-  {k:'sd',  c:'Situación doméstica',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político, aprobación gubernamental, riesgo país y cohesión de las sociedades civiles'},
-  {k:'ae',  c:'Autonomía estructural',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Sube cuando las islas pierden independencia fiscal, población y capital humano'}
+  {k:'si',  c:'Situación internacional',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas y respaldo diplomático'},
+  {k:'icm', c:'Capacidad militar', n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Correlación de fuerzas militares'},
+  {k:'fe',  c:'Factor económico',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Solvencia financiera argentina'},
+  {k:'tyl', c:'Territorio y logística', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad geográfica y abastecimiento'},
+  {k:'sd',  c:'Situación doméstica',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político y desgaste británico'},
+  {k:'ae',  c:'Autonomía estructural',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Crisis fiscal y demográfica de las islas'}
 ];
 /* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
    (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
@@ -245,8 +252,8 @@ const CARDS = [
   A:{l:'Trascender el Sur Global: sumar a Estados Unidos y la Unión Europea', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8}, r:'La campaña sale de su zona de confort discursiva y empieza a sumar a las potencias del Norte Global.'},
   B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{si:3,sd:3}, r:'Más respaldo declarativo. Sin condicionamiento material, las resoluciones quedan en el plano simbólico.'}},
  {y:2027, t:'Vulnerabilidad financiera', x:'El riesgo país, el alto endeudamiento externo y las fluctuaciones inflacionarias restringen el margen del Estado argentino.',
-  A:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:2}, r:'Con más solvencia financiera, el Estado puede ejecutar políticas consistentes a largo plazo.'},
-  B:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-4}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'}},
+  A:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-4}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'},
+  B:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:2}, r:'Con más solvencia financiera, el Estado puede ejecutar políticas consistentes a largo plazo.'}},
  {y:2029, t:'Licencias pesqueras', x:'La explotación de licencias pesqueras dota a la administración isleña de autonomía fiscal y un elevado producto bruto per cápita.',
   A:{l:'Aplicar medidas de presión económica sobre las licencias', an:'sanction', tag:'🚫 PRESIÓN ECONÓMICA', fx:{ae:8,fe:-2}, t:8, r:'Algunas empresas pesqueras se retiran. La ocupación empieza a tener un costo.'},
   B:{l:'Persuadir a los aliados occidentales sobre los recursos', an:'fish', tag:'🎣 RECURSOS', fx:{si:5,ae:3}, r:'La valorización de los recursos naturales entra en la agenda de los aliados de Londres.'}},
@@ -266,8 +273,8 @@ const CARDS = [
   A:{l:'Pedir el bloqueo de las rutas de abastecimiento', an:'sanction', tag:'⛔ BLOQUEO', fx:{tyl:10,si:2}, t:14, r:'El aislamiento logístico de la potencia ocupante es real. También sube la propensión al enfrentamiento.'},
   B:{l:'Coordinar una postura regional sin bloqueo', an:'summit', tag:'🤝 APOYO REGIONAL', fx:{tyl:4,si:5}, r:'El apoyo regional se consolida sin tensionar la relación bilateral.'}},
  {y:2038, t:'Desgaste doméstico británico', x:'La sociedad civil británica, agobiada por las reformas del estado de bienestar, cuestiona los costos de sostener las islas.',
-  A:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:9,si:2}, r:'Los costos impositivos, logísticos y políticos de las islas entran en el debate británico.'},
-  B:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:4}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo.'}},
+  A:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:4}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo.'},
+  B:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:9,si:2}, r:'Los costos impositivos, logísticos y políticos de las islas entran en el debate británico.'}},
  {y:2040, t:'Ultimátum de los aliados', x:'Estados Unidos y actores clave de la Unión Europea pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
   A:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:10}, t:4, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica.'},
   B:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:3}, r:'Una arquitectura jurídica innovadora: soberanía compartida o arriendo territorial a muy largo plazo.'}}
@@ -343,11 +350,8 @@ function buildSide(){
       <div class="br"><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div></div>`;
     $(v.side==='L'?'sideL':'sideR').appendChild(el);
   });
-  const n=document.createElement('div'); n.className='news'; n.id='news';
-  n.innerHTML='<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">🌐</div><p>2026: status quo. Propensión marcadamente baja.</p>';
-  $('sideR').appendChild(n);
 }
-function setNews(ic, txt){ $('news').innerHTML=`<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">${ic}</div><p>${txt}</p>`; }
+function setNews(ic, txt){ if(!$('news')) return; $('news').innerHTML=`<h4>📰 NOTICIAS DEL MUNDO</h4><div class="ico">${ic}</div><p>${txt}</p>`; }
 function renderMobs(deltas){
   VARS.forEach((v,i)=>{
     const el=$('mob_'+v.k), val=Math.round(S.val[v.k]);
@@ -546,9 +550,11 @@ function setHud(){
 }
 function chips(o){
   const a=[];
-  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<span class="${up?'u':'dn'}">${VI[k].ic} ${VI[k].c} ${up?'▲':'▼'}</span>`); }
-  if(o.t>0) a.push('<span class="dn">🔥 ENFRENTAMIENTO ▲</span>'); else if(o.t<0) a.push('<span class="u">🔥 ENFRENTAMIENTO ▼</span>');
-  return a.join('');
+  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} ${VI[k].c}</li>`); }
+  const risk = o.t>0 ? '<div class="risk bad">⚠️ Sube el riesgo de guerra</div>'
+             : o.t<0 ? '<div class="risk good">🕊️ Baja el riesgo de guerra</div>'
+             : '<div class="risk neu">No cambia el riesgo de guerra</div>';
+  return `<ul class="fx">${a.join('')}</ul>${risk}`;
 }
 function showCard(){
   phase='card';
@@ -556,9 +562,9 @@ function showCard(){
   card.className='card';
   card.innerHTML = `
     ${expo?'':'<div class="timer"><i id="timerFill"></i></div>'}
-    <div class="info"><div class="tg">${c.y} · DECISIÓN ${S.turn+1} DE ${TURNS}</div><h2>${c.t}</h2><p>${c.x}</p></div>
-    <button class="opt" data-o="A"><div class="l"><b>A</b>${c.A.l}</div><div class="chips">${chips(c.A)}</div></button>
-    <button class="opt" data-o="B"><div class="l"><b>B</b>${c.B.l}</div><div class="chips">${chips(c.B)}</div></button>`;
+    <div class="info"><div class="tg">${c.y} · DECISIÓN ${S.turn+1} DE ${TURNS}</div><h2>${c.t}</h2><p>${c.x}</p><div class="ask">¿QUÉ HACÉS? ELEGÍ A O B ▶</div></div>
+    <button class="opt" data-o="A"><div class="l"><b>A</b>${c.A.l}</div>${chips(c.A)}</button>
+    <button class="opt" data-o="B"><div class="l"><b>B</b>${c.B.l}</div>${chips(c.B)}</button>`;
   card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>choose(b.dataset.o));
   setHud();
   if(!expo){
@@ -602,6 +608,9 @@ function choose(o){
       <p>${opt.r}</p>
       ${ev?`<div class="ev">${ev.ic} Evento mundial: ${ev.x}</div>`:''}
     </div>
+    <div class="sum"><div class="t1">QUÉ CAMBIÓ</div><ul class="fx">${
+      VARS.filter(x=>deltas[x.k]).map(x=>`<li class="${deltas[x.k]>0?'u':'dn'}"><span class="ar">${deltas[x.k]>0?'▲':'▼'}</span>${x.ic} ${x.c} ${deltas[x.k]>0?'+':''}${deltas[x.k]}</li>`).join('')
+    }</ul><div class="risk ${S.tension>=40?'bad':'neu'}">⚠️ Riesgo de guerra: ${Math.round(S.tension)} / ${TENSION_MAX}</div></div>
     <button class="go" id="btnNext">${dead||last?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
   const next=()=>{clearTimeout(autoId); if(dead||last) finish(dead); else {S.turn++; showCard();}};
   $('btnNext').onclick=next;
@@ -632,7 +641,7 @@ function finish(dead){
     <h1>MALVINAS <em>2041</em></h1>
     <div class="big ${cls}">${title}</div>
     <p>${text}</p>
-    <p style="margin-top:.6rem;color:var(--cel2)">Propensión a una transición pacífica: <b style="color:var(--sol)">${Math.round(s)}%</b> (empezó en 34%) · Propensión al enfrentamiento: <b style="color:var(--red)">${Math.round(S.tension)}/${TENSION_MAX}</b></p>
+    <p style="margin-top:.6rem;color:var(--cel2)">Propensión a una transición pacífica: <b style="color:var(--sol)">${Math.round(s)}%</b> (empezó en 34%) · Riesgo de guerra: <b style="color:var(--red)">${Math.round(S.tension)}/${TENSION_MAX}</b></p>
     <div class="endbars">${bars}</div>
     <div class="row">
       <button class="go" id="btnAgain">JUGAR DE NUEVO ▶</button>
