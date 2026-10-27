@@ -52,10 +52,13 @@ button{font-family:var(--f);cursor:pointer}
 .flagw .ic{position:absolute;right:-.5rem;bottom:-.5rem;font-size:1.7rem;filter:drop-shadow(.1rem .1rem 0 #000)}
 .mob.hit .flagw canvas{animation:shake .5s}
 .mob .nm{font-weight:800;font-size:1.05rem;color:var(--cel2);letter-spacing:.03em;line-height:1.2}
-.mob .ds{font-size:.9rem;color:var(--dim);line-height:1.3;margin:.15rem 0 .35rem;font-weight:500}
+.mob .ds{font-size:.88rem;color:var(--dim);line-height:1.25;margin:.1rem 0 .3rem;font-weight:500}
 .mob .br{display:flex;align-items:center;gap:.5rem}
 .mob .bar{flex:1;height:.95rem;border-width:.13rem;outline-width:.1rem}
 .mob .val{font-weight:800;font-size:1.35rem;color:var(--sol);min-width:2.2rem;text-align:right}
+.pw{background:var(--sol);color:#000;font-weight:800;font-size:.75rem;padding:.1rem .35rem;white-space:nowrap;letter-spacing:.03em}
+.wt{font-style:normal;font-weight:600;color:var(--dim);font-size:.85em;margin-left:.3rem}
+.sum .tot{font-weight:800;font-size:1.05rem;color:var(--cel2)}
 .mob .d{position:absolute;right:.5rem;top:.1rem;font-weight:800;font-size:1.3rem;opacity:0;pointer-events:none;text-shadow:.1rem .1rem 0 #000}
 .mob .d.show{animation:float 1.6s ease-out}
 .mob .d.up{color:var(--ok)} .mob .d.dn{color:var(--red)}
@@ -101,7 +104,7 @@ button{font-family:var(--f);cursor:pointer}
 .risk.neu{color:var(--dim);border-color:var(--line)}
 .timer{position:absolute;left:0;right:0;top:0;height:.35rem;background:#03060c}
 .timer i{display:block;height:100%;background:var(--sol);width:100%}
-.card.res{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,13rem)}
+.card.res{grid-template-columns:minmax(0,1.25fr) minmax(0,1.25fr) minmax(0,11rem)}
 .res .t1{font-weight:800;font-size:1.05rem;color:var(--sol);margin-bottom:.5rem;letter-spacing:.04em}
 .res p{font-size:1.2rem;line-height:1.4}
 .sum{display:flex;flex-direction:column;gap:.4rem;border-left:.2rem solid var(--line);padding-left:1rem}
@@ -207,13 +210,23 @@ button{font-family:var(--f);cursor:pointer}
     <p><b style="color:var(--sol)">Pregunta:</b> ¿qué escenario será favorable para una transición pacífica del poder soberano de las Malvinas hacia la República Argentina? Horizonte 2026–2041.</p>
     <h3>LAS 6 DIMENSIONES</h3>
     <table class="th">
-      <tr><td>🌍 SITUACIÓN INTERNACIONAL</td><td>Alianzas estratégicas, respaldo diplomático en foros multilaterales y exposición a frentes de conflicto globales.</td></tr>
-      <tr><td>⚔️ CAPACIDAD MILITAR</td><td>Gasto en defensa, correlación de fuerzas navales, terrestres y aeroespaciales, y disuasión nuclear.</td></tr>
-      <tr><td>💰 FACTOR ECONÓMICO</td><td>Asimetrías de producto bruto, solvencia financiera, vulnerabilidad macroeconómica y valorización de los recursos naturales.</td></tr>
-      <tr><td>🧭 TERRITORIO Y LOGÍSTICA</td><td>Proximidad geográfica continental argentina frente a la cadena de suministro transoceánica británica.</td></tr>
-      <tr><td>🏛️ SITUACIÓN DOMÉSTICA</td><td>Capital político, aprobación gubernamental, riesgo país e interés cohesivo de las sociedades civiles.</td></tr>
-      <tr><td>🏝️ AUTONOMÍA ESTRUCTURAL</td><td>Independencia fiscal del enclave, matriz demográfica, retención de capital humano y dependencia de la metrópoli.</td></tr>
+      <tr><td>🌍 SITUACIÓN INTERNACIONAL<br><span class="pw">PESO 20%</span></td><td>Alianzas estratégicas, respaldo diplomático en foros multilaterales y exposición a frentes de conflicto globales.</td></tr>
+      <tr><td>⚔️ CAPACIDAD MILITAR<br><span class="pw">PESO 10%</span></td><td>Gasto en defensa, correlación de fuerzas navales, terrestres y aeroespaciales, y disuasión nuclear.</td></tr>
+      <tr><td>💰 FACTOR ECONÓMICO<br><span class="pw">PESO 15%</span></td><td>Asimetrías de producto bruto, solvencia financiera, vulnerabilidad macroeconómica y valorización de los recursos naturales.</td></tr>
+      <tr><td>🧭 TERRITORIO Y LOGÍSTICA<br><span class="pw">PESO 10%</span></td><td>Proximidad geográfica continental argentina frente a la cadena de suministro transoceánica británica.</td></tr>
+      <tr><td>🏛️ SITUACIÓN DOMÉSTICA<br><span class="pw">PESO 20%</span></td><td>Capital político, aprobación gubernamental, riesgo país e interés cohesivo de las sociedades civiles.</td></tr>
+      <tr><td>🏝️ AUTONOMÍA ESTRUCTURAL<br><span class="pw">PESO 25%</span></td><td>Independencia fiscal del enclave, matriz demográfica, retención de capital humano y dependencia de la metrópoli.</td></tr>
     </table>
+    <h3>POR QUÉ PESAN DISTINTO</h3>
+    <ul>
+      <li><b>Autonomía estructural, 25%:</b> la transición "requeriría inexorablemente" una crisis aguda e irreversible de autonomía estructural de las islas.</li>
+      <li><b>Situación internacional, 20%:</b> sería "virtualmente imposible" sin un cambio de paradigma diplomático que sume al Norte Global.</li>
+      <li><b>Situación doméstica, 20%:</b> exige un "profundo desgaste político, financiero y social" en el frente interno británico.</li>
+      <li><b>Factor económico, 15%:</b> los "desincentivos económicos terminales" y la vulnerabilidad financiera argentina.</li>
+      <li><b>Territorio y logística, 10%:</b> el "aislamiento logístico insalvable" suma, pero no alcanza solo.</li>
+      <li><b>Capacidad militar, 10%:</b> "un incremento aislado en las capacidades de disuasión jamás resultaría suficiente" para una transición pacífica.</li>
+    </ul>
+    <p style="color:var(--dim)">El TP plantea una ponderación de las seis dimensiones pero no fija números: estos pesos traducen lo que el texto exige para la transición pacífica.</p>
     <h3>LOS 3 ESCENARIOS</h3>
     <ul>
       <li><b>Status quo:</b> el más probable. Administración británica sostenida por disuasión militar, sin conflicto armado ni negociación sustantiva. Propensión cercana al 34%.</li>
@@ -221,7 +234,7 @@ button{font-family:var(--f);cursor:pointer}
       <li><b style="color:var(--ok)">Transición pacífica:</b> negociación bilateral que termina en transferencia plena o en soberanía compartida o arriendo. Requiere la confluencia de crisis de autonomía estructural, presión del Norte Global y desgaste doméstico británico.</li>
     </ul>
     <h3>CÓMO PUNTÚA EL JUEGO</h3>
-    <p>Cada barra va de 0 a 100 y mide cuánto empuja esa dimensión hacia la transición pacífica. La propensión es el promedio de las seis. Hay transición pacífica si la propensión llega a <b style="color:var(--ok)">55%</b> y autonomía estructural, situación internacional y situación doméstica superan 50 al mismo tiempo. Hay guerra si la propensión al enfrentamiento llega a 60.</p>
+    <p>Cada barra va de 0 a 100 y mide cuánto empuja esa dimensión hacia la transición pacífica. La propensión es el <b>promedio ponderado</b> de las seis: las dimensiones con más peso mueven más la propensión. Ejemplo: +10 en autonomía estructural (peso 25%) suma 2,5%; +10 en capacidad militar (peso 10%) suma solo 1%. Hay transición pacífica si la propensión llega a <b style="color:var(--ok)">55%</b> y autonomía estructural, situación internacional y situación doméstica superan 50 al mismo tiempo. Hay guerra si la propensión al enfrentamiento llega a 60.</p>
     <div class="row"><button class="go" id="btnCloseTheory">VOLVER</button></div>
   </div>
 </div>
@@ -232,53 +245,53 @@ button{font-family:var(--f);cursor:pointer}
 <script>
 /* ============ DATOS (editables) ============ */
 /* Las seis dimensiones del TP. Cada barra mide cuánto empuja esa dimensión hacia la transición pacífica (0-100).
-   Valores iniciales: promedio 34, la propensión "marcadamente baja" del escenario del status quo. */
+   w = peso en la propensión (suma 100), según lo que el TP exige para la transición pacífica.
+   Valores iniciales: promedio ponderado 34, la propensión "marcadamente baja" del escenario del status quo. */
 const VARS = [
-  {k:'si',  c:'Situación internacional',  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas y respaldo diplomático'},
-  {k:'icm', c:'Capacidad militar', n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Correlación de fuerzas militares'},
-  {k:'fe',  c:'Factor económico',  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Solvencia financiera argentina'},
-  {k:'tyl', c:'Territorio y logística', n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad geográfica y abastecimiento'},
-  {k:'sd',  c:'Situación doméstica',  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político y desgaste británico'},
-  {k:'ae',  c:'Autonomía estructural',  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Crisis fiscal y demográfica de las islas'}
+  {k:'si',  c:'Situación internacional', w:20,  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas y respaldo diplomático'},
+  {k:'icm', c:'Capacidad militar', w:10, n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Correlación de fuerzas militares'},
+  {k:'fe',  c:'Factor económico', w:15,  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Solvencia financiera argentina'},
+  {k:'tyl', c:'Territorio y logística', w:10, n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad geográfica y abastecimiento'},
+  {k:'sd',  c:'Situación doméstica', w:20,  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político y desgaste británico'},
+  {k:'ae',  c:'Autonomía estructural', w:25,  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Crisis fiscal y demográfica de las islas'}
 ];
 /* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
    (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
 const TH_TRANS = 55, TH_FULL = 58, TH_CONF = 50, CONF = ['ae','si','sd'];
-const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.4;
+const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.6;
 
 const CARDS = [
  {y:2026, t:'Diplomacia multilateral', x:'Argentina tiene respaldo en la Asamblea General de las Naciones Unidas, el Comité de Descolonización y la Organización de los Estados Americanos, pero carece de fuerza coercitiva real.',
-  A:{l:'Trascender el Sur Global: sumar a Estados Unidos y la Unión Europea', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8}, r:'La campaña sale de su zona de confort discursiva y empieza a sumar a las potencias del Norte Global.'},
-  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{si:3,sd:3}, r:'Más respaldo declarativo. Sin condicionamiento material, las resoluciones quedan en el plano simbólico.'}},
+  A:{l:'Trascender el Sur Global: sumar a Estados Unidos y la Unión Europea', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8,sd:-3}, r:'La campaña sale de su zona de confort discursiva y suma a las potencias del Norte Global. En casa se critica el acercamiento a los aliados de Londres.'},
+  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{sd:5,si:2}, t:4, r:'Crece el apoyo interno y el respaldo declarativo, pero Londres se cierra y las resoluciones quedan en el plano simbólico.'}},
  {y:2027, t:'Vulnerabilidad financiera', x:'El riesgo país, el alto endeudamiento externo y las fluctuaciones inflacionarias restringen el margen del Estado argentino.',
-  A:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-4}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'},
-  B:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:2}, r:'Con más solvencia financiera, el Estado puede ejecutar políticas consistentes a largo plazo.'}},
+  A:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-5}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'},
+  B:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:-5}, r:'Con más solvencia financiera el Estado puede sostener políticas a largo plazo, pero el ajuste cuesta aprobación gubernamental.'}},
  {y:2029, t:'Licencias pesqueras', x:'La explotación de licencias pesqueras dota a la administración isleña de autonomía fiscal y un elevado producto bruto per cápita.',
-  A:{l:'Aplicar medidas de presión económica sobre las licencias', an:'sanction', tag:'🚫 PRESIÓN ECONÓMICA', fx:{ae:8,fe:-2}, t:8, r:'Algunas empresas pesqueras se retiran. La ocupación empieza a tener un costo.'},
-  B:{l:'Persuadir a los aliados occidentales sobre los recursos', an:'fish', tag:'🎣 RECURSOS', fx:{si:5,ae:3}, r:'La valorización de los recursos naturales entra en la agenda de los aliados de Londres.'}},
+  A:{l:'Aplicar medidas de presión económica sobre las licencias', an:'sanction', tag:'🚫 PRESIÓN ECONÓMICA', fx:{ae:8,fe:-3}, t:10, r:'Algunas empresas pesqueras se retiran. La ocupación empieza a tener un costo, y también la relación con Londres.'},
+  B:{l:'Persuadir a los aliados occidentales sobre los recursos', an:'fish', tag:'🎣 RECURSOS', fx:{si:5,sd:-3}, r:'Los aliados escuchan, pero sin medidas concretas en casa se lee como debilidad.'}},
  {y:2030, t:'Frentes simultáneos', x:'El Reino Unido enfrenta frentes en Europa Oriental, Medio Oriente o el Indopacífico: una crisis de sobre extensión imperial.',
-  A:{l:'Aprovechar la ventana de vulnerabilidad británica', an:'press', tag:'⚡ VENTANA', fx:{icm:6,si:-2}, t:16, r:'El flanco sur británico queda desprotegido, pero Londres lee la jugada como una amenaza.'},
-  B:{l:'Presentarse como garante de la estabilidad regional', an:'peace', tag:'🕊️ ESTABILIDAD', fx:{si:7}, t:-6, r:'Los aliados occidentales ven en Argentina un socio para la estabilidad regional del Atlántico.'}},
+  A:{l:'Presentarse como garante de la estabilidad regional', an:'peace', tag:'🕊️ ESTABILIDAD', fx:{si:7,sd:-3}, t:-6, r:'Los aliados occidentales ven en Argentina un socio confiable. En casa se critica no aprovechar la debilidad británica.'},
+  B:{l:'Aprovechar la ventana de vulnerabilidad británica', an:'press', tag:'⚡ VENTANA', fx:{icm:6,sd:4,si:-4}, t:16, r:'El flanco sur británico queda desprotegido y crece el apoyo interno, pero Londres y sus aliados lo leen como una amenaza.'}},
  {y:2032, t:'Programa de rearme', x:'Defensa propone un programa sostenido de rearme y modernización naval, submarina y aeroespacial.',
-  A:{l:'Ejecutar el rearme', an:'arm', tag:'✈️ REARME', fx:{icm:12,fe:-4}, t:26, r:'Se reduce la brecha del índice de capacidad militar. Aumenta la propensión al enfrentamiento.'},
-  B:{l:'Mantener la vía estrictamente diplomática', an:'hold', tag:'🛡️ VÍA DIPLOMÁTICA', fx:{si:4,fe:3}, t:-4, r:'Sin coacción militar ni uso de la fuerza. La vía pacífica sigue abierta.'}},
+  A:{l:'Ejecutar el rearme', an:'arm', tag:'✈️ REARME', fx:{icm:12,fe:-5}, t:24, r:'Se reduce la brecha del índice de capacidad militar. Aumenta la propensión al enfrentamiento.'},
+  B:{l:'Mantener la vía estrictamente diplomática', an:'hold', tag:'🛡️ VÍA DIPLOMÁTICA', fx:{si:4,fe:3,icm:-3}, t:-4, r:'Sin coacción militar, la vía pacífica sigue abierta. Se profundiza la obsolescencia logística de las fuerzas armadas.'}},
  {y:2033, t:'Hidrocarburos en la cuenca norte', x:'Las proyecciones de extracción de hidrocarburos refuerzan la autonomía fiscal isleña, en un mundo en acelerada transición energética.',
-  A:{l:'Desalentar la inversión offshore', an:'sanction', tag:'🛢️ OFFSHORE', fx:{ae:9}, t:6, r:'Gana peso la inviabilidad comercial de la extracción a gran escala.'},
-  B:{l:'Apostar a la transición energética con los aliados', an:'peace', tag:'🌱 TRANSICIÓN ENERGÉTICA', fx:{ae:4,si:4,fe:2}, r:'El petróleo isleño pierde valor estratégico ante la transición energética.'}},
+  A:{l:'Apostar a la transición energética con los aliados', an:'peace', tag:'🌱 TRANSICIÓN ENERGÉTICA', fx:{ae:4,si:4,fe:-4}, r:'El petróleo isleño pierde valor estratégico, pero la apuesta exige recursos que Argentina no tiene de sobra.'},
+  B:{l:'Desalentar la inversión offshore', an:'sanction', tag:'🛢️ OFFSHORE', fx:{ae:9,si:-3}, t:8, r:'Gana peso la inviabilidad comercial de la extracción a gran escala. Las petroleras y sus gobiernos protestan.'}},
  {y:2035, t:'Envejecimiento y fuga de cerebros', x:'La población de las islas envejece y su capital humano emigra hacia el continente europeo.',
-  A:{l:'Aprovechar la proximidad continental argentina', an:'people', tag:'🏠 PROXIMIDAD', fx:{tyl:5,ae:6}, r:'Crece la dependencia del enclave respecto del continente más cercano.'},
-  B:{l:'Profundizar el aislamiento logístico del enclave', an:'ignore', tag:'🚫 AISLAMIENTO', fx:{tyl:8,ae:4}, t:10, r:'La cadena de suministro transoceánica se encarece. Londres refuerza su postura.'}},
+  A:{l:'Profundizar el aislamiento logístico del enclave', an:'ignore', tag:'🚫 AISLAMIENTO', fx:{tyl:8,ae:6,si:-3}, t:10, r:'La cadena de suministro transoceánica se encarece. Londres refuerza su postura y los aliados critican la medida.'},
+  B:{l:'Aprovechar la proximidad continental argentina', an:'people', tag:'🏠 PROXIMIDAD', fx:{tyl:4,ae:4,fe:-4}, r:'Crece la dependencia del enclave respecto del continente, pero ofrecer servicios a las islas tiene un costo.'}},
  {y:2037, t:'Los vecinos del cono sur', x:'Los países vecinos del cono sur podrían bloquear las rutas de abastecimiento británicas.',
-  A:{l:'Pedir el bloqueo de las rutas de abastecimiento', an:'sanction', tag:'⛔ BLOQUEO', fx:{tyl:10,si:2}, t:14, r:'El aislamiento logístico de la potencia ocupante es real. También sube la propensión al enfrentamiento.'},
-  B:{l:'Coordinar una postura regional sin bloqueo', an:'summit', tag:'🤝 APOYO REGIONAL', fx:{tyl:4,si:5}, r:'El apoyo regional se consolida sin tensionar la relación bilateral.'}},
+  A:{l:'Coordinar una postura regional sin bloqueo', an:'summit', tag:'🤝 APOYO REGIONAL', fx:{si:5,tyl:3,sd:-3}, r:'El apoyo regional se consolida, pero en casa se lo percibe como tibieza.'},
+  B:{l:'Pedir el bloqueo de las rutas de abastecimiento', an:'sanction', tag:'⛔ BLOQUEO', fx:{tyl:10,si:-4}, t:14, r:'El aislamiento logístico de la potencia ocupante es real. Los aliados occidentales se incomodan y sube la propensión al enfrentamiento.'}},
  {y:2038, t:'Desgaste doméstico británico', x:'La sociedad civil británica, agobiada por las reformas del estado de bienestar, cuestiona los costos de sostener las islas.',
-  A:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:4}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo.'},
-  B:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:9,si:2}, r:'Los costos impositivos, logísticos y políticos de las islas entran en el debate británico.'}},
+  A:{l:'Recurrir al nacionalismo para forzar la cohesión', an:'press', tag:'🔥 NACIONALISMO', fx:{sd:7,si:-3}, t:14, r:'Es la lógica de la guerra de distracción: sube la cohesión, pero también el riesgo, y los aliados toman distancia.'},
+  B:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:6,fe:-3}, r:'Los costos de las islas entran en el debate británico, pero la campaña internacional cuesta recursos.'}},
  {y:2040, t:'Ultimátum de los aliados', x:'Estados Unidos y actores clave de la Unión Europea pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
-  A:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:10}, t:4, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica.'},
-  B:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:3}, r:'Una arquitectura jurídica innovadora: soberanía compartida o arriendo territorial a muy largo plazo.'}}
+  A:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:-5}, r:'Una arquitectura jurídica innovadora, pero renunciar a la transferencia plena cuesta capital político.'},
+  B:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:9}, t:8, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica. Londres se endurece.'}}
 ];
-
 const EVENTS = [
  {ic:'🐟', x:'Los recursos pesqueros migran por el cambio climático.', fx:{ae:6}},
  {ic:'🛢️', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', fx:{ae:6}},
@@ -296,7 +309,7 @@ let S = null, phase = 'intro', tickId = null, autoId = null, expo = false;
 const $ = id => document.getElementById(id);
 const clamp = (v,a=0,b=100) => Math.max(a, Math.min(b, v));
 const lerp = (a,b,t) => a+(b-a)*t;
-const score = () => VARS.reduce((s,v)=>s+S.val[v.k],0) / VARS.length;
+const score = () => VARS.reduce((s,v)=>s+S.val[v.k]*v.w,0) / 100;   // promedio ponderado
 const confluence = () => CONF.every(k => S.val[k] >= TH_CONF);
 const VI = {}; VARS.forEach(v => VI[v.k] = v);
 const covOf = s => clamp((s-34)/30, 0, 1);
@@ -344,9 +357,9 @@ function buildSide(){
     const el = document.createElement('div');
     el.className='mob'; el.id='mob_'+v.k;
     el.innerHTML = `<span class="d" id="d_${v.k}"></span>
-      <div class="flagw"><canvas width="32" height="32"></canvas><span class="ic">${v.ic}</span></div>
+      <div class="flagw" style="width:${(2.4+v.w*.08).toFixed(2)}rem;height:${(2.4+v.w*.08).toFixed(2)}rem"><canvas width="32" height="32"></canvas><span class="ic">${v.ic}</span></div>
       <div><div class="nm">${v.n}</div><div class="ds">${v.ds}</div>
-      <div class="br"><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div></div>`;
+      <div class="br"><span class="pw">PESO ${v.w}%</span><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div></div>`;
     $(v.side==='L'?'sideL':'sideR').appendChild(el);
   });
 }
@@ -549,7 +562,7 @@ function setHud(){
 }
 function chips(o){
   const a=[];
-  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} ${VI[k].c}</li>`); }
+  for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} ${VI[k].c}<em class="wt">peso ${VI[k].w}%</em></li>`); }
   const risk = o.t>0 ? '<div class="risk bad">⚠️ Sube el riesgo de guerra</div>'
              : o.t<0 ? '<div class="risk good">🕊️ Baja el riesgo de guerra</div>'
              : '<div class="risk neu">No cambia el riesgo de guerra</div>';
@@ -585,7 +598,7 @@ function applyFx(fx,deltas,gain=1){
 function choose(o){
   if(phase!=='card') return;
   phase='result'; clearInterval(tickId);
-  const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={};
+  const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={}, s0=score();
   applyFx(opt.fx,deltas,o?GAIN:1);
   S.tension += (opt.t||0);
   let ev=null;
@@ -607,8 +620,9 @@ function choose(o){
       <p>${opt.r}</p>
       ${ev?`<div class="ev">${ev.ic} Evento mundial: ${ev.x}</div>`:''}
     </div>
-    <div class="sum"><div class="t1">QUÉ CAMBIÓ</div><ul class="fx">${
-      VARS.filter(x=>deltas[x.k]).map(x=>`<li class="${deltas[x.k]>0?'u':'dn'}"><span class="ar">${deltas[x.k]>0?'▲':'▼'}</span>${x.ic} ${x.c} ${deltas[x.k]>0?'+':''}${deltas[x.k]}</li>`).join('')
+    <div class="sum"><div class="t1">QUÉ CAMBIÓ · APORTE A LA PROPENSIÓN</div><div class="tot">Propensión: ${Math.round(s0)}% → ${Math.round(score())}%</div><ul class="fx">${
+      VARS.filter(x=>deltas[x.k]).map(x=>{const d=deltas[x.k], p=(d*x.w/100).toFixed(1).replace('.',',');
+        return `<li class="${d>0?'u':'dn'}"><span class="ar">${d>0?'▲':'▼'}</span>${x.ic} ${x.c} ${d>0?'+':''}${d}<em class="wt">→ ${d>0?'+':''}${p}%</em></li>`;}).join('')
     }</ul><div class="risk ${S.tension>=40?'bad':'neu'}">⚠️ Riesgo de guerra: ${Math.round(S.tension)} / ${TENSION_MAX}</div></div>
     <button class="go" id="btnNext">${dead||last?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
   const next=()=>{clearTimeout(autoId); if(dead||last) finish(dead); else {S.turn++; showCard();}};
