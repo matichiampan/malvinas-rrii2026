@@ -191,7 +191,6 @@ button{font-family:var(--f);cursor:pointer}
       <li>Si el <b style="color:var(--red)">riesgo de guerra</b> (propensión al enfrentamiento) llega a 60, estalla la guerra.</li>
       <li>Hay 3 escenarios posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
-    <label class="chk"><input type="checkbox" id="chkExpo"> Modo exposición (sin cronómetro)</label>
     <div class="row">
       <button class="go" id="btnStart">JUGAR ▶</button>
       <button class="btn" id="btnFS2">⛶ PANTALLA COMPLETA</button>
@@ -652,7 +651,7 @@ function finish(dead){
   $('ovEnd').classList.add('on');
 }
 function start(){
-  expo = $('chkExpo').checked;
+  expo = true; // sin cronómetro
   newGame(); cov=0; covTarget=0; dirty=true; FX.length=0;
   $('ovIntro').classList.remove('on'); $('ovEnd').classList.remove('on');
   buildSide(); renderMobs(); showCard(); fitMap();
