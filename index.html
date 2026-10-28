@@ -129,6 +129,13 @@ button{font-family:var(--f);cursor:pointer}
 @keyframes plum{0%{transform:scale(.2) rotate(-8deg);opacity:0}60%{transform:scale(1.08) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0)}}
 .flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:11;animation:flash .45s ease-out forwards}
 @keyframes flash{0%{opacity:.55}100%{opacity:0}}
+.modb{margin:.6rem 0 0;font-weight:800;font-size:1rem;line-height:1.35;padding:.4rem .7rem;border:.15rem solid;letter-spacing:.01em}
+.modb.ok{color:var(--ok);border-color:var(--ok);background:rgba(88,214,141,.08)}
+.modb.bad{color:var(--red);border-color:var(--red);background:rgba(255,77,94,.1)}
+.evbox .modb{max-width:34rem;margin:.7rem auto 0;text-align:left;font-weight:600}
+.evbox .lead{margin-top:.6rem;font-style:italic;color:var(--sol);font-size:1.1rem;font-weight:700}
+.modl{font-weight:800;font-size:.92rem;margin:.1rem 0 .35rem;line-height:1.25}
+.modl.ok{color:var(--ok)} .modl.bad{color:var(--red)}
 .res .say{margin-top:.6rem;font-size:1.05rem;line-height:1.4;color:var(--cel2)}
 .panel{background:var(--bg2);border:.25rem solid var(--cel);box-shadow:.4rem .4rem 0 #000;max-width:54rem;width:100%;padding:1.4rem 1.6rem;max-height:96vh;overflow:auto}
 .panel h1{font-weight:800;font-size:2.6rem;color:var(--cel);line-height:1.05;margin-bottom:.3rem}
@@ -206,7 +213,7 @@ button{font-family:var(--f);cursor:pointer}
       <li>A los costados están las <b>6 dimensiones</b> del TP. Las que tienen más <b style="color:var(--sol)">PESO</b> mueven más la propensión.</li>
       <li>Para ganar necesitás llegar a <b style="color:var(--ok)">55%</b> con tres desgastes a la vez: <b>autonomía estructural</b>, <b>situación internacional</b> y <b>situación doméstica</b> en 50 o más.</li>
       <li>Si el <b style="color:var(--red)">riesgo de guerra</b> llega a 60, estalla la guerra y perdés.</li>
-      <li><b style="color:var(--sol)">¡PLUM!</b> Dos veces por partida, en años al azar, pasa algo en el mundo que vos no controlás: puede ayudarte o perjudicarte.</li>
+      <li><b style="color:var(--sol)">¡PLUM!</b> Dos veces por partida, en años al azar, pasa algo en el mundo que vos no controlás. Además, el año siguiente te abre una <b style="color:var(--ok)">ventana</b> (presionar cuesta menos o rinde más) o te pone <b style="color:var(--red)">viento en contra</b>. Si venís muy bien, el mundo suele frenarte; si venís mal, suele abrirse una posibilidad.</li>
       <li>Hay 3 finales posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
     <div class="row">
@@ -309,14 +316,14 @@ const CARDS = [
   B:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:9,fe:-3}, t:6, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica, pero ellos esperan acceso a recursos sudamericanos. Londres se endurece.'}}
 ];
 const EVENTS = [
- {ic:'🐟', t:'Los peces se van', x:'Los recursos pesqueros migran por el cambio climático.', w:'Las licencias pesqueras son la principal fuente de plata de las islas. Si los peces se van, las islas pierden autonomía fiscal y dependen más de afuera.', fx:{ae:6}},
- {ic:'🛢️', t:'El petróleo no sale', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', w:'Las islas contaban con el petróleo de la cuenca norte para financiarse en el futuro. Sin esa plata, su autonomía estructural se debilita.', fx:{ae:6}},
- {ic:'🌍', t:'Londres, ocupado en otro lado', x:'Nuevo frente en el Indopacífico: el Reino Unido dispersa sus recursos.', w:'El Reino Unido tiene que mandar barcos y recursos a otro conflicto. Es la sobre extensión imperial: el Atlántico Sur queda menos protegido.', fx:{icm:4,si:2}},
- {ic:'📉', t:'Sube el riesgo país', x:'Sube el riesgo país argentino.', w:'A la Argentina le cuesta más endeudarse. Hay menos margen para sostener políticas a largo plazo y el gobierno pierde aprobación.', fx:{fe:-5,sd:-3}},
- {ic:'🏛️', t:'Crisis en casa británica', x:'Crisis interna británica por las reformas del estado de bienestar.', w:'La sociedad británica se pregunta por qué pagar los costos de unas islas lejanas mientras le recortan el estado de bienestar.', fx:{sd:5}},
- {ic:'✈️', t:'Londres refuerza la base', x:'Rotación permanente de efectivos en Mount Pleasant.', w:'El Reino Unido mantiene tropas de forma permanente en la base militar de las islas. La disuasión británica se fortalece.', fx:{icm:-3}},
- {ic:'💷', t:'A las islas les va bien', x:'Las islas mantienen un elevado producto bruto per cápita.', w:'Con buenos ingresos, las islas no necesitan del continente. Su autonomía estructural se mantiene fuerte.', fx:{ae:-4}},
- {ic:'🤝', t:'Los aliados cierran filas', x:'Las potencias del Norte Global respaldan a su aliado británico.', w:'Estados Unidos y Europa apoyan a Londres. Argentina pierde respaldo internacional.', fx:{si:-4}}
+ {ic:'🐟', t:'Los peces se van', x:'Los recursos pesqueros migran por el cambio climático.', w:'Las licencias pesqueras son la principal fuente de plata de las islas. Si los peces se van, las islas pierden autonomía fiscal y dependen más de afuera.', fx:{ae:6}, m:{on:'press', risk:.5, txt:'presionar cuesta la mitad de riesgo de guerra', why:'Con las islas debilitadas, Londres tiene menos para defender.'}},
+ {ic:'🛢️', t:'El petróleo no sale', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', w:'Las islas contaban con el petróleo de la cuenca norte para financiarse en el futuro. Sin esa plata, su autonomía estructural se debilita.', fx:{ae:6}, m:{on:'press', gain:1.5, txt:'las medidas de presión rinden 50% más', why:'Sin petróleo, cada presión sobre la economía isleña pega más fuerte.'}},
+ {ic:'🌍', t:'Londres, ocupado en otro lado', x:'Nuevo frente en el Indopacífico: el Reino Unido dispersa sus recursos.', w:'El Reino Unido tiene que mandar barcos y recursos a otro conflicto. Es la sobre extensión imperial: el Atlántico Sur queda menos protegido.', fx:{icm:4,si:2}, m:{on:'press', risk:.5, txt:'presionar cuesta la mitad de riesgo de guerra', why:'Londres no puede responder con fuerza en dos frentes a la vez.'}},
+ {ic:'📉', t:'Sube el riesgo país', x:'Sube el riesgo país argentino.', w:'A la Argentina le cuesta más endeudarse. Hay menos margen para sostener políticas a largo plazo y el gobierno pierde aprobación.', fx:{fe:-5,sd:-3}, m:{on:'all', gain:.6, txt:'todas las decisiones rinden 40% menos', why:'Sin solvencia financiera no hay políticas consistentes.'}},
+ {ic:'🏛️', t:'Crisis en casa británica', x:'Crisis interna británica por las reformas del estado de bienestar.', w:'La sociedad británica se pregunta por qué pagar los costos de unas islas lejanas mientras le recortan el estado de bienestar.', fx:{sd:5}, m:{on:'dip', gain:1.5, txt:'las decisiones diplomáticas rinden 50% más', why:'La opinión pública británica está dispuesta a escuchar.'}},
+ {ic:'✈️', t:'Londres refuerza la base', x:'Rotación permanente de efectivos en Mount Pleasant.', w:'El Reino Unido mantiene tropas de forma permanente en la base militar de las islas. La disuasión británica se fortalece.', fx:{icm:-3}, m:{on:'press', risk:1.5, txt:'presionar cuesta 50% más de riesgo de guerra', why:'Con más tropas en las islas, cualquier presión se lee como amenaza.'}},
+ {ic:'💷', t:'A las islas les va bien', x:'Las islas mantienen un elevado producto bruto per cápita.', w:'Con buenos ingresos, las islas no necesitan del continente. Su autonomía estructural se mantiene fuerte.', fx:{ae:-4}, m:{on:'press', gain:.5, txt:'las medidas de presión rinden la mitad', why:'Una economía isleña sólida aguanta mejor la presión.'}},
+ {ic:'🤝', t:'Los aliados cierran filas', x:'Las potencias del Norte Global respaldan a su aliado británico.', w:'Estados Unidos y Europa apoyan a Londres. Argentina pierde respaldo internacional.', fx:{si:-4}, m:{on:'dip', gain:.5, txt:'las decisiones diplomáticas rinden la mitad', why:'Con los aliados alineados con Londres, la diplomacia rebota.'}}
 ];
 const TIMEOUT = {l:'No decidiste a tiempo', an:'timeout', tag:'⏳ SIN DECISIÓN', fx:{sd:-3,si:-3}, t:4, r:'Sin políticas consistentes, el status quo se refuerza.'};
 
@@ -329,13 +336,32 @@ const score = () => VARS.reduce((s,v)=>s+S.val[v.k]*v.w,0) / 100;   // promedio 
 const confluence = () => CONF.every(k => S.val[k] >= TH_CONF);
 const VI = {}; VARS.forEach(v => VI[v.k] = v);
 const covOf = s => clamp((s-34)/30, 0, 1);
+const isGood = e => Object.keys(e.fx).reduce((a,k)=>a+e.fx[k]*VI[k].w,0) > 0;
+const isPress = o => (o.t||0) > 0;
+const modHits = (m,o) => m && (m.on==='all' || (m.on==='press') === isPress(o));
+/* El mundo reacciona: si venís muy bien, es más probable que algo te frene;
+   si venís mal o al borde de la guerra, es más probable que se abra una posibilidad. */
+function mood(){
+  const esperado = 34 + (TH_TRANS-34)*(S.turn+1)/TURNS, gap = score()-esperado;
+  if(S.tension>=40 || gap<-3) return 'abrir';
+  if(gap>2) return 'frenar';
+  return null;
+}
+function pickEvent(){
+  const left = EVENTS.filter(e=>!S.used.includes(e)), md = mood();
+  const w = left.map(e => md==='frenar' ? (isGood(e)?1:3) : md==='abrir' ? (isGood(e)?3:1) : 1);
+  let r = Math.random()*w.reduce((a,b)=>a+b,0), i=0;
+  while(r>=w[i]){ r-=w[i]; i++; }
+  S.used.push(left[i]);
+  return {e:left[i], md};
+}
 
 function newGame(){
-  S = {val:{}, tension:10, turn:0, log:[], plum:{}};
-  /* dos eventos por partida, distintos entre sí, en dos años al azar (desde 2027) */
-  const shuf = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
-  const yrs = shuf([...Array(TURNS-1)].map((_,i)=>i+1)), evs = shuf(EVENTS);
-  S.plum[yrs[0]] = evs[0]; S.plum[yrs[1]] = evs[1];
+  S = {val:{}, tension:10, turn:0, log:[], plumYears:[], used:[], mod:null};
+  /* dos plums por partida, en dos años al azar entre 2027 y 2037 (así la ventana o el freno llega a jugarse) */
+  const yrs=[...Array(TURNS-2)].map((_,i)=>i+1);
+  for(let i=yrs.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[yrs[i],yrs[j]]=[yrs[j],yrs[i]];}
+  S.plumYears = yrs.slice(0,2);
   VARS.forEach(v => S.val[v.k] = v.v);
 }
 
@@ -580,12 +606,18 @@ function setHud(){
   setCov(covOf(s));
 }
 function chips(o){
-  const a=[];
+  const a=[], m=S.mod, hit=modHits(m,o) && (m.gain || (m.risk && o.t>0));
   for(const k in o.fx){ const up=o.fx[k]>0; a.push(`<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} ${VI[k].c}<em class="wt">peso ${VI[k].w}%</em></li>`); }
   const risk = o.t>0 ? '<div class="risk bad">⚠️ Sube el riesgo de guerra</div>'
              : o.t<0 ? '<div class="risk good">🕊️ Baja el riesgo de guerra</div>'
              : '<div class="risk neu">No cambia el riesgo de guerra</div>';
-  return `<ul class="fx">${a.join('')}</ul>${risk}`;
+  const good = hit && ((m.gain||1)>1 || (m.risk||1)<1);
+  const ml = hit ? `<div class="modl ${good?'ok':'bad'}">${good?'🪟':'🚧'} ${m.txt[0].toUpperCase()+m.txt.slice(1)}</div>` : '';
+  return `<ul class="fx">${a.join('')}</ul>${ml}${risk}`;
+}
+function modBanner(){
+  const m=S.mod; if(!m) return '';
+  return `<div class="modb ${m.good?'ok':'bad'}">${m.good?'🪟 VENTANA ABIERTA':'🚧 VIENTO EN CONTRA'} · ${m.ic} este año ${m.txt}</div>`;
 }
 function showCard(){
   phase='card';
@@ -593,7 +625,7 @@ function showCard(){
   card.className='card';
   card.innerHTML = `
     ${expo?'':'<div class="timer"><i id="timerFill"></i></div>'}
-    <div class="info"><div class="tg">${c.y} · DECISIÓN ${S.turn+1} DE ${TURNS}</div><h2>${c.t}</h2><p>${c.x}</p><div class="ask">¿QUÉ HACÉS? ELEGÍ A O B ▶</div></div>
+    <div class="info"><div class="tg">${c.y} · DECISIÓN ${S.turn+1} DE ${TURNS}</div><h2>${c.t}</h2><p>${c.x}</p>${modBanner()}<div class="ask">¿QUÉ HACÉS? ELEGÍ A O B ▶</div></div>
     <button class="opt" data-o="A"><div class="l"><b>A</b>${c.A.l}</div>${chips(c.A)}</button>
     <button class="opt" data-o="B"><div class="l"><b>B</b>${c.B.l}</div>${chips(c.B)}</button>`;
   card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>choose(b.dataset.o));
@@ -618,9 +650,11 @@ function choose(o){
   if(phase!=='card') return;
   phase='result'; clearInterval(tickId);
   const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={}, s0=score(), t0=S.tension;
-  applyFx(opt.fx,deltas,o?GAIN:1);
-  S.tension = Math.max(0, S.tension + (opt.t||0) - 3);
-  const ev = S.plum[S.turn] || null;
+  const m = S.mod, hit = o && modHits(m,opt);
+  applyFx(opt.fx,deltas,(o?GAIN:1)*(hit&&m.gain?m.gain:1));
+  S.tension = Math.max(0, S.tension + (opt.t||0)*(hit&&m.risk&&opt.t>0?m.risk:1) - 3);
+  S.mod = null;
+  const ev = S.plumYears.includes(S.turn) ? pickEvent() : null;
   S.log.push({y:c.y, t:c.t, pick:o?c[o].l:TIMEOUT.l});
   renderMobs(deltas); setHud();
   spawn(opt.an); showTag(opt.tag);
@@ -637,7 +671,7 @@ function choose(o){
     <button class="go" id="btnNext">${dead||(last&&!ev)?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
   const next=()=>{clearTimeout(autoId);
     if(dead) return finish(true);
-    if(ev) return showEvent(ev, last);
+    if(ev) return showEvent(ev.e, last, ev.md);
     if(last) finish(false); else {S.turn++; showCard();}
   };
   $('btnNext').onclick=next;
@@ -659,9 +693,10 @@ function sayRisk(a,b){
   if(b>=40) return `Cuidado: el riesgo de guerra está en ${Math.round(b)}. Si llega a ${TENSION_MAX}, estalla la guerra.`;
   return b>a ? `El riesgo de guerra subió a ${Math.round(b)} de ${TENSION_MAX}.` : `El riesgo de guerra está en ${Math.round(b)} de ${TENSION_MAX}.`;
 }
-function showEvent(ev, last){
+function showEvent(ev, last, md){
   phase='event';
-  const good = Object.keys(ev.fx).reduce((a,k)=>a+ev.fx[k]*VI[k].w,0) > 0;
+  const good = isGood(ev);
+  const lead = md==='frenar' && !good ? 'Venías muy bien… y el mundo reaccionó.' : md==='abrir' && good ? 'Cuando parecía perdido, se abrió una posibilidad.' : '';
   const lines = Object.keys(ev.fx).map(k=>{const up=ev.fx[k]>0;
     return `<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} <b>${VI[k].c}</b> ${up?'sube':'baja'} ${Math.abs(ev.fx[k])} <em class="wt">(peso ${VI[k].w}%)</em></li>`;}).join('');
   $('evBox').innerHTML = `
@@ -672,6 +707,8 @@ function showEvent(ev, last){
     <p class="why">${ev.w}</p>
     <ul class="fx">${lines}</ul>
     <div class="verdict ${good?'ok':'bad'}">${good?'👍 Te ayuda: te acerca a la transición pacífica.':'👎 Te perjudica: te aleja de la transición pacífica.'}</div>
+    ${last?'':`<div class="modb ${good?'ok':'bad'}"><b>${good?'🪟 SE ABRIÓ UNA VENTANA':'🚧 VIENTO EN CONTRA'}:</b> el año que viene ${ev.m.txt}. ${ev.m.why}</div>`}
+    ${lead?`<div class="lead">${lead}</div>`:''}
     <button class="go" id="btnEv">ENTENDIDO ▶</button>`;
   const fl=document.createElement('div'); fl.className='flash'; document.body.appendChild(fl); setTimeout(()=>fl.remove(),500);
   $('ovEvent').classList.add('on');
@@ -679,6 +716,7 @@ function showEvent(ev, last){
   $('btnEv').onclick=()=>{
     $('ovEvent').classList.remove('on');
     const deltas={}; applyFx(ev.fx,deltas); renderMobs(deltas); setHud();
+    S.mod = last ? null : {...ev.m, ic:ev.ic, good};
     setTimeout(()=>{ if(last) finish(false); else {S.turn++; showCard();} }, 1100);
   };
 }
