@@ -261,7 +261,7 @@ const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.6;
 const CARDS = [
  {y:2026, t:'Diplomacia multilateral', x:'Argentina tiene respaldo en la Asamblea General de las Naciones Unidas, el Comité de Descolonización y la Organización de los Estados Americanos, pero carece de fuerza coercitiva real.',
   A:{l:'Trascender el Sur Global: sumar a Estados Unidos y la Unión Europea', an:'summit', tag:'🌍 NORTE GLOBAL', fx:{si:8,sd:-3}, r:'La campaña sale de su zona de confort discursiva y suma a las potencias del Norte Global. En casa se critica el acercamiento a los aliados de Londres.'},
-  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{sd:5,si:2}, t:4, r:'Crece el apoyo interno y el respaldo declarativo, pero Londres se cierra y las resoluciones quedan en el plano simbólico.'}},
+  B:{l:'Sumar más declaraciones en el Sur Global', an:'un', tag:'📜 NACIONES UNIDAS', fx:{sd:6,si:-3}, r:'Crece el apoyo interno, pero el respaldo declarativo no suma a las potencias del Norte Global y las resoluciones quedan en el plano simbólico.'}},
  {y:2027, t:'Vulnerabilidad financiera', x:'El riesgo país, el alto endeudamiento externo y las fluctuaciones inflacionarias restringen el margen del Estado argentino.',
   A:{l:'Gasto expansivo para sostener el capital político', an:'vote', tag:'🗳️ APROBACIÓN', fx:{sd:6,fe:-5}, r:'Sube la aprobación gubernamental, pero crece la vulnerabilidad macroeconómica.'},
   B:{l:'Priorizar la estabilidad macroeconómica', an:'invest', tag:'💰 SOLVENCIA', fx:{fe:9,sd:-5}, r:'Con más solvencia financiera el Estado puede sostener políticas a largo plazo, pero el ajuste cuesta aprobación gubernamental.'}},
@@ -288,7 +288,7 @@ const CARDS = [
   B:{l:'Exponer los costos del resabio imperial', an:'un', tag:'📢 COSTOS', fx:{sd:6,fe:-3}, r:'Los costos de las islas entran en el debate británico, pero la campaña internacional cuesta recursos.'}},
  {y:2040, t:'Ultimátum de los aliados', x:'Estados Unidos y actores clave de la Unión Europea pueden presionar a Londres por la estabilidad regional y el acceso a recursos sudamericanos.',
   A:{l:'Ofrecer soberanía compartida o arriendo', an:'base', tag:'📄 ARRIENDO', fx:{si:5,ae:3,sd:-5}, r:'Una arquitectura jurídica innovadora, pero renunciar a la transferencia plena cuesta capital político.'},
-  B:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:9}, t:8, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica. Londres se endurece.'}}
+  B:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:9,fe:-3}, t:6, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica, pero ellos esperan acceso a recursos sudamericanos. Londres se endurece.'}}
 ];
 const EVENTS = [
  {ic:'🐟', x:'Los recursos pesqueros migran por el cambio climático.', fx:{ae:6}},
