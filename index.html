@@ -150,7 +150,7 @@ button{font-family:var(--f);cursor:pointer}
 .row .go{align-self:auto;padding:.7rem 1.4rem}
 .th{width:100%;border-collapse:collapse;margin-top:.4rem}
 .th td{border:.12rem solid var(--bg3);padding:.4rem .6rem;font-size:1.05rem;vertical-align:top}
-.th td:first-child{font-weight:800;color:var(--cel2);width:32%}
+.th td:first-child{font-weight:800;color:var(--cel2);width:34%}
 .endbars{display:grid;grid-template-columns:1fr 1fr;gap:.3rem 1.2rem;margin:.8rem 0}
 .endbars div{font-size:1.1rem}
 .big{font-weight:800;font-size:1.9rem;line-height:1.15;margin:.5rem 0}
@@ -173,8 +173,8 @@ button{font-family:var(--f);cursor:pointer}
       <div class="yr" id="year">2026<small>TURNO 1/10</small></div>
     </div>
     <div class="prop">
-      <div class="lab"><span>Propensión del Reino Unido a la transición pacífica</span><b id="scoreLab">32%</b></div>
-      <div class="bar"><i id="scoreFill" style="width:32%"></i><span class="mk" style="left:55%"></span></div>
+      <div class="lab"><span>Propensión del Reino Unido a la transición pacífica</span><b id="scoreLab">34%</b></div>
+      <div class="bar"><i id="scoreFill" style="width:34%"></i><span class="mk" style="left:55%"></span></div>
       <div class="zones"><span style="left:27.5%">STATUS QUO</span><span style="left:55%;color:var(--sol)">▲ META 55%</span><span style="left:84%">TRANSICIÓN</span></div>
     </div>
     <div style="display:flex;gap:1rem;align-items:center">
@@ -206,7 +206,7 @@ button{font-family:var(--f);cursor:pointer}
   <div class="panel">
     <h1>MALVINAS <em>2041</em></h1>
     <p class="sub">Simulador prospectivo de relaciones internacionales</p>
-    <p>Asesorás al gobierno nacional de la República Argentina. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para subir la <b style="color:var(--cel2)">propensión del Reino Unido a una transición pacífica</b> del poder soberano de las Malvinas. Hoy está en <b style="color:var(--sol)">32%</b>: marcadamente baja.</p>
+    <p>Asesorás al gobierno nacional de la República Argentina. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para subir la <b style="color:var(--cel2)">propensión del Reino Unido a una transición pacífica</b> del poder soberano de las Malvinas. Hoy está en <b style="color:var(--sol)">34%</b>: marcadamente baja.</p>
     <h3>CÓMO SE JUEGA</h3>
     <ul>
       <li>Cada año elegís <b>A</b> o <b>B</b>. Ninguna es gratis: cada opción sube algo ▲ y baja otra cosa ▼, o sube el riesgo de guerra.</li>
@@ -248,7 +248,7 @@ button{font-family:var(--f);cursor:pointer}
     <p style="color:var(--dim)">El TP plantea una ponderación de las seis dimensiones pero no fija números: estos pesos son la decisión del grupo. Aunque pesen 10%, la autonomía estructural y la situación doméstica siguen siendo obligatorias: sin la confluencia de los tres desgastes no hay transición.</p>
     <h3>LOS 3 ESCENARIOS</h3>
     <ul>
-      <li><b>Status quo:</b> el más probable. Administración británica sostenida por disuasión militar, sin conflicto armado ni negociación sustantiva. Propensión cercana al 32%.</li>
+      <li><b>Status quo:</b> el más probable. Administración británica sostenida por disuasión militar, sin conflicto armado ni negociación sustantiva. Propensión cercana al 34%.</li>
       <li><b style="color:var(--red)">Guerra:</b> ruptura violenta del status quo. Requiere rearme argentino, sobre extensión británica y presiones internas.</li>
       <li><b style="color:var(--ok)">Transición pacífica:</b> negociación bilateral que termina en transferencia plena o en soberanía compartida o arriendo. Requiere la confluencia de crisis de autonomía estructural, presión del Norte Global y desgaste doméstico británico.</li>
     </ul>
@@ -266,19 +266,19 @@ button{font-family:var(--f);cursor:pointer}
 /* ============ DATOS (editables) ============ */
 /* Las seis dimensiones del TP. Cada barra mide cuánto empuja esa dimensión hacia la transición pacífica (0-100).
    w = peso en la propensión (suma 100), según lo que el TP exige para la transición pacífica.
-   Valores iniciales: promedio ponderado 32, la propensión "marcadamente baja" del escenario del status quo. */
+   Valores iniciales: índices argentinos del TP (100% − ventaja del Reino Unido). Promedio ponderado 34,4, la propensión "marcadamente baja" del escenario del status quo. */
 const VARS = [
-  {k:'si',  c:'Situación internacional', w:30,  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:50, ds:'Alianzas y respaldo diplomático'},
-  {k:'icm', c:'Capacidad militar', w:30, n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:10, ds:'Correlación de fuerzas militares'},
-  {k:'fe',  c:'Factor económico', w:10,  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:25, ds:'Solvencia financiera argentina'},
-  {k:'tyl', c:'Territorio y logística', w:10, n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:60, ds:'Proximidad geográfica y abastecimiento'},
-  {k:'sd',  c:'Situación doméstica', w:10,  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:35, ds:'Capital político y desgaste británico'},
-  {k:'ae',  c:'Autonomía estructural', w:10,  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:24, ds:'Crisis fiscal y demográfica de las islas'}
+  {k:'si',  c:'Situación internacional', w:30,  n:'SITUACIÓN INTERNACIONAL',  ic:'🌍', side:'L', v:55.4, ds:'Alianzas y respaldo diplomático'},
+  {k:'icm', c:'Capacidad militar', w:30, n:'CAPACIDAD MILITAR',  ic:'⚔️', side:'L', v:11.16, ds:'Correlación de fuerzas militares'},
+  {k:'fe',  c:'Factor económico', w:10,  n:'FACTOR ECONÓMICO',         ic:'💰', side:'L', v:51.5, ds:'Solvencia financiera argentina'},
+  {k:'tyl', c:'Territorio y logística', w:10, n:'TERRITORIO Y LOGÍSTICA',   ic:'🧭', side:'R', v:23.8, ds:'Proximidad geográfica y abastecimiento'},
+  {k:'sd',  c:'Situación doméstica', w:10,  n:'SITUACIÓN DOMÉSTICA',      ic:'🏛️', side:'R', v:32.7, ds:'Capital político y desgaste británico'},
+  {k:'ae',  c:'Autonomía estructural', w:10,  n:'AUTONOMÍA ESTRUCTURAL',    ic:'🏝️', side:'R', v:36.6, ds:'Crisis fiscal y demográfica de las islas'}
 ];
 /* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
    (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
 const TH_TRANS = 55, TH_FULL = 58, TH_CONF = 50, CONF = ['ae','si','sd'];
-const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.7;
+const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.65;
 
 const CARDS = [
  {y:2026, t:'Diplomacia multilateral', x:'Argentina tiene respaldo en la Asamblea General de las Naciones Unidas, el Comité de Descolonización y la Organización de los Estados Americanos, pero carece de fuerza coercitiva real.',
