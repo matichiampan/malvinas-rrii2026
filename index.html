@@ -206,7 +206,7 @@ button{font-family:var(--f);cursor:pointer}
       <li>A los costados están las <b>6 dimensiones</b> del TP. Las que tienen más <b style="color:var(--sol)">PESO</b> mueven más la propensión.</li>
       <li>Para ganar necesitás llegar a <b style="color:var(--ok)">55%</b> con tres desgastes a la vez: <b>autonomía estructural</b>, <b>situación internacional</b> y <b>situación doméstica</b> en 50 o más.</li>
       <li>Si el <b style="color:var(--red)">riesgo de guerra</b> llega a 60, estalla la guerra y perdés.</li>
-      <li><b style="color:var(--sol)">¡PLUM!</b> Algunos años pasa algo en el mundo que vos no controlás: puede ayudarte o perjudicarte.</li>
+      <li><b style="color:var(--sol)">¡PLUM!</b> Dos veces por partida, en años al azar, pasa algo en el mundo que vos no controlás: puede ayudarte o perjudicarte.</li>
       <li>Hay 3 finales posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
     <div class="row">
@@ -274,7 +274,7 @@ const VARS = [
 /* Transición pacífica: propensión >= TH_TRANS y confluencia de los tres desgastes que exige el TP
    (crisis de autonomía estructural, presión de las potencias del Norte Global, desgaste doméstico). */
 const TH_TRANS = 55, TH_FULL = 58, TH_CONF = 50, CONF = ['ae','si','sd'];
-const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.65;
+const TENSION_MAX = 60, TURNS = 10, TIME = 14, GAIN = 1.7;
 
 const CARDS = [
  {y:2026, t:'Diplomacia multilateral', x:'Argentina tiene respaldo en la Asamblea General de las Naciones Unidas, el Comité de Descolonización y la Organización de los Estados Americanos, pero carece de fuerza coercitiva real.',
@@ -331,7 +331,11 @@ const VI = {}; VARS.forEach(v => VI[v.k] = v);
 const covOf = s => clamp((s-34)/30, 0, 1);
 
 function newGame(){
-  S = {val:{}, tension:10, turn:0, log:[]};
+  S = {val:{}, tension:10, turn:0, log:[], plum:{}};
+  /* dos eventos por partida, distintos entre sí, en dos años al azar (desde 2027) */
+  const shuf = a => { a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+  const yrs = shuf([...Array(TURNS-1)].map((_,i)=>i+1)), evs = shuf(EVENTS);
+  S.plum[yrs[0]] = evs[0]; S.plum[yrs[1]] = evs[1];
   VARS.forEach(v => S.val[v.k] = v.v);
 }
 
@@ -616,7 +620,7 @@ function choose(o){
   const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={}, s0=score(), t0=S.tension;
   applyFx(opt.fx,deltas,o?GAIN:1);
   S.tension = Math.max(0, S.tension + (opt.t||0) - 3);
-  const ev = (S.turn>=1 && Math.random()<0.5) ? EVENTS[Math.floor(Math.random()*EVENTS.length)] : null;
+  const ev = S.plum[S.turn] || null;
   S.log.push({y:c.y, t:c.t, pick:o?c[o].l:TIMEOUT.l});
   renderMobs(deltas); setHud();
   spawn(opt.an); showTag(opt.tag);
