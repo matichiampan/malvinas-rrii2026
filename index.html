@@ -45,18 +45,16 @@ button{font-family:var(--f);cursor:pointer}
 /* ---------- ESCENARIO ---------- */
 .stage{display:grid;grid-template-columns:minmax(0,19rem) minmax(0,1fr) minmax(0,19rem);gap:.9rem;min-height:0}
 .side{display:flex;flex-direction:column;gap:.6rem;min-height:0}
-.mob{flex:1 1 0;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:.9rem;align-items:center;
-  background:var(--bg2);border:.17rem solid var(--line);padding:.4rem .9rem;position:relative;box-shadow:.2rem .2rem 0 #000}
-.flagw{position:relative;width:3.8rem;height:3.8rem}
-.flagw canvas{width:100%;height:100%;image-rendering:pixelated;display:block}
-.flagw .ic{position:absolute;right:-.5rem;bottom:-.5rem;font-size:1.7rem;filter:drop-shadow(.1rem .1rem 0 #000)}
-.mob.hit .flagw canvas{animation:shake .5s}
-.mob .nm{font-weight:800;font-size:1.05rem;color:var(--cel2);letter-spacing:.03em;line-height:1.2}
-.mob .ds{font-size:.88rem;color:var(--dim);line-height:1.25;margin:.1rem 0 .3rem;font-weight:500}
-.mob .br{display:flex;align-items:center;gap:.5rem}
-.mob .bar{flex:1;height:.95rem;border-width:.13rem;outline-width:.1rem}
-.mob .val{font-weight:800;font-size:1.35rem;color:var(--sol);min-width:2.2rem;text-align:right}
-.pw{background:var(--sol);color:#000;font-weight:800;font-size:.75rem;padding:.1rem .35rem;white-space:nowrap;letter-spacing:.03em}
+.mob{flex:1 1 0;min-height:0;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:.75rem;row-gap:.45rem;align-content:center;
+  background:var(--bg2);border:.17rem solid var(--line);padding:.55rem .8rem;position:relative;box-shadow:.2rem .2rem 0 #000}
+.mob .ico{width:2.6rem;height:2.6rem;display:grid;place-items:center;font-size:1.6rem;background:var(--bg3);border:.15rem solid var(--line);align-self:start}
+.mob.hit .ico{animation:shake .5s}
+.mob .nm{font-weight:800;font-size:.98rem;color:var(--cel2);letter-spacing:.02em;line-height:1.15}
+.mob .ds{font-size:.82rem;color:var(--dim);line-height:1.25;margin-top:.15rem;font-weight:500}
+.mob .br{grid-column:1/-1;display:flex;align-items:center;gap:.55rem}
+.mob .bar{flex:1;height:.9rem;border-width:.13rem;outline-width:.1rem}
+.mob .val{font-weight:800;font-size:1.25rem;color:var(--sol);min-width:2.2rem;text-align:right}
+.pw{background:var(--sol);color:#000;font-weight:800;font-size:.72rem;padding:.12rem .4rem;white-space:nowrap;letter-spacing:.03em;min-width:4.6rem;text-align:center}
 .wt{font-style:normal;font-weight:600;color:var(--dim);font-size:.85em;margin-left:.3rem}
 .sum .tot{font-weight:800;font-size:1.05rem;color:var(--cel2)}
 .mob .d{position:absolute;right:.5rem;top:.1rem;font-weight:800;font-size:1.3rem;opacity:0;pointer-events:none;text-shadow:.1rem .1rem 0 #000}
@@ -357,9 +355,9 @@ function buildSide(){
     const el = document.createElement('div');
     el.className='mob'; el.id='mob_'+v.k;
     el.innerHTML = `<span class="d" id="d_${v.k}"></span>
-      <div class="flagw" style="width:${(2.4+v.w*.08).toFixed(2)}rem;height:${(2.4+v.w*.08).toFixed(2)}rem"><canvas width="32" height="32"></canvas><span class="ic">${v.ic}</span></div>
-      <div><div class="nm">${v.n}</div><div class="ds">${v.ds}</div>
-      <div class="br"><span class="pw">PESO ${v.w}%</span><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div></div>`;
+      <div class="ico">${v.ic}</div>
+      <div><div class="nm">${v.n}</div><div class="ds">${v.ds}</div></div>
+      <div class="br"><span class="pw">PESO ${v.w}%</span><div class="bar"><i style="width:0%"></i></div><span class="val">0</span></div>`;
     $(v.side==='L'?'sideL':'sideR').appendChild(el);
   });
 }
@@ -367,7 +365,6 @@ function setNews(ic, txt){ if(!$('news')) return; $('news').innerHTML=`<h4>📰 
 function renderMobs(deltas){
   VARS.forEach((v,i)=>{
     const el=$('mob_'+v.k), val=Math.round(S.val[v.k]);
-    drawMob(el.querySelector('canvas'), val, i);
     el.querySelector('.bar>i').style.width = val+'%';
     el.querySelector('.val').textContent = val;
     if(deltas && deltas[v.k]){
