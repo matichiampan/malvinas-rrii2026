@@ -114,6 +114,22 @@ button{font-family:var(--f);cursor:pointer}
 /* ---------- OVERLAYS ---------- */
 .ov{position:fixed;inset:0;background:rgba(3,6,12,.9);display:none;align-items:center;justify-content:center;padding:1rem;z-index:10;overflow:auto}
 .ov.on{display:flex}
+.evbox{background:var(--bg2);border:.3rem solid var(--sol);box-shadow:.5rem .5rem 0 #000;max-width:44rem;width:100%;padding:1.4rem 1.8rem;text-align:center;max-height:96vh;overflow:auto}
+#ovEvent{background:rgba(3,6,12,.82)}
+#ovEvent.on .evbox{animation:plum .7s cubic-bezier(.2,1.6,.4,1)}
+.evbox .bang{display:inline-block;background:var(--sol);color:#000;font-weight:800;font-size:2.6rem;letter-spacing:.06em;padding:.1rem 1rem;transform:rotate(-3deg);box-shadow:.25rem .25rem 0 #000}
+.evbox .sub{margin:.7rem 0 .4rem;font-weight:800;font-size:1.15rem;color:var(--cel2);letter-spacing:.05em}
+.evbox .big{font-size:4.5rem;line-height:1;margin:.4rem 0;animation:shake .6s .5s}
+.evbox h2{font-weight:800;font-size:1.9rem;color:#fff;margin-bottom:.2rem}
+.evbox .why{font-size:1.25rem;line-height:1.4;color:var(--tx);margin:.6rem auto 0;max-width:36rem}
+.evbox ul.fx{list-style:none;padding:0;margin:.9rem auto 0;max-width:34rem;text-align:left}
+.evbox ul.fx li{font-size:1.15rem;margin:.3rem 0}
+.evbox .verdict{margin:.9rem auto 0;font-weight:800;font-size:1.2rem;padding:.4rem .8rem;border:.15rem solid;max-width:34rem}
+.evbox .go{margin-top:1.1rem;padding:.7rem 1.6rem}
+@keyframes plum{0%{transform:scale(.2) rotate(-8deg);opacity:0}60%{transform:scale(1.08) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+.flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:11;animation:flash .45s ease-out forwards}
+@keyframes flash{0%{opacity:.55}100%{opacity:0}}
+.res .say{margin-top:.6rem;font-size:1.05rem;line-height:1.4;color:var(--cel2)}
 .panel{background:var(--bg2);border:.25rem solid var(--cel);box-shadow:.4rem .4rem 0 #000;max-width:54rem;width:100%;padding:1.4rem 1.6rem;max-height:96vh;overflow:auto}
 .panel h1{font-weight:800;font-size:2.6rem;color:var(--cel);line-height:1.05;margin-bottom:.3rem}
 .panel h1 em{font-style:normal;color:var(--sol)}
@@ -186,11 +202,12 @@ button{font-family:var(--f);cursor:pointer}
     <p>Asesorás al gobierno nacional de la República Argentina. Tenés <b style="color:var(--sol)">10 decisiones</b> (2026 → 2041) para subir la <b style="color:var(--cel2)">propensión del Reino Unido a una transición pacífica</b> del poder soberano de las Malvinas. Hoy está en <b style="color:var(--sol)">34%</b>: marcadamente baja.</p>
     <h3>CÓMO SE JUEGA</h3>
     <ul>
-      <li>Elegí <b>A</b> o <b>B</b>. Cada opción muestra qué dimensión sube ▲ o baja ▼.</li>
-      <li>Cada bandera británica es una de las <b>6 dimensiones</b> del TP. Cuanto más sube, más se rompe.</li>
-      <li>Las islas se van <b style="color:var(--cel2)">pintando de celeste</b> a medida que sube la propensión.</li>
-      <li>Si el <b style="color:var(--red)">riesgo de guerra</b> (propensión al enfrentamiento) llega a 60, estalla la guerra.</li>
-      <li>Hay 3 escenarios posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
+      <li>Cada año elegís <b>A</b> o <b>B</b>. Ninguna es gratis: cada opción sube algo ▲ y baja otra cosa ▼, o sube el riesgo de guerra.</li>
+      <li>A los costados están las <b>6 dimensiones</b> del TP. Las que tienen más <b style="color:var(--sol)">PESO</b> mueven más la propensión.</li>
+      <li>Para ganar necesitás llegar a <b style="color:var(--ok)">55%</b> con tres desgastes a la vez: <b>autonomía estructural</b>, <b>situación internacional</b> y <b>situación doméstica</b> en 50 o más.</li>
+      <li>Si el <b style="color:var(--red)">riesgo de guerra</b> llega a 60, estalla la guerra y perdés.</li>
+      <li><b style="color:var(--sol)">¡PLUM!</b> Algunos años pasa algo en el mundo que vos no controlás: puede ayudarte o perjudicarte.</li>
+      <li>Hay 3 finales posibles: <b>status quo</b>, <b>guerra</b> o <b>transición pacífica</b>.</li>
     </ul>
     <div class="row">
       <button class="go" id="btnStart">JUGAR ▶</button>
@@ -238,6 +255,7 @@ button{font-family:var(--f);cursor:pointer}
 </div>
 
 <!-- FINAL -->
+<div class="ov" id="ovEvent"><div class="evbox" id="evBox"></div></div>
 <div class="ov" id="ovEnd"><div class="panel" id="endPanel"></div></div>
 
 <script>
@@ -291,14 +309,14 @@ const CARDS = [
   B:{l:'Pedir ultimátums políticos a Londres', an:'summit', tag:'🇺🇸 ULTIMÁTUM', fx:{si:9,fe:-3}, t:6, r:'La presión de los aliados occidentales socava el andamiaje de alianzas que sostiene la intransigencia británica, pero ellos esperan acceso a recursos sudamericanos. Londres se endurece.'}}
 ];
 const EVENTS = [
- {ic:'🐟', x:'Los recursos pesqueros migran por el cambio climático.', fx:{ae:6}},
- {ic:'🛢️', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', fx:{ae:6}},
- {ic:'🌍', x:'Nuevo frente en el Indopacífico: el Reino Unido dispersa sus recursos.', fx:{icm:4,si:2}},
- {ic:'📉', x:'Sube el riesgo país argentino.', fx:{fe:-5,sd:-3}},
- {ic:'🏛️', x:'Crisis interna británica por las reformas del estado de bienestar.', fx:{sd:5}},
- {ic:'✈️', x:'Rotación permanente de efectivos en Mount Pleasant.', fx:{icm:-3}},
- {ic:'💷', x:'Las islas mantienen un elevado producto bruto per cápita.', fx:{ae:-4}},
- {ic:'🤝', x:'Las potencias del Norte Global respaldan a su aliado británico.', fx:{si:-4}}
+ {ic:'🐟', t:'Los peces se van', x:'Los recursos pesqueros migran por el cambio climático.', w:'Las licencias pesqueras son la principal fuente de plata de las islas. Si los peces se van, las islas pierden autonomía fiscal y dependen más de afuera.', fx:{ae:6}},
+ {ic:'🛢️', t:'El petróleo no sale', x:'Se comprueba la inviabilidad técnica de los hidrocarburos offshore.', w:'Las islas contaban con el petróleo de la cuenca norte para financiarse en el futuro. Sin esa plata, su autonomía estructural se debilita.', fx:{ae:6}},
+ {ic:'🌍', t:'Londres, ocupado en otro lado', x:'Nuevo frente en el Indopacífico: el Reino Unido dispersa sus recursos.', w:'El Reino Unido tiene que mandar barcos y recursos a otro conflicto. Es la sobre extensión imperial: el Atlántico Sur queda menos protegido.', fx:{icm:4,si:2}},
+ {ic:'📉', t:'Sube el riesgo país', x:'Sube el riesgo país argentino.', w:'A la Argentina le cuesta más endeudarse. Hay menos margen para sostener políticas a largo plazo y el gobierno pierde aprobación.', fx:{fe:-5,sd:-3}},
+ {ic:'🏛️', t:'Crisis en casa británica', x:'Crisis interna británica por las reformas del estado de bienestar.', w:'La sociedad británica se pregunta por qué pagar los costos de unas islas lejanas mientras le recortan el estado de bienestar.', fx:{sd:5}},
+ {ic:'✈️', t:'Londres refuerza la base', x:'Rotación permanente de efectivos en Mount Pleasant.', w:'El Reino Unido mantiene tropas de forma permanente en la base militar de las islas. La disuasión británica se fortalece.', fx:{icm:-3}},
+ {ic:'💷', t:'A las islas les va bien', x:'Las islas mantienen un elevado producto bruto per cápita.', w:'Con buenos ingresos, las islas no necesitan del continente. Su autonomía estructural se mantiene fuerte.', fx:{ae:-4}},
+ {ic:'🤝', t:'Los aliados cierran filas', x:'Las potencias del Norte Global respaldan a su aliado británico.', w:'Estados Unidos y Europa apoyan a Londres. Argentina pierde respaldo internacional.', fx:{si:-4}}
 ];
 const TIMEOUT = {l:'No decidiste a tiempo', an:'timeout', tag:'⏳ SIN DECISIÓN', fx:{sd:-3,si:-3}, t:4, r:'Sin políticas consistentes, el status quo se refuerza.'};
 
@@ -595,36 +613,70 @@ function applyFx(fx,deltas,gain=1){
 function choose(o){
   if(phase!=='card') return;
   phase='result'; clearInterval(tickId);
-  const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={}, s0=score();
+  const c=CARDS[S.turn], opt = o ? c[o] : TIMEOUT, deltas={}, s0=score(), t0=S.tension;
   applyFx(opt.fx,deltas,o?GAIN:1);
-  S.tension += (opt.t||0);
-  let ev=null;
-  if(S.turn>=1 && Math.random()<0.5){
-    ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
-    applyFx(ev.fx,deltas); S.tension += (ev.t||0);
-  }
-  S.tension = Math.max(0, S.tension-3);
+  S.tension = Math.max(0, S.tension + (opt.t||0) - 3);
+  const ev = (S.turn>=1 && Math.random()<0.5) ? EVENTS[Math.floor(Math.random()*EVENTS.length)] : null;
   S.log.push({y:c.y, t:c.t, pick:o?c[o].l:TIMEOUT.l});
   renderMobs(deltas); setHud();
   spawn(opt.an); showTag(opt.tag);
-  if(ev){ setTimeout(()=>spawn('event',2.6,ev),900); setNews(ev.ic,ev.x); } else setNews('🌐','Sin novedades del mundo este año. El tablero depende de vos.');
 
-  const last = S.turn===TURNS-1, dead = S.tension>=TENSION_MAX;
+  const s=score(), last = S.turn===TURNS-1, dead = S.tension>=TENSION_MAX;
   const card=$('card'); card.className='card res';
   card.innerHTML = `
     <div class="res">
       <div class="t1">${o?`ELEGISTE ${o}: ${opt.l.toUpperCase()}`:'SE ACABÓ EL TIEMPO'}</div>
       <p>${opt.r}</p>
-      ${ev?`<div class="ev">${ev.ic} Evento mundial: ${ev.x}</div>`:''}
+      <div class="say">${sayScore(s0,s)} ${sayRisk(t0,S.tension)}</div>
     </div>
-    <div class="sum"><div class="t1">QUÉ CAMBIÓ · APORTE A LA PROPENSIÓN</div><div class="tot">Propensión: ${Math.round(s0)}% → ${Math.round(score())}%</div><ul class="fx">${
-      VARS.filter(x=>deltas[x.k]).map(x=>{const d=deltas[x.k], p=(d*x.w/100).toFixed(1).replace('.',',');
-        return `<li class="${d>0?'u':'dn'}"><span class="ar">${d>0?'▲':'▼'}</span>${x.ic} ${x.c} ${d>0?'+':''}${d}<em class="wt">→ ${d>0?'+':''}${p}%</em></li>`;}).join('')
-    }</ul><div class="risk ${S.tension>=40?'bad':'neu'}">⚠️ Riesgo de guerra: ${Math.round(S.tension)} / ${TENSION_MAX}</div></div>
-    <button class="go" id="btnNext">${dead||last?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
-  const next=()=>{clearTimeout(autoId); if(dead||last) finish(dead); else {S.turn++; showCard();}};
+    <div class="sum"><div class="t1">QUÉ CAMBIÓ · APORTE A LA PROPENSIÓN</div><div class="tot">Propensión: ${Math.round(s0)}% → ${Math.round(s)}%</div><ul class="fx">${deltaList(deltas)}</ul><div class="risk ${S.tension>=40?'bad':'neu'}">⚠️ Riesgo de guerra: ${Math.round(S.tension)} / ${TENSION_MAX}</div></div>
+    <button class="go" id="btnNext">${dead||(last&&!ev)?'VER RESULTADO ▶':'SEGUIR ▶'}</button>`;
+  const next=()=>{clearTimeout(autoId);
+    if(dead) return finish(true);
+    if(ev) return showEvent(ev, last);
+    if(last) finish(false); else {S.turn++; showCard();}
+  };
   $('btnNext').onclick=next;
   if(!expo) autoId=setTimeout(next, dead||last ? 4200 : 3800);
+}
+function deltaList(deltas){
+  return VARS.filter(x=>deltas[x.k]).map(x=>{const d=deltas[x.k], p=(d*x.w/100).toFixed(1).replace('.',',');
+    return `<li class="${d>0?'u':'dn'}"><span class="ar">${d>0?'▲':'▼'}</span>${x.ic} ${x.c} ${d>0?'+':''}${d}<em class="wt">→ ${d>0?'+':''}${p}%</em></li>`;}).join('');
+}
+function sayScore(a,b){
+  const d=Math.round(b)-Math.round(a), falta=Math.max(0,Math.ceil(TH_TRANS-b));
+  const meta = falta>0 ? `Faltan ${falta} puntos para la meta de ${TH_TRANS}%.` : `Ya estás en la meta de ${TH_TRANS}%: ahora sostenela.`;
+  if(d>0) return `Te acercaste a la transición pacífica (+${d}). ${meta}`;
+  if(d<0) return `Te alejaste de la transición pacífica (${d}). ${meta}`;
+  return `La propensión casi no se movió. ${meta}`;
+}
+function sayRisk(a,b){
+  if(b>=TENSION_MAX) return 'El riesgo de guerra llegó al límite.';
+  if(b>=40) return `Cuidado: el riesgo de guerra está en ${Math.round(b)}. Si llega a ${TENSION_MAX}, estalla la guerra.`;
+  return b>a ? `El riesgo de guerra subió a ${Math.round(b)} de ${TENSION_MAX}.` : `El riesgo de guerra está en ${Math.round(b)} de ${TENSION_MAX}.`;
+}
+function showEvent(ev, last){
+  phase='event';
+  const good = Object.keys(ev.fx).reduce((a,k)=>a+ev.fx[k]*VI[k].w,0) > 0;
+  const lines = Object.keys(ev.fx).map(k=>{const up=ev.fx[k]>0;
+    return `<li class="${up?'u':'dn'}"><span class="ar">${up?'▲':'▼'}</span>${VI[k].ic} <b>${VI[k].c}</b> ${up?'sube':'baja'} ${Math.abs(ev.fx[k])} <em class="wt">(peso ${VI[k].w}%)</em></li>`;}).join('');
+  $('evBox').innerHTML = `
+    <div class="bang">¡PLUM!</div>
+    <div class="sub">PASÓ ALGO EN EL MUNDO QUE VOS NO CONTROLÁS</div>
+    <div class="big">${ev.ic}</div>
+    <h2>${ev.t}</h2>
+    <p class="why">${ev.w}</p>
+    <ul class="fx">${lines}</ul>
+    <div class="verdict ${good?'ok':'bad'}">${good?'👍 Te ayuda: te acerca a la transición pacífica.':'👎 Te perjudica: te aleja de la transición pacífica.'}</div>
+    <button class="go" id="btnEv">ENTENDIDO ▶</button>`;
+  const fl=document.createElement('div'); fl.className='flash'; document.body.appendChild(fl); setTimeout(()=>fl.remove(),500);
+  $('ovEvent').classList.add('on');
+  spawn('event',2.6,ev);
+  $('btnEv').onclick=()=>{
+    $('ovEvent').classList.remove('on');
+    const deltas={}; applyFx(ev.fx,deltas); renderMobs(deltas); setHud();
+    setTimeout(()=>{ if(last) finish(false); else {S.turn++; showCard();} }, 1100);
+  };
 }
 
 function finish(dead){
